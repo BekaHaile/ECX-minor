@@ -7,7 +7,6 @@
     <title>ECX</title>
 </head>
 <body>
-    <h1>Welcome to ECX</h1>
-    <P>Web page of ECX</P>
+    @yield('content')
 </body>
 </html>
