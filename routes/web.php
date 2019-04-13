@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/home', function () {
-    //return view('welcome');
-    return "Hello";
-});
+Route::get('/', 'PagesController@index');
+
+Route::get('/login','PagesController@login');
+
+Route::get('/about','PagesController@about');
+
+/*Route::get('/users/{name}/{id}',function ($name, $id){
+    return 'The user is '.$name.$id;
+});*/
