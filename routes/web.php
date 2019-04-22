@@ -17,6 +17,8 @@ Route::get('/login','PagesController@login')->name('login');
 
 Route::get('/about','PagesController@about')->name('about');
 
+Route::get('/help','PagesController@help')->name('help');
+
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
 });*/

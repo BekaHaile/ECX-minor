@@ -16,6 +16,10 @@ class CreateCoffeesTable extends Migration
         Schema::create('coffees', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->string("weight");
+            $table->string("dispatch");
+            $table->string("speciality");
+            $table->string("grade");
         });
     }
 
