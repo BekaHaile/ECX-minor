@@ -4,9 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>ECX</title>
+    <title>{{ config('app.name', 'ECX') }}</title>
 </head>
 <body>
+    @include('inc.navbar')
     @yield('content')
 </body>
 </html>

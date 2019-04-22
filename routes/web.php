@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'PagesController@home');
+Route::get('/', 'PagesController@home')->name('home');
 
-Route::get('/login','PagesController@login');
+Route::get('/login','PagesController@login')->name('login');
 
-Route::get('/about','PagesController@about');
+Route::get('/about','PagesController@about')->name('about');
 
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
