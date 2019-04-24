@@ -21,4 +21,16 @@ class PagesController extends Controller
     public function help(){
         return view('pages.help');
     }
+
+    public function admin(){
+        return view('forms.createUser');
+    }
+
+    public function report(){
+        return view('pages.report');
+    }
+
+    public function comment(){
+        return view('pages.comment');
+    }
 }

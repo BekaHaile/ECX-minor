@@ -2,8 +2,13 @@
 
 @section('content')
     <div class="jumbotron text-center">
-        <h1>Welcome to Ethiopian Commodity Exchange</h1>
-        <P>Web page of ECX</P>
+        <h1>Welcome to Coffee Suppliers System for Ethiopian Commodity Exchange</h1>
+        <P>Web page of Coffee Suppliers System for ECX</P>
+        <p>The first of its kind in Ethiopia, ECX is a national multi-commodity exchange that provides low-cost, secure marketplace services to benefit all
+            agricultural market stakeholders and invites industry professionals to seek membership enabling them to participate in trading.
+            Ethiopian commodity exchange (ECX) also accepts coffee from individual coffee suppliers and process it before it is exported.
+            The organization works in relation with farmers’ union, suppliers, coffee senders’ union, and coffee roasters union. ECX manages all of the process beginning
+            from accepting coffee from suppliers, assigning grade to the coffee and selling it to the rest of the world. </p>
         <p><a class="btn btn-primary btn-lg" href="/about" role="button">About</a>  </p>
     </div>
     <div class="jumbotron text-center">

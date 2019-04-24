@@ -17,7 +17,13 @@ Route::get('/login','PagesController@login')->name('login');
 
 Route::get('/about','PagesController@about')->name('about');
 
+Route::get('/report','PagesController@report')->name('report');
+
+Route::get('/comment','PagesController@comment')->name('comment');
+
 Route::get('/help','PagesController@help')->name('help');
+
+Route::get('/admin','PagesController@admin')->name('admin');
 
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
