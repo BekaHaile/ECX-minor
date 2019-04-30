@@ -25,6 +25,8 @@ Route::get('/help','PagesController@help')->name('help');
 
 Route::get('/admin','PagesController@admin')->name('admin');
 
+Route::get('/dispatch','PagesController@dispatchs')->name('dispatchs');
+
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
 });*/
