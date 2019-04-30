@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('username');
             $table->string('password');
-            $table->string('name');
             $table->string('fname');
             $table->string('lname');
             $table->string('sex');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Coffee;
 
 class CoffeesController extends Controller
 {
@@ -13,7 +14,9 @@ class CoffeesController extends Controller
      */
     public function index()
     {
-        //
+        $coffees = Coffee::all();
+
+        return view('forms.dispatch', compact('coffees'));
     }
 
     /**

@@ -4,7 +4,7 @@
     <div class="jumbotron">
         <h1>Coffees</h1>
         @foreach($coffees as $coffee)
-            <li>{{ $coffee -> origin }}  {{ $coffee -> grade }}</li>
+            <li>{{ $coffee -> comment }}  {{ $coffee -> grade }}</li>
         @endforeach
     </div>
 

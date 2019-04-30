@@ -19,13 +19,21 @@ Route::get('/about','PagesController@about')->name('about');
 
 Route::get('/report','PagesController@report')->name('report');
 
-Route::get('/comment','PagesController@comment')->name('comment');
-
 Route::get('/help','PagesController@help')->name('help');
 
-Route::get('/admin','PagesController@admin')->name('admin');
+Route::get('/admin','UsersController@index')->name('admin');
 
-Route::get('/dispatch','PagesController@dispatchs')->name('dispatchs');
+Route::get('/dispatch','CoffeesController@index')->name('dispatch');
+
+Route::resource('coffees','CoffeesController');
+
+Route::resource('users','UsersController');
+Route::post('/admin','UsersController@store');
+
+Route::resource('comments','CommentsController');
+Route::post('/comment','CommentsController@store');
+Route::get('/comment','CommentsController@create')->name('comment');
+Route::get('/commentView','CommentsController@index');
 
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;

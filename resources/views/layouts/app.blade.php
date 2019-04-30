@@ -38,6 +38,12 @@
         .footer {
             height: 50px;
         }
+
+        body {
+            opacity: 0.8;
+            /*background-image: url("{{ asset('images/ECX.png') }}");
+            background-repeat: no-repeat;*/
+        }
     </style>
 
     <title>{{ config('app.name', 'ECX') }}</title>

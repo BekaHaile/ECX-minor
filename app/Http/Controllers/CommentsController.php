@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Comment;
 
-class CommentController extends Controller
+class CommentsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +14,9 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        $comments = Comment::all();
+
+        return view('pages.viewComment', compact('comments'));
     }
 
     /**
@@ -23,7 +26,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.comment');
     }
 
     /**
@@ -34,7 +37,14 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comments = new Comment();
+
+        $comments->comment = request('comment');
+        $comments->category = '';
+
+        $comments->save();
+
+        return redirect('/commentView');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -13,7 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+       // $coffees = Coffee::all();
+
+        return view('forms.createUser');
     }
 
     /**
@@ -23,7 +26,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.createUser');
     }
 
     /**
@@ -34,7 +37,7 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return request()->all();
     }
 
     /**

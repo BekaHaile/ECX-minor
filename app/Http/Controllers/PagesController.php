@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Coffee;
 
 class PagesController extends Controller
 {
@@ -31,13 +30,4 @@ class PagesController extends Controller
         return view('pages.report');
     }
 
-    public function comment(){
-        return view('pages.comment');
-    }
-
-    public function dispatchs(){
-        $coffees = Coffee::all();
-
-        return view('forms.dispatch', compact('coffees'));
-    }
 }
