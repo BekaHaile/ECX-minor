@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container" style="margin-top: 60px; margin-bottom: 215px">
+    <div class="container" style="margin-top: 60px; margin-bottom: 215px; opacity: 0.8;">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -9,17 +9,17 @@
 
                     <div class="card-body">
                         <form method="POST" action="{{ route('login') }}">
-                            @csrf
+                            {{ csrf_field() }}
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                    <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
 
-                                    @if ($errors->has('email'))
+                                    @if ($errors->has('username'))
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                     @endif
                                 </div>

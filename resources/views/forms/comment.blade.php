@@ -9,7 +9,7 @@
                 <div class="col-md-4 mb-3">
                     <label for="comment" style="margin-top: 70px;"><h4>Comment</h4></label>
                     <textarea name="comment" class="form-control" id="comment" style="margin-left: 180px;"
-                              value="" required rows="10" cols="60">
+                              required rows="10" cols="60">
                     </textarea>
                     <div class="invalid-feedback">
                         Please provide a valid comment.

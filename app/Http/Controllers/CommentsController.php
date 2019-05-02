@@ -14,9 +14,9 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::orderBy('created_at','desc')->paginate(2);
 
-        return view('pages.viewComment', compact('comments'));
+        return view('pages.viewComment')->with('comments',$comments);
     }
 
     /**
@@ -44,7 +44,7 @@ class CommentsController extends Controller
 
         $comments->save();
 
-        return redirect('/commentView');
+        return redirect('/comments');
     }
 
     /**
@@ -55,7 +55,11 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Comment::find($id);
+
+        /*To forward the a specific item to a different page we can use the following*/
+        /*$comment = Comment::find($id);
+        return view('pages.viewComment')->with('comments','$comment')*/
     }
 
     /**

@@ -40,9 +40,12 @@
         }
 
         body {
-            opacity: 0.8;
-            /*background-image: url("{{ asset('images/ECX.png') }}");
-            background-repeat: no-repeat;*/
+            opacity: 0.9;
+            background-image: url("{{ asset('images/ECX1.jpg') }}");
+            background-repeat: no-repeat;
+        }
+        .jumbotron {
+            margin: 20px;
         }
     </style>
 
@@ -50,7 +53,9 @@
 </head>
 <body>
     @include('inc.navbar')
-    @yield('content')
+            @yield('content')
+        </div>
+    </div>
     @include('inc.footer')
 </body>
 </html>

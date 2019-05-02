@@ -14,9 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-       // $coffees = Coffee::all();
+        $users = User::orderBy('created_at','desc')->paginate(5);
 
-        return view('forms.createUser');
+        return view('pages.viewUsers')->with('users',$users);
     }
 
     /**
@@ -37,7 +37,26 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        return request()->all();
+        $users = new User();
+
+        $users->id = request('id');
+        $users->username = request('username');
+        $users->password = request('password');
+        $users->fname = request('fname');
+        $users->lname = request('lname');
+        $users->sex = request('sex');
+        $users->zone = request('zone');
+        $users->woreda = request('woreda');
+        $users->kebele = request('kebele');
+        $users->phoneNumber = request('phoneNumber');
+        $users->userType = request('userType');
+        $users->city = request('city');
+        $users->dateOfBirth = request('dateOfBirth');
+        $users->email = request('email');
+
+        $users->save();
+
+        return redirect('/users');
     }
 
     /**

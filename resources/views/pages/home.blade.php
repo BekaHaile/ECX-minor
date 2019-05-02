@@ -15,6 +15,6 @@
         <h1>Help on how to use this website</h1>
         <P>If you want to see information on how to get your JAR certificate,
         click the button below.</P>
-        <p><a class="btn btn-primary btn-lg bg-secondary" href="/help" role="button">Help</a>  </p>
+        <p><a class="btn btn-success btn-lg" href="/help" role="button">Help</a>  </p>
     </div>
 @endsection

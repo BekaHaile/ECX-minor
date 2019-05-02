@@ -28,12 +28,11 @@ Route::get('/dispatch','CoffeesController@index')->name('dispatch');
 Route::resource('coffees','CoffeesController');
 
 Route::resource('users','UsersController');
-Route::post('/admin','UsersController@store');
+Route::post('/user','UsersController@store');
 
 Route::resource('comments','CommentsController');
 Route::post('/comment','CommentsController@store');
 Route::get('/comment','CommentsController@create')->name('comment');
-Route::get('/commentView','CommentsController@index');
 
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
