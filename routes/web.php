@@ -23,9 +23,10 @@ Route::get('/help','PagesController@help')->name('help');
 
 Route::get('/admin','UsersController@index')->name('admin');
 
-Route::get('/dispatch','CoffeesController@index')->name('dispatch');
+Route::get('/dispatch','CoffeesController@create')->name('dispatch');
 
 Route::resource('coffees','CoffeesController');
+Route::post('/coffee','CoffeesController@storeDispatch');
 
 Route::resource('users','UsersController');
 Route::post('/user','UsersController@store');

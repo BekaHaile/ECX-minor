@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.sidenav')
+            @include('inc.sidenavAdmin')
         </div>
         <div class="col-md-10 mb-3">
                 <div class="jumbotron" style="margin: 20px;">

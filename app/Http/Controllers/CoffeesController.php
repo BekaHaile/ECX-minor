@@ -14,9 +14,9 @@ class CoffeesController extends Controller
      */
     public function index()
     {
-        $coffees = Coffee::all();
+        $coffees = Coffee::orderBy('created_at','desc')->paginate(5);
 
-        return view('forms.dispatch', compact('coffees'));
+        return view('pages.viewDispatch', compact('coffees'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CoffeesController extends Controller
      */
     public function create()
     {
-        //
+        return view('forms.dispatch');
     }
 
     /**
@@ -35,9 +35,49 @@ class CoffeesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storeDispatch(Request $request)
     {
-        //
+        $coffees = new Coffee();
+
+        //coffee info
+        $coffees->id = request('id');
+
+        if(request('wet')== 'Wet')
+            $coffees->wet = TRUE;
+        else
+            $coffees->wet = FALSE;
+        $coffees->weight = request('weight');
+        $coffees->sacks = request('sacks');
+        $coffees->stitchNo = request('stitchNo');
+        $coffees->packDate = request('packDate');
+        $coffees->region = request('region');
+        $coffees->woreda = request('woreda');
+        $coffees->kebele = request('kebele');
+        $coffees->washingStation = request('washingStation');
+
+        //owner info
+        $coffees->ownerName = request('ownerName');
+        $coffees->ownerPhone = request('ownerPhone');
+
+        //driver info
+        $coffees->driverName = request('driverName');
+        $coffees->driverPhone = request('driverPhone');
+        $coffees->driverId = request('driverId');
+        $coffees->licenceNum = request('licenceNum');
+
+        //Car info
+        $coffees->typeOfCar = request('typeOfCar');
+        $coffees->plateNum = request('plateNum');
+        $coffees->cardinalNum = 1;
+        $coffees->dispatchFill = TRUE;
+
+        $coffees->specialty = '';
+        $coffees->grade = '';
+        $coffees->price = '';
+
+        $coffees->save();
+
+        return redirect('/coffees');
     }
 
     /**
@@ -48,7 +88,12 @@ class CoffeesController extends Controller
      */
     public function show($id)
     {
-        //
+        $coffees = Coffee::find($id);
+
+        return view('forms.dispatch', compact('coffees'));
+
+        //$coffees = Coffee::find($id);
+        //return view('forms.dispatch')->with('coffees','$coffees');
     }
 
     /**
