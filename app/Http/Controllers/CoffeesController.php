@@ -88,9 +88,9 @@ class CoffeesController extends Controller
      */
     public function show($id)
     {
-        $coffees = Coffee::find($id);
+        $coffee = Coffee::find($id);
 
-        return view('forms.dispatch', compact('coffees'));
+        return view('forms.dispatchEdit', compact('coffee'));
 
         //$coffees = Coffee::find($id);
         //return view('forms.dispatch')->with('coffees','$coffees');
