@@ -14,10 +14,13 @@ class CommentsController extends Controller
      */
     public function index()
     {
-        $comments = Comment::where('category','')->paginate(4);
-        //$comments2 = Comment::where('category','bad');
+        //$comments = Comment::orderBy('id','desc')->paginate(10);
 
-        return view('pages.viewComment')->with('comments',$comments);
+        $comments = Comment::where('category','good')->latest()->get();
+        $comments2 = Comment::where('category','bad')->latest()->paginate(3);
+
+        return view('pages.viewComment')->with('comments',$comments)->with('comments2',$comments2);
+        //return view('pages.viewComment',compact('comments'));
     }
 
     /**
@@ -40,8 +43,9 @@ class CommentsController extends Controller
     {
         $comments = new Comment();
 
+        $comments->email = request('email');
         $comments->comment = request('comment');
-        $comments->category = 'bad';
+        $comments->category = '';
 
         $comments->save();
 
@@ -54,9 +58,9 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Comment $comment)
     {
-        return Comment::find($id);
+        return $comment;
 
         /*To forward a specific item to a different page we can use the following*/
         /*$comment = Comment::find($id);
@@ -69,7 +73,7 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comment $comment)
     {
         //
     }
@@ -81,7 +85,7 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $comment)
     {
         //
     }
@@ -92,7 +96,7 @@ class CommentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Comment $comment)
     {
         //
     }

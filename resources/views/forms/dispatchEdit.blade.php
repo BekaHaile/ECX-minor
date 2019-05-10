@@ -152,11 +152,15 @@
 
                             <div class="d-block my-3">
                                 <div class="custom-control custom-radio">
-                                    <input id="wet" name="wet" type="radio" value="Wet" class="custom-control-input"  required>
+                                    <input id="wet" name="wet" type="radio" value="Wet" class="custom-control-input"
+                                           @if($coffee->wet == 1) checked
+                                           @endif required>
                                     <label class="custom-control-label" for="wet">Wet</label>
                                 </div>
                                 <div class="custom-control custom-radio">
-                                    <input id="notwet" name="wet" type="radio" value="Not Wet" class="custom-control-input" required>
+                                    <input id="notwet" name="wet" type="radio" value="Not Wet" class="custom-control-input"
+                                           @if($coffee->wet == 0) checked
+                                           @endif required>
                                     <label class="custom-control-label" for="notwet">Not Wet</label>
                                 </div>
                             </div>
@@ -183,7 +187,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="dateOfBirth">Pack date</label>
-                                    <input type="date" class="form-control" name="packDate" id="packDate" placeholder="{{ $coffee -> packDate }}" value="" required>
+                                    <input type="date" class="form-control" name="packDate" id="packDate" placeholder="dateb" value="" required>
                                     <div class="invalid-feedback">
                                         please input a valid date.
                                     </div>
@@ -201,8 +205,7 @@
                             </div>
 
                             <hr class="mb-6">
-                            <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>
-                            <button class="btn btn-danger btn-lg " type="" style="margin-bottom: 10px;">Clear</button>
+                            <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Update</button>
                         </form>
                     </div>
                 </div>

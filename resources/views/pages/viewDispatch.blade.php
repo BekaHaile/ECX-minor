@@ -11,7 +11,7 @@
                 @if(count($coffees) > 0)
                     @foreach($coffees as $coffee)
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">
-                            <a href="/coffees/{{ $coffee->id }}"> <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3></a>
+                            <a href="/coffees/{{ $coffee->id }}/edit"> <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3></a>
                             <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}}</h5>
                         </div>
                     @endforeach

@@ -17,11 +17,11 @@ class CreateCoffeesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
         //dispatch info
-            $table->string("wet");
+            $table->boolean("wet");
             $table->integer("weight");
             $table->integer("sacks");
             $table->integer("stitchNo");
-            $table->string("packDate");
+            $table->date("packDate");
             $table->string("region");
             $table->string("woreda");
             $table->string("kebele");
