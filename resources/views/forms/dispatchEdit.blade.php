@@ -24,25 +24,26 @@
             </style>
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <div class="py-5 text-center">
-                    <h2>Dispatch form</h2>
+                    <h2>Edit Dispatch</h2>
                 </div>
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Owner Information</h4>
-                        <form class="needs-validation" method="POST" action="/coffee">
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}">
+                            {{ method_field('PATCH') }}
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerName">Full name</label>
-                                    <input type="text" class="form-control" name="ownerName" id="ownerName" placeholder="{{ $coffee -> ownerName }}" value="" required>
+                                    <input type="text" class="form-control" name="ownerName" id="ownerName" value="{{ $coffee -> ownerName }}" required>
                                     <div class="invalid-feedback">
                                         Valid full name is required.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerPhone">Phone number</label>
-                                    <input type="text" class="form-control" name="ownerPhone" id="ownerPhone" placeholder="{{ $coffee -> ownerPhone }}" value="" required>
+                                    <input type="text" class="form-control" name="ownerPhone" id="ownerPhone" value="{{ $coffee -> ownerPhone }}" required>
                                     <div class="invalid-feedback">
                                         Valid phone number is required.
                                     </div>
@@ -55,14 +56,14 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="driverName">Full name</label>
-                                    <input type="text" class="form-control" name="driverName" id="driverName" placeholder="{{ $coffee -> driverName }}" value="" required>
+                                    <input type="text" class="form-control" name="driverName" id="driverName" value="{{ $coffee -> driverName }}" required>
                                     <div class="invalid-feedback">
                                         Valid full name is required.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="driverPhone">Phone number</label>
-                                    <input type="text" class="form-control" name="driverPhone" id="driverPhone" placeholder="{{ $coffee -> driverPhone }}" value="" required>
+                                    <input type="text" class="form-control" name="driverPhone" id="driverPhone" value="{{ $coffee -> driverPhone }}" required>
                                     <div class="invalid-feedback">
                                         Valid phone number is required.
                                     </div>
@@ -71,14 +72,14 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="driverId">Driver ID</label>
-                                    <input type="text" class="form-control" name="driverId" id="driverId" placeholder="{{ $coffee -> driverId }}" value="" required>
+                                    <input type="text" class="form-control" name="driverId" id="driverId" value="{{ $coffee -> driverId }}"  required>
                                     <div class="invalid-feedback">
                                         Valid driver ID is required.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="licenceNum">Licence number</label>
-                                    <input type="text" class="form-control" name="licenceNum" id="licenceNum" placeholder="{{ $coffee -> licenceNum }}" value="" required>
+                                    <input type="text" class="form-control" name="licenceNum" id="licenceNum" value="{{ $coffee -> licenceNum }}" required>
                                     <div class="invalid-feedback">
                                         Valid licence number is required.
                                     </div>
@@ -91,7 +92,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="typeOfCar">Type Of Car</label>
-                                    <input list="typeOfCar" class="form-control" name="typeOfCar" placeholder="{{ $coffee -> typeOfCar }}" required>
+                                    <input list="typeOfCar" class="form-control" name="typeOfCar" value="{{ $coffee -> typeOfCar }}" required>
                                     <datalist id="typeOfCar">
                                         <option value="Mercedes">
                                         <option value="Eurotracker">
@@ -105,7 +106,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="plateNum">Plate number</label>
-                                    <input type="text" class="form-control" name="plateNum" id="plateNum" placeholder="{{ $coffee -> plateNum }}" value="" required>
+                                    <input type="text" class="form-control" name="plateNum" id="plateNum" value="{{ $coffee -> plateNum }}" required>
                                     <div class="invalid-feedback">
                                         Valid plate number is required.
                                     </div>
@@ -118,21 +119,21 @@
                             <div class="row">
                                 <div class="col-md-5 mb-3">
                                     <label for="region">Region</label>
-                                    <input class="form-control" name="region" id="region" placeholder="{{ $coffee -> region }}" required>
+                                    <input class="form-control" name="region" id="region" value="{{ $coffee -> region }}" required>
                                     <div class="invalid-feedback">
                                         Please input a valid region.
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="woreda">Woreda</label>
-                                    <input class="form-control" name="woreda" id="woreda" placeholder="{{ $coffee -> woreda }}" required>
+                                    <input class="form-control" name="woreda" id="woreda" value="{{ $coffee -> woreda }}" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid woreda.
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-3">
                                     <label for="kebele">Kebele</label>
-                                    <input class="form-control" name="kebele" id="kebele" placeholder="{{ $coffee -> kebele }}" required>
+                                    <input class="form-control" name="kebele" id="kebele" value="{{ $coffee -> kebele }}" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid kebele.
                                     </div>
@@ -141,7 +142,7 @@
                             <div class="row">
                                 <div class="col-md-5 mb-3">
                                     <label for="washingStation">Washing Station</label>
-                                    <input type="text" class="form-control" name="washingStation" id="washingStation" placeholder="{{ $coffee -> washingStation }}" required>
+                                    <input type="text" class="form-control" name="washingStation" id="washingStation" value="{{ $coffee -> washingStation }}" required>
                                     <div class="invalid-feedback">
                                         Please provide a valid washingStation.
                                     </div>
@@ -170,14 +171,14 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="weight">Weight in KG</label>
-                                    <input type="number" class="form-control" name="weight" id="weight" placeholder="{{ $coffee -> weight }}" value="" required>
+                                    <input type="number" class="form-control" name="weight" id="weight" value="{{ $coffee -> weight }}" required>
                                     <div class="invalid-feedback">
                                         Valid weight is required.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="sacks">Number of sacks</label>
-                                    <input type="number" class="form-control" name="sacks" id="sacks" placeholder="{{ $coffee -> sacks }}" value="" required>
+                                    <input type="number" class="form-control" name="sacks" id="sacks" value="{{ $coffee -> sacks }}" required>
                                     <div class="invalid-feedback">
                                         Valid sack number is required.
                                     </div>
@@ -187,7 +188,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="dateOfBirth">Pack date</label>
-                                    <input type="date" class="form-control" name="packDate" id="packDate" placeholder="dateb" value="" required>
+                                    <input type="date" class="form-control" name="packDate" id="packDate" value="{{ $coffee -> packDate }}" required>
                                     <div class="invalid-feedback">
                                         please input a valid date.
                                     </div>
@@ -197,7 +198,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="stitchNo">Number of stitch</label>
-                                    <input type="number" class="form-control" name="stitchNo" id="stitchNo" placeholder="{{ $coffee -> stitchNo }}" value="" required>
+                                    <input type="number" class="form-control" name="stitchNo" id="stitchNo" value="{{ $coffee -> stitchNo }}" required>
                                     <div class="invalid-feedback">
                                         Valid stitch number is required.
                                     </div>

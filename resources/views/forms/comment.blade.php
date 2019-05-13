@@ -7,7 +7,18 @@
            {{ csrf_field() }}
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="comment" style="margin-top: 70px;"><h4>Comment</h4></label>
+                    <label for="comment" style="margin-top: 20px;"><h4>Email(Optional)</h4></label>
+                    <input type="email" class="form-control" name="email" id="email" style="margin-left: 180px;"
+                           placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                        Please enter a valid email address.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="comment" style="margin-top: 20px; margin-left: -50px;"><h4>Comment</h4></label>
                     <textarea name="comment" class="form-control" id="comment" style="margin-left: 180px;"
                               required rows="10" cols="60">
                     </textarea>

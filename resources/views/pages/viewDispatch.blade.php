@@ -11,8 +11,21 @@
                 @if(count($coffees) > 0)
                     @foreach($coffees as $coffee)
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">
-                            <a href="/coffees/{{ $coffee->id }}/edit"> <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3></a>
-                            <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}}</h5>
+                            <div class="row">
+                                <div class="col-md-5 mb-3">
+                                    <a href="/coffees/{{ $coffee->id }}/edit"> <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3></a>
+                                    <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}}</h5>
+                                </div>
+                                <div class="col-md-3 mb-3" style="margin-left: 100px; margin-top: 10px;">
+                                    <form method="POST" action="/coffees/{{ $coffee->id }}">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+
+                                        <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Delete</button>
+
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     @endforeach
                     {{$coffees->links()}}

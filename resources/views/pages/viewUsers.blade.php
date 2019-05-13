@@ -11,8 +11,22 @@
                     @if(count($users) > 0)
                         @foreach($users as $user)
                             <div class="table-bordered bg-light" style="margin-bottom: 10px;">
-                                <a href="/users/{{ $user->id }}"> <h3>{{ $user -> fname }} {{ $user -> lname }}</h3></a>
-                                <h5> ID = {{ $user->id }} {{ $user -> userType}}</h5>
+                                <div class="row">
+                                    <div class="col-md-5 mb-3">
+                                        <a href="/users/{{ $user->id }}"> <h3>{{ $user -> fname }} {{ $user -> lname }}</h3></a>
+                                        <h5> ID = {{ $user->id }} {{ $user -> userType}}</h5>
+                                    </div>
+
+                                    <div class="col-md-3 mb-3" style="margin-left: 100px; margin-top: 10px;">
+                                        <form method="POST" action="/users/{{ $user->id }}">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+
+                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Delete</button>
+
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                         {{$users->links()}}

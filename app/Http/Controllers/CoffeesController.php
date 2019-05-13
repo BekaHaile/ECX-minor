@@ -118,7 +118,41 @@ class CoffeesController extends Controller
      */
     public function update(Request $request, Coffee $coffee)
     {
-        //
+        //coffee info
+
+        if(request('wet')== 'Wet')
+            $coffee->wet = TRUE;
+        else
+            $coffee->wet = FALSE;
+        $coffee->weight = request('weight');
+        $coffee->sacks = request('sacks');
+        $coffee->stitchNo = request('stitchNo');
+        $coffee->packDate = request('packDate');
+        $coffee->region = request('region');
+        $coffee->woreda = request('woreda');
+        $coffee->kebele = request('kebele');
+        $coffee->washingStation = request('washingStation');
+
+        //owner info
+        $coffee->ownerName = request('ownerName');
+        $coffee->ownerPhone = request('ownerPhone');
+
+        //driver info
+        $coffee->driverName = request('driverName');
+        $coffee->driverPhone = request('driverPhone');
+        $coffee->driverId = request('driverId');
+        $coffee->licenceNum = request('licenceNum');
+
+        //Car info
+        $coffee->typeOfCar = request('typeOfCar');
+        $coffee->plateNum = request('plateNum');
+        $coffee->cardinalNum = 1;
+        $coffee->dispatchFill = TRUE;
+
+        $coffee->save();
+
+        return redirect('/coffees');
+
     }
 
     /**
@@ -129,6 +163,8 @@ class CoffeesController extends Controller
      */
     public function destroy(Coffee $coffee)
     {
-        //
+        $coffee->delete();
+
+        return redirect('/coffees');
     }
 }

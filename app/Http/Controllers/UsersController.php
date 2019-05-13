@@ -67,7 +67,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('forms.editUser')->with('users',$user);
+        return view('forms.editUser', compact('user'));
     }
 
     /**
@@ -78,7 +78,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('forms.editUser')->with('users',$user);
+        return view('forms.editUser', compact('user'));
     }
 
     /**
@@ -90,7 +90,23 @@ class UsersController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->username = request('username');
+        $user->password = request('password');
+        $user->fname = request('fname');
+        $user->lname = request('lname');
+        $user->sex = request('sex');
+        $user->zone = request('zone');
+        $user->woreda = request('woreda');
+        $user->kebele = request('kebele');
+        $user->phoneNumber = request('phoneNumber');
+        $user->userType = request('userType');
+        $user->city = request('city');
+        $user->dateOfBirth = request('dateOfBirth');
+        $user->email = request('email');
+
+        $user->save();
+
+        return redirect('/users');
     }
 
     /**
@@ -101,6 +117,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect('/users');
     }
 }
