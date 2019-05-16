@@ -13,8 +13,8 @@
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">
                             <div class="row">
                                 <div class="col-md-5 mb-3">
-                                     <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3>
-                                    <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}}</h5>
+                                    <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3>
+                                    <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
                                     <a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>

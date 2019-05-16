@@ -28,6 +28,10 @@ class CoffeesController extends Controller
     {
         return view('forms.dispatch');
     }
+    public function createScale()
+    {
+        return view('forms.scale');
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -106,7 +110,7 @@ class CoffeesController extends Controller
     {
        // $coffee = Coffee::find($id);
 
-        return view('forms.dispatchEdit', compact('coffee'));
+        return view('forms.editDispatch', compact('coffee'));
     }
 
     /**

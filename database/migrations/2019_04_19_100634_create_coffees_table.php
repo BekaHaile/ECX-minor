@@ -17,28 +17,33 @@ class CreateCoffeesTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
         //dispatch info
-            $table->boolean("wet");
-            $table->integer("weight");
-            $table->integer("sacks");
-            $table->integer("stitchNo");
-            $table->date("packDate");
-            $table->string("region");
-            $table->string("woreda");
-            $table->string("kebele");
-            $table->string("washingStation");
-        //owner info
-            $table->string("ownerName");
-            $table->string("ownerPhone");
-        //driver info
-            $table->string("driverName");
-            $table->string("driverPhone");
-            $table->string("driverId");
-            $table->string("licenceNum");
-        //car info
-            $table->string("typeOfCar");
-            $table->string("plateNum");
-            $table->Integer('cardinalNum');
-            $table->boolean("dispatchFill");
+                $table->boolean("wet");
+                $table->integer("weight");
+                $table->integer("sacks");
+                $table->integer("stitchNo");
+                $table->date("packDate");
+                $table->string("region");
+                $table->string("woreda");
+                $table->string("kebele");
+                $table->string("washingStation");
+            //owner info
+                $table->string("ownerName");
+                $table->string("ownerPhone");
+            //driver info
+                $table->string("driverName");
+                $table->string("driverPhone");
+                $table->string("driverId");
+                $table->string("licenceNum");
+            //car info
+                $table->string("typeOfCar");
+                $table->string("plateNum");
+                $table->Integer('cardinalNum');
+                $table->boolean("dispatchFill");
+
+        //scale info
+            $table->boolean("scaleWet");
+            $table->integer("scaleWeight");
+            $table->boolean("scaleFill");
 
             $table->string("specialty");
             $table->string("grade");
