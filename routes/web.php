@@ -34,6 +34,13 @@ Route::post('/coffees/{coffee}/storeScale','CoffeesController@storeScale')->name
 Route::get('/coffees/{coffee}/editScale','CoffeesController@editScale')->name('coffees.editScale');
 Route::post('/coffees/{coffee}/updateScale','CoffeesController@updateScale')->name('coffees.updateScale');
 Route::get('/viewScaleFilled','CoffeesController@viewScaleFilled')->name('coffees.viewScaleFilled');
+//scale
+Route::get('/sample','CoffeesController@viewSample')->name('sample');
+Route::get('/coffees/{coffee}/createSample','CoffeesController@createSample')->name('coffees.createSample');
+Route::post('/coffees/{coffee}/storeSample','CoffeesController@storeSample')->name('coffees.storeSample');
+Route::get('/coffees/{coffee}/editSample','CoffeesController@editSample')->name('coffees.editSample');
+Route::post('/coffees/{coffee}/updateSample','CoffeesController@updateSample')->name('coffees.updateSample');
+Route::get('/viewSampleFilled','CoffeesController@viewSampleFilled')->name('coffees.viewSampleFilled');
 
 Route::resource('users','UsersController');
 Route::post('/user','UsersController@store');

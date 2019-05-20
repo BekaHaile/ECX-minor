@@ -35,6 +35,24 @@ class CoffeesController extends Controller
         return view('pages.coffee.viewScale', compact('coffees'));
     }
 
+
+    //view coffees with dispatch ans scale info already filled out
+    public function viewSample()
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
+            ->orderBy('created_at','desc')->paginate(5);
+
+        return view('pages.coffee.viewSample',compact('coffees'));
+    }
+
+    //show coffees with sample info filled out
+    public function viewSampleFilled()
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->orderBy('created_at','desc')->paginate(5);
+        return view('pages.coffee.viewSample', compact('coffees'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -48,6 +66,11 @@ class CoffeesController extends Controller
     public function createScale(Coffee $coffee)
     {
         return view('forms.coffee.scale', compact('coffee'));
+    }
+    //Views coffees with dispatch, scale info filled
+    public function createSample(Coffee $coffee)
+    {
+        return view('forms.coffee.sample', compact('coffee'));
     }
 
     /**
@@ -115,6 +138,21 @@ class CoffeesController extends Controller
         return redirect('/viewScaleFilled');
     }
 
+    //Adds scale info onto the selected coffee.
+    public function storeSample(Request $request, Coffee $coffee)
+    {
+
+        $coffee->scaleWeight = request('scaleWeight');
+        if(request('scaleWet')== 'Wet')
+            $coffee->scaleWet = TRUE;
+        else
+            $coffee->scaleWet = FALSE;
+        $coffee->scaleFill = TRUE;
+        $coffee->save();
+
+        return redirect('/viewSampleFilled');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -149,6 +187,13 @@ class CoffeesController extends Controller
         // $coffee = Coffee::find($id);
 
         return view('forms.coffee.editScale', compact('coffee'));
+    }
+    //View edit form for sample info already filled out
+    public function editSample(Coffee $coffee)
+    {
+        // $coffee = Coffee::find($id);
+
+        return view('forms.coffee.editSample', compact('coffee'));
     }
 
     /**
@@ -209,6 +254,20 @@ class CoffeesController extends Controller
         $coffee->save();
 
         return redirect('/viewScaleFilled');
+    }
+
+    //To update already filled sample info
+    public function updateSample(Request $request, Coffee $coffee)
+    {
+        $coffee->scaleWeight = request('scaleWeight');
+        if(request('scaleWet')== 'Wet')
+            $coffee->scaleWet = TRUE;
+        else
+            $coffee->scaleWet = FALSE;
+        $coffee->scaleFill = TRUE;
+        $coffee->save();
+
+        return redirect('/viewSampleFilled');
     }
 
     /**
