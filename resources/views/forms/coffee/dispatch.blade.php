@@ -1,27 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        @media (min-width: 768px) {
+        }
+    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @include('inc.sidenav')
         </div>
         <div class="col-md-10 mb-3">
-            <style>
-                .bd-placeholder-img {
-                    font-size: 1.125rem;
-                    text-anchor: middle;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                }
-
-                @media (min-width: 768px) {
-                    .bd-placeholder-img-lg {
-                        font-size: 3.5rem;
-                    }
-                }
-            </style>
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <div class="py-5 text-center">
                     <h2>Dispatch form</h2>
@@ -202,7 +190,7 @@
 
                             <hr class="mb-6">
                             <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>
-                            <button class="btn btn-danger btn-lg " type="" style="margin-bottom: 10px;">Clear</button>
+                            <button class="btn btn-danger btn-lg " style="margin-bottom: 10px;">Clear</button>
                         </form>
                     </div>
                 </div>

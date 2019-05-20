@@ -2,6 +2,7 @@
 
 @section('content')
     <style>
+
         @media (min-width: 768px) {
 
         }
@@ -15,7 +16,7 @@
     </style>
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.scaleSidenav')
+            @include('inc.specialtySidenav')
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
@@ -46,8 +47,8 @@
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Scale Information </b> </h4>
-                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateScale">
+                        <h4 class="mb-3"> <b> Specialty Information </b> </h4>
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateSpecialty">
                             {{--{{ method_field('PATCH') }}--}}
                             {{ csrf_field() }}
                             <div class="row">

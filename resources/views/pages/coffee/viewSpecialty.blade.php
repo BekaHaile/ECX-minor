@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.sampleSidenav')
+            @include('inc.specialtySidenav')
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">
-                <h1 style="margin-left: 400px;">Scale Info</h1>
+                <h1 style="margin-left: 400px;">Coffee Info</h1>
                 @if(count($coffees) > 0)
                     @foreach($coffees as $coffee)
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">
@@ -17,11 +17,11 @@
                                     <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
-                                            @else "/coffees/{{ $coffee->id }}/editSample"
+                                    <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
+                                            @else "/coffees/{{ $coffee->id }}/editSpecialty"
                                             @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->scaleFill == 0)Insert Sample
-                                            @else Edit Sample
+                                            @if ($coffee->scaleFill == 0)Insert Specialty
+                                            @else Edit Specialty
                                             @endif </button> </a>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: 5px;">

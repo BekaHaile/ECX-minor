@@ -41,6 +41,13 @@ Route::post('/coffees/{coffee}/storeSample','CoffeesController@storeSample')->na
 Route::get('/coffees/{coffee}/editSample','CoffeesController@editSample')->name('coffees.editSample');
 Route::post('/coffees/{coffee}/updateSample','CoffeesController@updateSample')->name('coffees.updateSample');
 Route::get('/viewSampleFilled','CoffeesController@viewSampleFilled')->name('coffees.viewSampleFilled');
+//specialty
+Route::get('/specialty','CoffeesController@viewSpecialty')->name('specialty');
+Route::get('/coffees/{coffee}/createSpecialty','CoffeesController@createSpecialty')->name('coffees.createSpecialty');
+Route::post('/coffees/{coffee}/storeSample','CoffeesController@storeSample')->name('coffees.storeSpecialty');
+Route::get('/coffees/{coffee}/editSpecialty','CoffeesController@editSpecialty')->name('coffees.editSpecialty');
+Route::post('/coffees/{coffee}/updateSpecialty','CoffeesController@updateSpecialty')->name('coffees.updateSpecialty');
+Route::get('/viewSpecialtyFilled','CoffeesController@viewSpecialtyFilled')->name('coffees.viewSpecialtyFilled');
 
 Route::resource('users','UsersController');
 Route::post('/user','UsersController@store');

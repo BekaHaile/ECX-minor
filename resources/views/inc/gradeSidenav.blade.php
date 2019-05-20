@@ -7,15 +7,15 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Dispatch Menu</h3>
+            <h3>Grade Menu</h3>
         </div>
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/dispatch">Create new</a>
+                <a href="/grade">Create new</a>
             </li>
             <li>
-                <a href="/coffees">View Existing</a>
+                <a href="/viewGradeFilled">View Existing</a>
             </li>
         </ul>
     </nav>

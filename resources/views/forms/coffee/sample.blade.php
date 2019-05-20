@@ -24,7 +24,7 @@
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Dispatch Information </b> </h4>
+                        <h4 class="mb-3"> <b> Coffee Information </b> </h4>
                     </div>
                 </div>
                 <div class="row">
@@ -45,8 +45,8 @@
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Scale Information </b> </h4>
-                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeScale">
+                        <h4 class="mb-3"> <b> Sample Information </b> </h4>
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeSample">
                             {{--{{ method_field('PATCH') }}--}}
                             {{ csrf_field() }}
                             <div class="row">

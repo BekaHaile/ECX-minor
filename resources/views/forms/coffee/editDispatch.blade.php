@@ -1,27 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+    <style>
+        @media (min-width: 768px) {
+
+        }
+    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @include('inc.sidenav')
         </div>
         <div class="col-md-10 mb-3">
-            <style>
-                .bd-placeholder-img {
-                    font-size: 1.125rem;
-                    text-anchor: middle;
-                    -webkit-user-select: none;
-                    -moz-user-select: none;
-                    -ms-user-select: none;
-                    user-select: none;
-                }
-
-                @media (min-width: 768px) {
-                    .bd-placeholder-img-lg {
-                        font-size: 3.5rem;
-                    }
-                }
-            </style>
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <div class="py-5 text-center">
                     <h2>Edit Dispatch</h2>
@@ -187,7 +176,7 @@
 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="dateOfBirth">Pack date</label>
+                                    <label for="packDate">Pack date</label>
                                     <input type="date" class="form-control" name="packDate" id="packDate" value="{{ $coffee -> packDate }}" required>
                                     <div class="invalid-feedback">
                                         please input a valid date.
