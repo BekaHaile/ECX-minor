@@ -2,8 +2,28 @@
     li a{
         color: white;
     }
+    .sidenav {
+        height: 100%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        top: 40px;
+        left: 30px;
+        overflow-x: hidden;
+        padding-top: 20px;
+    }
+
+    .sidenav a:hover {
+        color: #f1f1f1;
+    }
 </style>
-<div class="wrapper jumbotron bg-dark" style="height: inherit; margin-top: 20px; margin-right: -10px; color: white;">
+<div class="wrapper jumbotron bg-dark" style="height: 80%;
+        width: 160px;
+        position: fixed;
+        z-index: 1;
+        overflow-x: hidden;
+         margin-bottom: 10px;
+         margin-right: -10px; color: white;">
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">

@@ -58,13 +58,13 @@
                 <div class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Scale Information </b> </h4>
-                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeScale">
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateScale">
                             {{--{{ method_field('PATCH') }}--}}
                             {{ csrf_field() }}
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="scaleWeight"><h5>Weight in KG</h5></label>
-                                    <input type="number" class="form-control" name="scaleWeight" id="scaleWeight" placeholder="" value="" required>
+                                    <input type="number" class="form-control" name="scaleWeight" id="scaleWeight" placeholder="" value={{ $coffee -> scaleWeight }} required>
                                     <div class="invalid-feedback">
                                         Valid weight is required.
                                     </div>
@@ -80,11 +80,15 @@
 
                                     <div class="d-block my-3">
                                         <div class="custom-control custom-radio">
-                                            <input id="wet" name="scaleWet" type="radio" value="Wet" class="custom-control-input" required>
+                                            <input id="wet" name="scaleWet" type="radio" value="Wet" class="custom-control-input"
+                                                   @if( $coffee -> scaleWet == 1) checked
+                                                   @endif required>
                                             <label class="custom-control-label" for="wet">Wet</label>
                                         </div>
                                         <div class="custom-control custom-radio">
-                                            <input id="notwet" name="scaleWet" type="radio" value="Not Wet" class="custom-control-input" required>
+                                            <input id="notwet" name="scaleWet" type="radio" value="Not Wet" class="custom-control-input"
+                                                   @if( $coffee -> scaleWet == 0) checked
+                                                   @endif required >
                                             <label class="custom-control-label" for="notwet">Not Wet</label>
                                         </div>
                                     </div>

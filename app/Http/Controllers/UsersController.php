@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use Webpatser\Uuid\Uuid;
 
 class UsersController extends Controller
 {
@@ -41,7 +42,7 @@ class UsersController extends Controller
 
         $users->id = request('id');
         $users->username = request('username');
-        $users->password = request('password');
+        $users->password = Uuid::generate()->string;
         $users->fname = request('fname');
         $users->lname = request('lname');
         $users->sex = request('sex');

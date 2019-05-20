@@ -63,25 +63,25 @@
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="" value="" required>
-                                    <div class="invalid-feedback">
-                                        Valid password is required.
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-6 mb-3">--}}
+                                    {{--<label for="password">Password</label>--}}
+                                    {{--<input type="password" class="form-control" name="password" id="password" placeholder="" value="" required>--}}
+                                    {{--<div class="invalid-feedback">--}}
+                                        {{--Valid password is required.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="confirm password">Confirm Password</label>
-                                    <input type="password" class="form-control" name="confirm password" id="confirm password" placeholder="" value="" required>
-                                    <div class="invalid-feedback">
-                                        Password mismatch.
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="row">--}}
+                                {{--<div class="col-md-6 mb-3">--}}
+                                    {{--<label for="confirm password">Confirm Password</label>--}}
+                                    {{--<input type="password" class="form-control" name="confirm password" id="confirm password" placeholder="" value="" required>--}}
+                                    {{--<div class="invalid-feedback">--}}
+                                        {{--Password mismatch.--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
 
                             <div class="row">
                                 <div class="col-md-5 mb-3">

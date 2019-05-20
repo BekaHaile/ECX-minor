@@ -19,6 +19,22 @@ class CoffeesController extends Controller
         return view('pages.viewDispatch', compact('coffees'));
     }
 
+    //view coffees with dispatch info already filled out
+    public function viewScale()
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->orderBy('created_at','desc')->paginate(5);
+
+        return view('pages.viewScale',compact('coffees'));
+    }
+
+    //show coffees with scale info filled out
+    public function viewScaleFilled()
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)
+            ->orderBy('created_at','desc')->paginate(5);
+        return view('pages.viewScale', compact('coffees'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,9 +44,10 @@ class CoffeesController extends Controller
     {
         return view('forms.dispatch');
     }
-    public function createScale()
+    //Views coffees with dispatch info filled
+    public function createScale(Coffee $coffee)
     {
-        return view('forms.scale');
+        return view('forms.scale', compact('coffee'));
     }
 
     /**
@@ -43,45 +60,59 @@ class CoffeesController extends Controller
     {
         $coffees = new Coffee();
 
+        //dispatch info
         //coffee info
-        $coffees->id = request('id');
+            $coffees->id = request('id');
 
-        if(request('wet')== 'Wet')
-            $coffees->wet = TRUE;
-        else
-            $coffees->wet = FALSE;
-        $coffees->weight = request('weight');
-        $coffees->sacks = request('sacks');
-        $coffees->stitchNo = request('stitchNo');
-        $coffees->packDate = request('packDate');
-        $coffees->region = request('region');
-        $coffees->woreda = request('woreda');
-        $coffees->kebele = request('kebele');
-        $coffees->washingStation = request('washingStation');
+            if(request('wet')== 'Wet')
+                $coffees->wet = TRUE;
+            else
+                $coffees->wet = FALSE;
+            $coffees->weight = request('weight');
+            $coffees->sacks = request('sacks');
+            $coffees->stitchNo = request('stitchNo');
+            $coffees->packDate = request('packDate');
+            $coffees->region = request('region');
+            $coffees->woreda = request('woreda');
+            $coffees->kebele = request('kebele');
+            $coffees->washingStation = request('washingStation');
 
-        //owner info
-        $coffees->ownerName = request('ownerName');
-        $coffees->ownerPhone = request('ownerPhone');
+            //owner info
+            $coffees->ownerName = request('ownerName');
+            $coffees->ownerPhone = request('ownerPhone');
 
-        //driver info
-        $coffees->driverName = request('driverName');
-        $coffees->driverPhone = request('driverPhone');
-        $coffees->driverId = request('driverId');
-        $coffees->licenceNum = request('licenceNum');
+            //driver info
+            $coffees->driverName = request('driverName');
+            $coffees->driverPhone = request('driverPhone');
+            $coffees->driverId = request('driverId');
+            $coffees->licenceNum = request('licenceNum');
 
-        //Car info
-        $coffees->typeOfCar = request('typeOfCar');
-        $coffees->plateNum = request('plateNum');
-        $coffees->cardinalNum = 1;
-        $coffees->dispatchFill = TRUE;
+            //Car info
+            $coffees->typeOfCar = request('typeOfCar');
+            $coffees->plateNum = request('plateNum');
+            $coffees->cardinalNum = 1;
+            $coffees->dispatchFill = TRUE;
 
-        $coffees->specialty = '';
-        $coffees->grade = '';
-        $coffees->price = '';
+            $coffees->scaleFill = FALSE;
 
         $coffees->save();
 
         return redirect('/coffees');
+    }
+
+    //Adds scale info onto the selected coffee.
+    public function storeScale(Request $request, Coffee $coffee)
+    {
+
+        $coffee->scaleWeight = request('scaleWeight');
+        if(request('scaleWet')== 'Wet')
+            $coffee->scaleWet = TRUE;
+        else
+            $coffee->scaleWet = FALSE;
+        $coffee->scaleFill = TRUE;
+        $coffee->save();
+
+        return redirect('/viewScaleFilled');
     }
 
     /**
@@ -111,6 +142,13 @@ class CoffeesController extends Controller
        // $coffee = Coffee::find($id);
 
         return view('forms.editDispatch', compact('coffee'));
+    }
+    //View edit form for scale info already filled out
+    public function editScale(Coffee $coffee)
+    {
+        // $coffee = Coffee::find($id);
+
+        return view('forms.editScale', compact('coffee'));
     }
 
     /**
@@ -157,6 +195,20 @@ class CoffeesController extends Controller
 
         return redirect('/coffees');
 
+    }
+
+    //To update already filled scale info
+    public function updateScale(Request $request, Coffee $coffee)
+    {
+        $coffee->scaleWeight = request('scaleWeight');
+        if(request('scaleWet')== 'Wet')
+            $coffee->scaleWet = TRUE;
+        else
+            $coffee->scaleWet = FALSE;
+        $coffee->scaleFill = TRUE;
+        $coffee->save();
+
+        return redirect('/viewScaleFilled');
     }
 
     /**

@@ -3,11 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.sidenav')
+            @include('inc.scaleSidenav')
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">
-                <h1 style="margin-left: 400px;">Dispatch</h1>
+                <h1 style="margin-left: 400px;">Scale Info</h1>
                 @if(count($coffees) > 0)
                     @foreach($coffees as $coffee)
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">
@@ -17,9 +17,14 @@
                                     <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
+                                    <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createScale"
+                                            @else "/coffees/{{ $coffee->id }}/editScale"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                            @if ($coffee->scaleFill == 0)Insert Scale
+                                            @else Edit Scale
+                                            @endif </button> </a>
                                 </div>
-                                <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: -20px;">
+                                <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: 5px;">
                                     <form method="POST" action="/coffees/{{ $coffee->id }}">
                                         {{ method_field('DELETE') }}
                                         {{ csrf_field() }}
@@ -33,7 +38,7 @@
                     @endforeach
                     {{$coffees->links()}}
                 @else
-                    <p> No Users exist.</p>
+                    <p> No Coffees exist.</p>
                 @endif
             </div>
         </div>

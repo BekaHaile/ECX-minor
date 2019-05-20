@@ -23,11 +23,17 @@ Route::get('/help','PagesController@help')->name('help');
 
 Route::get('/admin','UsersController@index')->name('admin');
 
-Route::get('/dispatch','CoffeesController@create')->name('dispatch');
-Route::get('/scale','CoffeesController@createScale')->name('scale');
-
 Route::resource('coffees','CoffeesController');
+//dispatch
 Route::post('/coffee','CoffeesController@storeDispatch');
+Route::get('/dispatch','CoffeesController@create')->name('dispatch');
+//scale
+Route::get('/scale','CoffeesController@viewScale')->name('scale');
+Route::get('/coffees/{coffee}/createScale','CoffeesController@createScale')->name('coffees.createScale');
+Route::post('/coffees/{coffee}/storeScale','CoffeesController@storeScale')->name('coffees.storeScale');
+Route::get('/coffees/{coffee}/editScale','CoffeesController@editScale')->name('coffees.editScale');
+Route::post('/coffees/{coffee}/updateScale','CoffeesController@updateScale')->name('coffees.updateScale');
+Route::get('/viewScaleFilled','CoffeesController@viewScaleFilled')->name('coffees.viewScaleFilled');
 
 Route::resource('users','UsersController');
 Route::post('/user','UsersController@store');

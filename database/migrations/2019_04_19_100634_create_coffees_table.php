@@ -41,13 +41,13 @@ class CreateCoffeesTable extends Migration
                 $table->boolean("dispatchFill");
 
         //scale info
-            $table->boolean("scaleWet");
-            $table->integer("scaleWeight");
-            $table->boolean("scaleFill");
+            $table->boolean("scaleWet")->nullable();
+            $table->integer("scaleWeight")->nullable();
+            $table->boolean("scaleFill")->nullable();
 
-            $table->string("specialty");
-            $table->string("grade");
-            $table->string("price");
+            $table->string("specialty")->nullable();
+            $table->string("grade")->nullable();
+            $table->string("price")->nullable();
         });
     }
 
