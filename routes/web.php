@@ -44,10 +44,19 @@ Route::get('/viewSampleFilled','CoffeesController@viewSampleFilled')->name('coff
 //specialty
 Route::get('/specialty','CoffeesController@viewSpecialty')->name('specialty');
 Route::get('/coffees/{coffee}/createSpecialty','CoffeesController@createSpecialty')->name('coffees.createSpecialty');
-Route::post('/coffees/{coffee}/storeSample','CoffeesController@storeSample')->name('coffees.storeSpecialty');
+Route::post('/coffees/{coffee}/storeSpecialty','CoffeesController@storeSpecialty')->name('coffees.storeSpecialty');
 Route::get('/coffees/{coffee}/editSpecialty','CoffeesController@editSpecialty')->name('coffees.editSpecialty');
 Route::post('/coffees/{coffee}/updateSpecialty','CoffeesController@updateSpecialty')->name('coffees.updateSpecialty');
 Route::get('/viewSpecialtyFilled','CoffeesController@viewSpecialtyFilled')->name('coffees.viewSpecialtyFilled');
+//grade
+Route::get('/grade','CoffeesController@viewGrade')->name('grade');
+Route::get('/coffees/{coffee}/createGrade','CoffeesController@createGrade')->name('coffees.createGrade');
+Route::post('/coffees/{coffee}/storeGrade','CoffeesController@storeGrade')->name('coffees.storeGrade');
+Route::get('/coffees/{coffee}/editGrade','CoffeesController@editGrade')->name('coffees.editGrade');
+Route::post('/coffees/{coffee}/updateGrade','CoffeesController@updateGrade')->name('coffees.updateGrade');
+Route::get('/viewGradeFilled','CoffeesController@viewGradeFilled')->name('coffees.viewGradeFilled');
+
+
 
 Route::resource('users','UsersController');
 Route::post('/user','UsersController@store');

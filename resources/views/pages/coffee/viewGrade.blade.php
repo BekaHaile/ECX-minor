@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.sampleSidenav')
+            @include('inc.gradeSidenav')
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">
@@ -17,11 +17,11 @@
                                     <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href=@if ($coffee->sampleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
-                                            @else "/coffees/{{ $coffee->id }}/editSample"
+                                    <a href=@if ($coffee->gradeFill == 0) "/coffees/{{ $coffee->id }}/createGrade"
+                                            @else "/coffees/{{ $coffee->id }}/editGrade"
                                             @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->sampleFill == 0)Insert Sample
-                                            @else Edit Sample
+                                            @if ($coffee->gradeFill == 0)Insert Grade
+                                            @else Edit Grade
                                             @endif </button> </a>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: 5px;">

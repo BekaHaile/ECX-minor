@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">
-                <h1 style="margin-left: 400px;">Scale Info</h1>
+                <h1 style="margin-left: 400px;">Coffee Info</h1>
                 @if(count($coffees) > 0)
                     @foreach($coffees as $coffee)
                         <div class="table-bordered bg-light" style="margin-bottom: 10px;">

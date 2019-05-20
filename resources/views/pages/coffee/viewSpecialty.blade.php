@@ -17,10 +17,10 @@
                                     <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
+                                    <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
                                             @else "/coffees/{{ $coffee->id }}/editSpecialty"
                                             @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->scaleFill == 0)Insert Specialty
+                                            @if ($coffee->specialtyFill == 0)Insert Specialty
                                             @else Edit Specialty
                                             @endif </button> </a>
                                 </div>
