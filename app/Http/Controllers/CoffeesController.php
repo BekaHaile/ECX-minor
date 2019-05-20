@@ -16,7 +16,7 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::orderBy('created_at','desc')->paginate(5);
 
-        return view('pages.viewDispatch', compact('coffees'));
+        return view('pages.coffee.viewDispatch', compact('coffees'));
     }
 
     //view coffees with dispatch info already filled out
@@ -24,7 +24,7 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->orderBy('created_at','desc')->paginate(5);
 
-        return view('pages.viewScale',compact('coffees'));
+        return view('pages.coffee.viewScale',compact('coffees'));
     }
 
     //show coffees with scale info filled out
@@ -32,7 +32,7 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)
             ->orderBy('created_at','desc')->paginate(5);
-        return view('pages.viewScale', compact('coffees'));
+        return view('pages.coffee.viewScale', compact('coffees'));
     }
 
     /**
@@ -42,12 +42,12 @@ class CoffeesController extends Controller
      */
     public function create()
     {
-        return view('forms.dispatch');
+        return view('forms.coffee.dispatch');
     }
     //Views coffees with dispatch info filled
     public function createScale(Coffee $coffee)
     {
-        return view('forms.scale', compact('coffee'));
+        return view('forms.coffee.scale', compact('coffee'));
     }
 
     /**
@@ -125,7 +125,7 @@ class CoffeesController extends Controller
     {
         //$coffee = Coffee::find($id);
 
-        return view('forms.dispatchEdit', compact('coffee'));
+        return view('forms.coffee.dispatchEdit', compact('coffee'));
 
         //$coffees = Coffee::find($id);
         //return view('forms.dispatch')->with('coffees','$coffees');
@@ -141,14 +141,14 @@ class CoffeesController extends Controller
     {
        // $coffee = Coffee::find($id);
 
-        return view('forms.editDispatch', compact('coffee'));
+        return view('forms.coffee.editDispatch', compact('coffee'));
     }
     //View edit form for scale info already filled out
     public function editScale(Coffee $coffee)
     {
         // $coffee = Coffee::find($id);
 
-        return view('forms.editScale', compact('coffee'));
+        return view('forms.coffee.editScale', compact('coffee'));
     }
 
     /**
