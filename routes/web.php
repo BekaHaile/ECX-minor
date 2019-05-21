@@ -68,3 +68,6 @@ Route::get('/comment','CommentsController@create')->name('comment');
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;
 });*/
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
