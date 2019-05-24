@@ -3,7 +3,7 @@
 @section('content')
 <div class="container" style="margin-top: 60px; margin-bottom: 215px; opacity: 0.95;">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-secondary" style="color: white;">{{ __('Login') }}</div>
 

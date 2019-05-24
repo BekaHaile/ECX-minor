@@ -37,7 +37,7 @@
 
         body {
             opacity: 0.9;
-            background-image: url("{{ asset('images/ECX2.jpg') }}");
+            {{--background-image: url("{{ asset('images/ECX2.jpg') }}");--}}
             /*  background-repeat: no-repeat;*/
         }
         .jumbotron {
