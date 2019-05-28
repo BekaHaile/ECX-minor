@@ -22,7 +22,7 @@ class CoffeesController extends Controller
     //view coffees with dispatch info already filled out
     public function viewScale()
     {
-        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->orderBy('created_at','desc')->paginate(5);
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->orderBy('created_at','asc')->paginate(5);
 
         return view('pages.coffee.viewScale',compact('coffees'));
     }

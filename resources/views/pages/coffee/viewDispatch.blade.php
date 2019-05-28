@@ -3,39 +3,62 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @if(auth()->usertype() == 'manager')
+            {{--@if(auth()->usertype() == 'manager')--}}
                 @include('inc.sidenav')
-            @endif
+
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">
                 <h1 style="margin-left: 400px;">Dispatch</h1>
                 @if(count($coffees) > 0)
-                    @foreach($coffees as $coffee)
-                        <div class="table-bordered bg-light" style="margin-bottom: 10px;">
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                     <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3>
-                                    <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}}</h5>
-                                </div>
-                                <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
-                                </div>
-                                <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: -20px;">
-                                    <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <table class="table table-hover ">
+                                {{--table-striped mb-0--}}
+                                <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Owners' Name</th>
+                                    <th scope="col">Owners' Phone Number</th>
+                                    <th scope="col">Washing Station</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Remove</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($coffees as $coffee)
+                                        {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
+                                        <tr>
+                                            <td>
+                                                {{ $coffee->id }}
+                                            </td>
+                                            <td>
+                                                {{ $coffee -> ownerName }}
+                                            </td>
+                                            <td>
+                                                {{ $coffee -> ownerPhone }}
+                                            </td>
+                                            <td>
+                                                {{ $coffee -> washingStation}}
+                                            </td>
+                                            <td>
+                                                <a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
+                                            </td>
+                                            <td>
+                                                <form method="POST" action="/coffees/{{ $coffee->id }}">
+                                                    {{ method_field('DELETE') }}
+                                                    {{ csrf_field() }}
+                                                    <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
+                                                </form>
+                                            </td>
+                                        </tr>
 
-                                        <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Delete</button>
-
-                                    </form>
-                                </div>
-                            </div>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
-                    @endforeach
                     {{$coffees->links()}}
                 @else
-                    <p> No Users exist.</p>
+                    <p> No Coffees exist.</p>
                 @endif
             </div>
         </div>

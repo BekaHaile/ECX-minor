@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use \Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\User;
 class LoginController extends Controller
 {
     /*
@@ -20,6 +21,26 @@ class LoginController extends Controller
     */
 
     use AuthenticatesUsers;
+
+    //custom authentication
+//    public function login(Request $request)
+//    {
+//        if(Auth::attempt([
+//            'username' => $request->username,
+//            'password' => $request->password
+//        ])){
+//            $user = User::where('username',$request->username)->first();
+//            if($user->userType == 'Manager')
+//                return redirect('/admin');
+//            if($user->userType == 'Grader')
+//                return redirect('/scale');
+//            else
+//                return redirect('/dispatch');
+//        }
+//        else
+//            return redirect('/login');
+//
+//    }
 
     /**
      * Where to redirect users after login.
@@ -49,6 +70,8 @@ class LoginController extends Controller
     {
         if($user->userType == 'Manager')
             return redirect('/admin');
+        if($user->userType == 'Grader')
+            return redirect('/scale');
         else
             return redirect('/dispatch');
     }

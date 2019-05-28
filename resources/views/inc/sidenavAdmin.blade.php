@@ -2,28 +2,29 @@
     li a{
         color: white;
     }
-    .sidenav {
-        height: 100%;
-        width: 160px;
-        position: fixed;
-        z-index: 1;
-        top: 40px;
-        left: 30px;
-        overflow-x: hidden;
-        padding-top: 20px;
-    }
+    /*.sidenav {*/
+        /*height: 100%;*/
+        /*width: 160px;*/
+        /*position: fixed;*/
+        /*z-index: 1;*/
+        /*top: 40px;*/
+        /*left: 30px;*/
+        /*overflow-x: hidden;*/
+        /*padding-top: 20px;*/
+    /*}*/
 
-    .sidenav a:hover {
+    .sidebar a:hover {
         color: #f1f1f1;
     }
 </style>
-<div class="wrapper jumbotron bg-dark" style="height: 80%;
-        width: 160px;
-        position: fixed;
+<div class="wrapper jumbotron bg-dark" style="height: 100%;
+        width: 200px;
+        /*position: fixed;*/
         z-index: 1;
         overflow-x: hidden;
-         margin-bottom: 10px;
-         margin-right: -10px; color: white;">
+         margin-bottom: 5px;
+         margin-right: -10px;
+         color: white;">
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
@@ -31,7 +32,6 @@
         </div>
 
         <ul class="list-unstyled components">
-            <p>Dummy Heading</p>
             <li class="active">
                 <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
                 <ul class="collapse list-unstyled" id="userSubmenu">

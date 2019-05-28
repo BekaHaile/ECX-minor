@@ -1,4 +1,4 @@
- <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 20px;">
+ <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 0px;">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ __('Home') }}

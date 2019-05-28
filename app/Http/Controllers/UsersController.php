@@ -17,9 +17,13 @@ class UsersController extends Controller
 
     public function index()
     {
-        $users = User::orderBy('created_at','desc')->paginate(5);
+        $users = User::orderBy('created_at','asc')->paginate(5);
 
-        return view('pages.viewUsers')->with('users',$users);
+        $user = auth()->user();
+        if($user->userType == 'Manager')
+            return view('pages.viewUsers')->with('users',$users);
+        else
+            return view('pages.home');
     }
 
     /**
@@ -29,7 +33,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('forms.createUser');
+        return view('auth.register');
     }
 
     /**

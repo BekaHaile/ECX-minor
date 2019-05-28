@@ -12,9 +12,11 @@ class PagesController extends Controller
       //  $this->middleware('auth');
     }
 
-
     public function home(){
-        return view('pages.home');
+        if(auth()->guest())
+            return view('pages.home');
+        else
+            return view('forms.createUser');
     }
 
     public function about(){
@@ -30,7 +32,11 @@ class PagesController extends Controller
     }
 
     public function admin(){
-        return view('forms.createUser');
+        $user = auth()->user();
+        if($user->userType == 'Manager')
+            return view('forms.createUser');
+        else
+            return view('pages.home');
     }
 
     public function report(){

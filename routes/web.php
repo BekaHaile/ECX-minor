@@ -13,7 +13,7 @@
 
 Route::get('/', 'PagesController@home')->name('home');
 
-Route::get('/login','PagesController@login')->name('login');
+Route::get('/login2','PagesController@login')->name('login');
 
 Route::get('/about','PagesController@about')->name('about');
 
@@ -70,4 +70,4 @@ Route::get('/comment','CommentsController@create')->name('comment');
 });*/
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
