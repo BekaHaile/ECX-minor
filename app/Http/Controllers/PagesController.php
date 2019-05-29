@@ -16,7 +16,7 @@ class PagesController extends Controller
         if(auth()->guest())
             return view('pages.home');
         else
-            return view('forms.createUser');
+            abort(403);
     }
 
     public function about(){
@@ -33,10 +33,8 @@ class PagesController extends Controller
 
     public function admin(){
         $user = auth()->user();
-        if($user->userType == 'Manager')
+        abort_unless($user->userType == 'Administrator', 403);
             return view('forms.createUser');
-        else
-            return view('pages.home');
     }
 
     public function report(){

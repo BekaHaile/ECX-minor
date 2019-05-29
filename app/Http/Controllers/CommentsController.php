@@ -18,11 +18,10 @@ class CommentsController extends Controller
 
         $comments = Comment::where('category','good')->latest()->get();
         $comments2 = Comment::where('category','bad')->latest()->paginate(3);
+
         $user = auth()->user();
-        if($user->userType == 'Manager' || 'Administrator')
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
             return view('pages.viewComment', compact('user'))->with('comments',$comments)->with('comments2',$comments2);
-        else
-            return view('pages.home');
     }
 
     /**
@@ -32,7 +31,7 @@ class CommentsController extends Controller
      */
     public function create()
     {
-        return view('forms.comment');
+            return view('forms.comment');
     }
 
     /**

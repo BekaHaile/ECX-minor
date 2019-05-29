@@ -20,11 +20,9 @@ class UsersController extends Controller
         $users = User::orderBy('created_at','asc')->paginate(5);
 
         $user = auth()->user();
-        if($user->userType == 'Manager' || 'Administrator')
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
             return view('pages.viewUsers', compact('user'))->with('users',$users);
-        else
-            return view('pages.home');
-    }
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -33,7 +31,9 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $user = auth()->user();
+        abort_unless($user->userType == 'Administrator', 403);
+            return view('auth.register');
     }
 
     /**
@@ -62,6 +62,8 @@ class UsersController extends Controller
         $users->email = request('email');
 
         $users->save();
+        $user = auth()->user();
+            abort_unless($user->userType == 'Administrator', 403);
 
         return redirect('/users');
     }
@@ -74,7 +76,9 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('forms.editUser', compact('user'));
+        $user = auth()->user();
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+            return view('forms.editUser', compact('user'));
     }
 
     /**
@@ -85,7 +89,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('forms.editUser', compact('user'));
+        $user = auth()->user();
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+            return view('forms.editUser', compact('user'));
     }
 
     /**
@@ -113,7 +119,9 @@ class UsersController extends Controller
 
         $user->save();
 
-        return redirect('/users');
+        $user = auth()->user();
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+            return redirect('/users');
     }
 
     /**
@@ -126,6 +134,8 @@ class UsersController extends Controller
     {
         $user->delete();
 
-        return redirect('/users');
+        $user = auth()->user();
+        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+            return redirect('/users');
     }
 }
