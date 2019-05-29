@@ -17,7 +17,7 @@ margin-bottom: 5px;">
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/grade">Create new</a>
+                <a href="/grade">Add Grade info</a>
             </li>
             <li>
                 <a href="/viewGradeFilled">View Existing</a>

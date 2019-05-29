@@ -17,7 +17,7 @@ margin-bottom: 5px;">
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/scale">Create new</a>
+                <a href="/scale">Add Scale info</a>
             </li>
             <li>
                 <a href="/viewScaleFilled">View Existing</a>

@@ -17,7 +17,7 @@ margin-bottom: 5px;">
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/dispatch">Create new</a>
+                <a href="/dispatch">Add Dispatch info</a>
             </li>
             <li>
                 <a href="/coffees">View Existing</a>

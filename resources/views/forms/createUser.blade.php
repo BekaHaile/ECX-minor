@@ -182,6 +182,10 @@
                                     <input id="Representative" name="userType" type="radio" value="Representative" class="custom-control-input" required>
                                     <label class="custom-control-label" for="Representative">Representative</label>
                                 </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Administrator" name="Administrator" type="radio" value="Administrator" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="Administrator">Administrator</label>
+                                </div>
                             </div>
                             <hr class="mb-6">
                             <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>

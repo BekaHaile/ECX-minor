@@ -5,7 +5,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.sidenavAdmin')
+            @if($user->userType == 'Manager')
+                @include('inc.managerSidenav')
+            @else
+                @include('inc.sidenavAdmin')
+            @endif
         </div>
         <div class="col-md-10 mb-3">
                 <div class="jumbotron" style="margin: 20px;">

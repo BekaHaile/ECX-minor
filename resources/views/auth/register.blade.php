@@ -172,14 +172,24 @@
                                             <input id="Representative" name="userType" type="radio" value="Representative" class="custom-control-input" required>
                                             <label class="custom-control-label" for="Representative">Representative</label>
                                         </div>
+                                        <div class="custom-control custom-radio">
+                                            <input id="Administrator" name="Administrator" type="radio" value="Administrator" class="custom-control-input" required>
+                                            <label class="custom-control-label" for="Administrator">Administrator</label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group row mb-0">
-                                        <div class="col-md-6 offset-md-4">
+                                        <div class="col-md-2 offset-md-4">
                                             <button type="submit" class="btn btn-primary">
                                                 {{ __('Register') }}
                                             </button>
                                         </div>
+                                        <div class="col-md-2">
+                                            <button type="submit" class="btn btn-danger">
+                                                {{ __('Clear') }}
+                                            </button>
+                                        </div>
+
                                     </div>
                                 </form>
                             </div>

@@ -3,7 +3,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @include('inc.scaleSidenav')
+            @if($user->userType == 'Manager')
+                @include('inc.managerSidenav')
+            @elseif($user->userType == 'Administrator')
+                @include('inc.sidenavAdmin')
+            @else
+                @include('inc.scaleSidenav')
+            @endif
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron" style="margin: 20px;">

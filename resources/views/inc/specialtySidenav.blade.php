@@ -17,7 +17,7 @@ margin-bottom: 5px;">
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/specialty">Create new</a>
+                <a href="/specialty">Add Specialty info</a>
             </li>
             <li>
                 <a href="/viewSpecialtyFilled">View Existing</a>

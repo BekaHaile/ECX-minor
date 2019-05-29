@@ -20,8 +20,8 @@ class UsersController extends Controller
         $users = User::orderBy('created_at','asc')->paginate(5);
 
         $user = auth()->user();
-        if($user->userType == 'Manager')
-            return view('pages.viewUsers')->with('users',$users);
+        if($user->userType == 'Manager' || 'Administrator')
+            return view('pages.viewUsers', compact('user'))->with('users',$users);
         else
             return view('pages.home');
     }

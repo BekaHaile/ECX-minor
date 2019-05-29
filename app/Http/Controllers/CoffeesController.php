@@ -15,16 +15,19 @@ class CoffeesController extends Controller
     public function index()
     {
         $coffees = Coffee::orderBy('created_at','desc')->paginate(5);
+        $user = auth()->user();
 
-        return view('pages.coffee.viewDispatch', compact('coffees'));
+        return view('pages.coffee.viewDispatch', compact('coffees','user'));
     }
 
     //view coffees with dispatch info already filled out
     public function viewScale()
     {
-        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->orderBy('created_at','asc')->paginate(5);
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->
+        orderBy('created_at','asc')->paginate(5);
+        $user = auth()->user();
 
-        return view('pages.coffee.viewScale',compact('coffees'));
+        return view('pages.coffee.viewScale',compact('coffees','user'));
     }
 
     //show coffees with scale info filled out
@@ -32,7 +35,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)
             ->orderBy('created_at','desc')->paginate(5);
-        return view('pages.coffee.viewScale', compact('coffees'));
+        $user = auth()->user();
+
+        return view('pages.coffee.viewScale', compact('coffees','user'));
     }
 
 
@@ -41,8 +46,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $user = auth()->user();
 
-        return view('pages.coffee.viewSample',compact('coffees'));
+        return view('pages.coffee.viewSample',compact('coffees','user'));
     }
 
     //show coffees with sample info filled out
@@ -50,7 +56,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
             ->orderBy('created_at','desc')->paginate(5);
-        return view('pages.coffee.viewSample', compact('coffees'));
+        $user = auth()->user();
+
+        return view('pages.coffee.viewSample', compact('coffees','user'));
     }
 
     //view coffees with dispatch ans scale info already filled out
@@ -58,8 +66,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $user = auth()->user();
 
-        return view('pages.coffee.viewSpecialty',compact('coffees'));
+        return view('pages.coffee.viewSpecialty',compact('coffees','user'));
     }
 
     //show coffees with sample info filled out
@@ -67,7 +76,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
             ->orderBy('created_at','desc')->paginate(5);
-        return view('pages.coffee.viewSpecialty', compact('coffees'));
+        $user = auth()->user();
+
+        return view('pages.coffee.viewSpecialty', compact('coffees','user'));
     }
 
     //view coffees with dispatch ans scale info already filled out
@@ -75,8 +86,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $user = auth()->user();
 
-        return view('pages.coffee.viewGrade',compact('coffees'));
+        return view('pages.coffee.viewGrade',compact('coffees','user'));
     }
 
     //show coffees with sample info filled out
@@ -84,7 +96,9 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
             ->orderBy('created_at','desc')->paginate(5);
-        return view('pages.coffee.viewGrade', compact('coffees'));
+        $user = auth()->user();
+
+        return view('pages.coffee.viewGrade', compact('coffees','user'));
     }
 
     /**
@@ -237,7 +251,9 @@ class CoffeesController extends Controller
     {
         //$coffee = Coffee::find($id);
 
-        return view('forms.coffee.editDispatch', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editDispatch', compact('coffee','user'));
 
         //$coffees = Coffee::find($id);
         //return view('forms.dispatch')->with('coffees','$coffees');
@@ -253,35 +269,45 @@ class CoffeesController extends Controller
     {
        // $coffee = Coffee::find($id);
 
-        return view('forms.coffee.editDispatch', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editDispatch', compact('coffee','user'));
     }
     //View edit form for scale info already filled out
     public function editScale(Coffee $coffee)
     {
         // $coffee = Coffee::find($id);
 
-        return view('forms.coffee.editScale', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editScale', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
     public function editSample(Coffee $coffee)
     {
         // $coffee = Coffee::find($id);
 
-        return view('forms.coffee.editSample', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editSample', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
     public function editSpecialty(Coffee $coffee)
     {
         // $coffee = Coffee::find($id);
 
-        return view('forms.coffee.editSpecialty', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editSpecialty', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
     public function editGrade(Coffee $coffee)
     {
         // $coffee = Coffee::find($id);
 
-        return view('forms.coffee.editGrade', compact('coffee'));
+        $user = auth()->user();
+
+        return view('forms.coffee.editGrade', compact('coffee','user'));
     }
 
     /**

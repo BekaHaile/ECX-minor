@@ -17,7 +17,7 @@ margin-bottom: 5px;">
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/sample">Create new</a>
+                <a href="/sample">Add Sample info</a>
             </li>
             <li>
                 <a href="/viewSampleFilled">View Existing</a>

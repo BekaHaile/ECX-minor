@@ -2,17 +2,6 @@
     li a{
         color: white;
     }
-    /*.sidenav {*/
-        /*height: 100%;*/
-        /*width: 160px;*/
-        /*position: fixed;*/
-        /*z-index: 1;*/
-        /*top: 40px;*/
-        /*left: 30px;*/
-        /*overflow-x: hidden;*/
-        /*padding-top: 20px;*/
-    /*}*/
-
     .sidebar a:hover {
         color: #f1f1f1;
     }
@@ -28,16 +17,13 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Admin Menu</h3>
+            <h3>Manager Menu</h3>
         </div>
 
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
                 <ul class="collapse list-unstyled" id="userSubmenu">
-                    <li>
-                        <a href="/users/create">Create new user</a>
-                    </li>
                     <li>
                         <a href="/users">View users</a>
                     </li>

@@ -3,8 +3,13 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            {{--@if(auth()->usertype() == 'manager')--}}
+            @if($user->userType == 'Manager')
+                @include('inc.managerSidenav')
+            @elseif($user->userType == 'Administrator')
+                    @include('inc.sidenavAdmin')
+            @else
                 @include('inc.sidenav')
+            @endif
 
         </div>
         <div class="col-md-10 mb-3">
