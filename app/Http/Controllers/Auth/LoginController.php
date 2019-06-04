@@ -69,9 +69,17 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if($user->userType == 'Manager')
-            return redirect('/admin');
-        if($user->userType == 'Grader')
+            return redirect('/manager');
+        if($user->userType == 'Scalor')
             return redirect('/scale');
+        if($user->userType == 'Sampler')
+            return redirect('/sample');
+        if($user->userType == 'Administrator')
+            return redirect('/admin');
+        if($user->userType == 'Tester')
+            return redirect('/specialty');
+        if($user->userType == 'Grader')
+            return redirect('/grade');
         else
             return redirect('/dispatch');
     }

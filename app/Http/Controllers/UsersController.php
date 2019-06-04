@@ -19,10 +19,19 @@ class UsersController extends Controller
     {
         $users = User::orderBy('created_at','asc')->paginate(5);
 
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
-            return view('pages.viewUsers', compact('user'))->with('users',$users);
+        $userAuth = auth()->user();
+        abort_unless($userAuth->userType == 'Administrator', 403);
+            return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
         }
+
+    public function manage()
+    {
+        $users = User::orderBy('created_at','asc')->paginate(5);
+
+        $userAuth = auth()->user();
+        abort_unless($userAuth->userType == 'Manager' , 403);
+        return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -61,10 +70,9 @@ class UsersController extends Controller
         $users->dateOfBirth = request('dateOfBirth');
         $users->email = request('email');
 
-        $users->save();
         $user = auth()->user();
-            abort_unless($user->userType == 'Administrator', 403);
-
+            abort_unless($user->userType == 'Administrator' , 403);
+                 $users->save();
         return redirect('/users');
     }
 
@@ -76,8 +84,8 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+        $userAuth = auth()->user();
+        abort_unless($userAuth->userType == 'Administrator', 403);
             return view('forms.editUser', compact('user'));
     }
 
@@ -89,8 +97,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+        $userAuth = auth()->user();
+        abort_unless($userAuth->userType == 'Administrator', 403);
             return view('forms.editUser', compact('user'));
     }
 
@@ -117,10 +125,9 @@ class UsersController extends Controller
         $user->dateOfBirth = request('dateOfBirth');
         $user->email = request('email');
 
-        $user->save();
-
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+        $userAuth= auth()->user();
+        abort_unless($userAuth->userType == 'Administrator', 403);
+            $user->save();
             return redirect('/users');
     }
 
@@ -132,10 +139,9 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        $user->delete();
-
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
+        $userAuth = auth()->user();
+        abort_unless($userAuth->userType == 'Administrator', 403);
+            $user->delete();
             return redirect('/users');
     }
 }

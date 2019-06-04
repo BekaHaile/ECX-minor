@@ -34,19 +34,38 @@
                         <h4 class="mb-3"> <b> Coffee Information </b> </h4>
                     </div>
                 </div>
-                <div class="row">
-                    <h5 class="view">Owner Name - </h5> <p>{{ $coffee -> ownerName }} </p>
-
-                    <h5 class="view">Phone Number - </h5> <p>{{ $coffee -> ownerPhone }}</p>
-
-                    <h5 class="view">ID - </h5><p> {{ $coffee -> id }} </p>
-
-                </div>
-                <div class="row">
-                    <h5 class="view">Region - </h5> <p>{{ $coffee -> region }} </p>
-
-                    <h5 class="view">Washing Station - </h5> <p> {{ $coffee -> washingStation }}</p>
-
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Owner Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Region</th>
+                            <th scope="col">Washing Station</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
+                        <tr>
+                            <td>
+                                {{ $coffee -> id }}
+                            </td>
+                            <td>
+                                {{ $coffee -> ownerName }}
+                            </td>
+                            <td>
+                                {{ $coffee -> ownerPhone }}
+                            </td>
+                            <td>
+                                {{ $coffee -> region }}
+                            </td>
+                            <td>
+                                {{ $coffee -> washingStation }}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <hr class="mb-4">
 
@@ -54,8 +73,7 @@
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Scale Information </b> </h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateScale">
-                            {{--{{ method_field('PATCH') }}--}}
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="scaleWeight"><h5>Weight in KG</h5></label>

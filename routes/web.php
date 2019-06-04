@@ -23,6 +23,8 @@ Route::get('/help','PagesController@help')->name('help');
 
 Route::get('/admin','UsersController@index')->name('admin')->middleware('auth');
 
+Route::get('/manager','UsersController@manage')->name('manager')->middleware('auth');
+
 Route::resource('coffees','CoffeesController')->middleware('auth');
 //dispatch
 Route::post('/coffee','CoffeesController@storeDispatch')->middleware('auth');

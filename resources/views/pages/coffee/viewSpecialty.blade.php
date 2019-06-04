@@ -5,8 +5,6 @@
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @elseif($user->userType == 'Administrator')
-                @include('inc.sidenavAdmin')
             @else
                 @include('inc.specialtySidenav')
            @endif
@@ -15,33 +13,61 @@
             <div class="jumbotron" style="margin: 20px;">
                 <h1 style="margin-left: 400px;">Coffee Info</h1>
                 @if(count($coffees) > 0)
-                    @foreach($coffees as $coffee)
-                        <div class="table-bordered bg-light" style="margin-bottom: 10px;">
-                            <div class="row">
-                                <div class="col-md-5 mb-3">
-                                    <h3>{{ $coffee -> ownerName }} {{ $coffee -> ownerPhone }}</h3>
-                                    <h5> ID = {{ $coffee->id }} {{ $coffee -> washingStation}} {{ $coffee -> scaleWeight}}</h5>
-                                </div>
-                                <div class="col-md-1 mb-3" style="margin-left: 100px; margin-top: 10px;">
-                                    <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
-                                            @else "/coffees/{{ $coffee->id }}/editSpecialty"
-                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-hover ">
+                            {{--table-striped mb-0--}}
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Owners' Name</th>
+                                <th scope="col">Owners' Phone Number</th>
+                                <th scope="col">Washing Station</th>
+                                <th scope="col">Scale Weight</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Remove</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($coffees as $coffee)
+                                {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
+                                <tr>
+                                    <td>
+                                        {{ $coffee->id }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> ownerName }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> ownerPhone }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> washingStation}}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> scaleWeight}}
+                                    </td>
+                                    <td>
+                                        <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
+                                        @else "/coffees/{{ $coffee->id }}/editSpecialty"
+                                        @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
                                             @if ($coffee->specialtyFill == 0)Insert Specialty
                                             @else Edit Specialty
                                             @endif </button> </a>
-                                </div>
-                                <div class="col-md-2 mb-3" style="margin-top: 10px; margin-left: 5px;">
-                                    <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="/coffees/{{ $coffee->id }}">
+                                            {{ method_field('DELETE') }}
+                                            {{ csrf_field() }}
+                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
+                                        </form>
+                                    </td>
+                                </tr>
 
-                                        <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Delete</button>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
 
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
                     {{$coffees->links()}}
                 @else
                     <p> No Coffees exist.</p>

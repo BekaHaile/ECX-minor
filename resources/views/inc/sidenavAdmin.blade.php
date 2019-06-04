@@ -1,22 +1,3 @@
-<style>
-    li a{
-        color: white;
-    }
-    /*.sidenav {*/
-        /*height: 100%;*/
-        /*width: 160px;*/
-        /*position: fixed;*/
-        /*z-index: 1;*/
-        /*top: 40px;*/
-        /*left: 30px;*/
-        /*overflow-x: hidden;*/
-        /*padding-top: 20px;*/
-    /*}*/
-
-    .sidebar a:hover {
-        color: #f1f1f1;
-    }
-</style>
 <div class="wrapper jumbotron bg-dark" style="height: 100%;
         width: 200px;
         /*position: fixed;*/
@@ -28,7 +9,7 @@
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Admin Menu</h3>
+            <h4>Admin Menu</h4>
         </div>
 
         <ul class="list-unstyled components">
@@ -42,9 +23,6 @@
                         <a href="/users">View users</a>
                     </li>
                 </ul>
-            </li>
-            <li>
-                <a href="/coffees">View Dispatch</a>
             </li>
             {{--<li>--}}
                 {{--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>--}}
@@ -60,9 +38,6 @@
                     {{--</li>--}}
                 {{--</ul>--}}
             {{--</li>--}}
-            <li>
-                <a href="/comments">Comments</a>
-            </li>
         </ul>
     </nav>
 

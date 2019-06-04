@@ -5,10 +5,12 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @if($user->userType == 'Manager')
+            @if($userAuth->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @else
+            @elseif($userAuth->userType == 'Administrator')
                 @include('inc.sidenavAdmin')
+            @else
+
             @endif
         </div>
         <div class="col-md-10 mb-3">
@@ -23,8 +25,10 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">User Type</th>
+                                @if($userAuth->userType == 'Administrator')
                                     <th scope="col">Edit</th>
                                     <th scope="col">Remove</th>
+                                @endif
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -40,16 +44,18 @@
                                         <td>
                                             {{ $user -> userType}}
                                         </td>
-                                        <td>
-                                            <a href="/users/{{ $user->id }}"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
-                                        </td>
-                                        <td>
-                                            <form method="POST" action="/users/{{ $user->id }}">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                            </form>
-                                        </td>
+                                        @if($userAuth->userType == 'Administrator')
+                                            <td>
+                                                <a href="/users/{{ $user->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
+                                            </td>
+                                            <td>
+                                                <form method="POST" action="/users/{{ $user->id }}">
+                                                    {{ method_field('DELETE') }}
+                                                    @csrf
+                                                    <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
+                                                </form>
+                                            </td>
+                                        @endif
                                     </tr>
 
                             @endforeach

@@ -189,6 +189,21 @@
                                            @endif required>
                                     <label class="custom-control-label" for="Representative">Representative</label>
                                 </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Administrator" name="userType" type="radio" value="Administrator" class="custom-control-input" @if($user->userType == "Administrator") checked
+                                           @endif required>
+                                    <label class="custom-control-label" for="Administrator">Administrator</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Scalor" name="userType" type="radio" value="Scalor" class="custom-control-input" @if($user->userType == "Scalor") checked
+                                           @endif required>
+                                    <label class="custom-control-label" for="Scalor">Scalor</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Sampler" name="userType" type="radio" value="Sampler" class="custom-control-input" @if($user->userType == "Sampler") checked
+                                           @endif required>
+                                    <label class="custom-control-label" for="Sampler">Sampler</label>
+                                </div>
                             </div>
                             <hr class="mb-6">
                             <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Update</button>

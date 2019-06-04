@@ -13,10 +13,10 @@ class PagesController extends Controller
     }
 
     public function home(){
-        if(auth()->guest())
+//        if(auth()->guest())
             return view('pages.home');
-        else
-            abort(403);
+//        else
+//            abort(403);
     }
 
     public function about(){

@@ -130,7 +130,6 @@
                                 <div class="col-md-5 mb-3">
                                     <label for="zone">Zone</label>
                                     <input class="form-control" name="zone" id="zone" required>
-                                    </input>
                                     <div class="invalid-feedback">
                                         Please input a valid zone.
                                     </div>
@@ -138,7 +137,6 @@
                                 <div class="col-md-5 mb-3">
                                     <label for="woreda">Woreda</label>
                                     <input class="form-control" name="woreda" id="woreda">
-                                    </input>
                                     <div class="invalid-feedback">
                                         Please provide a valid woreda.
                                     </div>
@@ -146,7 +144,6 @@
                                 <div class="col-md-5 mb-3">
                                     <label for="kebele">Kebele</label>
                                     <input class="form-control" name="kebele" id="kebele">
-                                    </input>
                                     <div class="invalid-feedback">
                                         Please provide a valid kebele.
                                     </div>
@@ -155,7 +152,7 @@
                             <div class="row">
                                 <div class="col-md-5 mb-3">
                                     <label for="phoneNumber">Phone Number</label>
-                                    <input type="text" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="" required>
+                                    <input type="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{5}" class="form-control" name="phoneNumber" id="phoneNumber" placeholder="" required>
                                     <div class="invalid-feedback">
                                         Phone Number required.
                                     </div>
@@ -166,6 +163,7 @@
                             <h4 class="mb-3">User Type</h4>
 
                             <div class="d-block my-3">
+                                <div class="col-md-5 mb-3">
                                 <div class="custom-control custom-radio">
                                     <input id="Manager" name="userType" type="radio" value="Manager" class="custom-control-input" required>
                                     <label class="custom-control-label" for="Manager">Manager</label>
@@ -182,14 +180,26 @@
                                     <input id="Representative" name="userType" type="radio" value="Representative" class="custom-control-input" required>
                                     <label class="custom-control-label" for="Representative">Representative</label>
                                 </div>
+                                </div>
+
+                                <div class="col-md-5 mb-3">
                                 <div class="custom-control custom-radio">
-                                    <input id="Administrator" name="Administrator" type="radio" value="Administrator" class="custom-control-input" required>
+                                    <input id="Administrator" name="userType" type="radio" value="Administrator" class="custom-control-input" required>
                                     <label class="custom-control-label" for="Administrator">Administrator</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Scalor" name="userType" type="radio" value="Scalor" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="Scalor">Scalor</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="Sampler" name="userType" type="radio" value="Sampler" class="custom-control-input" required>
+                                    <label class="custom-control-label" for="Sampler">Sampler</label>
+                                </div>
                                 </div>
                             </div>
                             <hr class="mb-6">
                             <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>
-                            <button class="btn btn-danger btn-lg " type="" style="margin-bottom: 10px;">Clear</button>
+                            <button class="btn btn-danger btn-lg " type="reset" style="margin-bottom: 10px;">Clear</button>
                         </form>
                     </div>
                 </div>

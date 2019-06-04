@@ -39,20 +39,53 @@
                         <h4 class="mb-3"> <b> Coffee Information </b> </h4>
                     </div>
                 </div>
-                <div class="row">
-                    <h5 class="view">Owner Name - </h5> <p>{{ $coffee -> ownerName }} </p>
-
-                    <h5 class="view">Phone Number - </h5> <p>{{ $coffee -> ownerPhone }}</p>
-
-                    <h5 class="view">ID - </h5><p> {{ $coffee -> id }} </p>
-
+                <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                    <table class="table table-hover ">
+                        <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Owner Name</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Region</th>
+                            <th scope="col">Washing Station</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
+                            <tr>
+                                <td>
+                                    {{ $coffee -> id }}
+                                </td>
+                                <td>
+                                    {{ $coffee -> ownerName }}
+                                </td>
+                                <td>
+                                    {{ $coffee -> ownerPhone }}
+                                </td>
+                                <td>
+                                    {{ $coffee -> region }}
+                                </td>
+                                <td>
+                                    {{ $coffee -> washingStation }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="row">
-                    <h5 class="view">Region - </h5> <p>{{ $coffee -> region }} </p>
+                {{--<div class="row">--}}
+                    {{--<h5 class="view">Owner Name - </h5> <p>{{ $coffee -> ownerName }} </p>--}}
 
-                    <h5 class="view">Washing Station - </h5> <p> {{ $coffee -> washingStation }}</p>
+                    {{--<h5 class="view">Phone Number - </h5> <p>{{ $coffee -> ownerPhone }}</p>--}}
 
-                </div>
+                    {{--<h5 class="view">ID - </h5><p> {{ $coffee -> id }} </p>--}}
+
+                {{--</div>--}}
+                {{--<div class="row">--}}
+                    {{--<h5 class="view">Region - </h5> <p>{{ $coffee -> region }} </p>--}}
+
+                    {{--<h5 class="view">Washing Station - </h5> <p> {{ $coffee -> washingStation }}</p>--}}
+
+                {{--</div>--}}
                 <hr class="mb-4">
 
                 <div class="row">
@@ -93,7 +126,7 @@
 
                             <hr class="mb-6">
                                 <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>
-                                <button class="btn btn-danger btn-lg " type="" style="margin-bottom: 10px;">Clear</button>
+                                <button class="btn btn-danger btn-lg " type="reset" style="margin-bottom: 10px;">Clear</button>
                         </form>
                     </div>
                 </div>

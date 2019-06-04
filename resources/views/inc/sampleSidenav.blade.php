@@ -12,7 +12,7 @@ margin-bottom: 5px;">
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Sample Menu</h3>
+            <h4>Sample Menu</h4>
         </div>
 
         <ul class="list-unstyled components">

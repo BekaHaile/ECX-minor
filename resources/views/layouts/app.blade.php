@@ -34,6 +34,10 @@
         .jumbotron {
             /*margin: 20px;*/
         }
+        li a{
+            color: white;
+        }
+
     </style>
 </head>
 <body>

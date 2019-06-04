@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Coffee;
+use Carbon\Carbon;
 
 class CoffeesController extends Controller
 {
@@ -17,7 +18,7 @@ class CoffeesController extends Controller
         $coffees = Coffee::orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Manager' && 'Administrator' && 'Dispatcher', 403);
+        abort_unless($user->userType == 'Manager' || 'Dispatcher', 403);
             return view('pages.coffee.viewDispatch', compact('coffees','user'));
     }
 
@@ -28,7 +29,7 @@ class CoffeesController extends Controller
         orderBy('created_at','asc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Scaler', 403);
+        abort_unless($user->userType == 'Scalor', 403);
             return view('pages.coffee.viewScale',compact('coffees','user'));
     }
 
@@ -39,7 +40,7 @@ class CoffeesController extends Controller
             ->orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Manager' && 'Administrator' && 'Scaler', 403);
+        abort_unless($user->userType == 'Manager' || 'Scalor', 403);
         return view('pages.coffee.viewScale', compact('coffees','user'));
     }
 
@@ -62,18 +63,18 @@ class CoffeesController extends Controller
             ->orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Manager' && 'Administrator' && 'Sampler', 403);
+        abort_unless($user->userType == 'Manager' || 'Sampler', 403);
             return view('pages.coffee.viewSample', compact('coffees','user'));
     }
 
     //view coffees with dispatch ans scale info already filled out
     public function viewSpecialty()
     {
-        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
-            ->orderBy('created_at','desc')->paginate(5);
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->where('specialtyFill',False)->orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'speciality', 403);
+        abort_unless($user->userType == 'Tester', 403);
             return view('pages.coffee.viewSpecialty',compact('coffees','user'));
     }
 
@@ -84,11 +85,11 @@ class CoffeesController extends Controller
             ->orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Manager' && 'Administrator' && 'speciality', 403);
+        abort_unless($user->userType == 'Manager' || 'Tester', 403);
             return view('pages.coffee.viewSpecialty', compact('coffees','user'));
     }
 
-    //view coffees with dispatch ans scale info already filled out
+    //view coffees with dispatch and scale info already filled out
     public function viewGrade()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)
@@ -106,7 +107,7 @@ class CoffeesController extends Controller
             ->orderBy('created_at','desc')->paginate(5);
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Manager' && 'Administrator' && 'Grader', 403);
+        abort_unless($user->userType == 'Manager' || 'Grader', 403);
         return view('pages.coffee.viewGrade', compact('coffees','user'));
     }
 
@@ -127,7 +128,7 @@ class CoffeesController extends Controller
     {
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Scale', 403);
+        abort_unless($user->userType == 'Scalor', 403);
             return view('forms.coffee.scale', compact('coffee'));
     }
     //Views coffees with dispatch, scale info filled
@@ -197,9 +198,14 @@ class CoffeesController extends Controller
             $coffees->plateNum = request('plateNum');
             $coffees->cardinalNum = 1;
             $coffees->dispatchFill = TRUE;
+            $current_date_time = Carbon::now()->toDateTimeString();
+            $coffees->dispatchFillTime = $current_date_time;
 
             $coffees->scaleFill = FALSE;
         $user = auth()->user();
+
+            $coffees->dispatcher = $user->username;
+            $coffees->dispatcherId = $user->id;
 
         abort_unless($user->userType == 'Dispatcher', 403);
             $coffees->save();
@@ -207,7 +213,7 @@ class CoffeesController extends Controller
             return redirect('/coffees');
     }
 
-    //Adds scale info onto the selected coffee.
+    //Add scale info onto the selected coffee.
     public function storeScale(Request $request, Coffee $coffee)
     {
 
@@ -217,9 +223,16 @@ class CoffeesController extends Controller
         else
             $coffee->scaleWet = FALSE;
         $coffee->scaleFill = TRUE;
+        $coffee->sampleFill = False;
+
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->scaleFillTime = $current_date_time;
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Scale', 403);
+        $coffee->scalor = $user->username;
+        $coffee->scalorId = $user->id;
+
+        abort_unless($user->userType == 'Scalor', 403);
             $coffee->save();
 
             return redirect('/viewScaleFilled');
@@ -229,13 +242,18 @@ class CoffeesController extends Controller
     public function storeSample(Request $request, Coffee $coffee)
     {
 
-        $coffee->scaleWeight = request('scaleWeight');
-        if(request('scaleWet')== 'Wet')
-            $coffee->scaleWet = TRUE;
-        else
-            $coffee->scaleWet = FALSE;
-        $coffee->scaleFill = TRUE;
+        $coffee->group1 = request('group1');
+        $coffee->group2 = request('group2');
+        $coffee->group3 = request('group3');
+        $coffee->group4 = request('group4');
+        $coffee->sampleFill = TRUE;
+
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->sampleFillTime = $current_date_time;
         $user = auth()->user();
+
+        $coffee->sampler = $user->username;
+        $coffee->sampler = $user->id;
 
         abort_unless($user->userType == 'Sampler', 403);
             $coffee->save();
@@ -247,15 +265,19 @@ class CoffeesController extends Controller
     public function storeSpecialty(Request $request, Coffee $coffee)
     {
 
-        $coffee->scaleWeight = request('scaleWeight');
-        if(request('scaleWet')== 'Wet')
-            $coffee->scaleWet = TRUE;
-        else
-            $coffee->scaleWet = FALSE;
-        $coffee->scaleFill = TRUE;
+        $coffee->wetnessPercent = request('wetnessPercent');
+        $coffee->speciality = request('speciality');
+
+        $coffee->specialityFill = TRUE;
+
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->specialityFillTime = $current_date_time;
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Speciality', 403);
+        $coffee->tester = $user->username;
+        $coffee->testerId = $user->id;
+
+        abort_unless($user->userType == 'Tester', 403);
             $coffee->save();
 
             return redirect('/viewSpecialtyFilled');
@@ -271,7 +293,13 @@ class CoffeesController extends Controller
         else
             $coffee->scaleWet = FALSE;
         $coffee->scaleFill = TRUE;
+
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->gradeFillTime = $current_date_time;
         $user = auth()->user();
+
+        $coffee->grader = $user->username;
+        $coffee->graderId = $user->id;
 
         abort_unless($user->userType == 'Grader', 403);
             $coffee->save();
@@ -291,7 +319,7 @@ class CoffeesController extends Controller
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+        abort_unless($user->userType =='Manager' || 'Administrator' || 'Dispatcher', 403);
             return view('forms.coffee.editDispatch', compact('coffee','user'));
 
         //$coffees = Coffee::find($id);
@@ -310,7 +338,7 @@ class CoffeesController extends Controller
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
             return view('forms.coffee.editDispatch', compact('coffee','user'));
     }
     //View edit form for scale info already filled out
@@ -320,7 +348,7 @@ class CoffeesController extends Controller
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Scale', 403);
+        abort_unless($user->userType =='Manager' || 'Scalor', 403);
             return view('forms.coffee.editScale', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
@@ -330,7 +358,7 @@ class CoffeesController extends Controller
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Sampler', 403);
+        abort_unless($user->userType =='Manager' || 'Sampler', 403);
             return view('forms.coffee.editSample', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
@@ -340,17 +368,16 @@ class CoffeesController extends Controller
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Speciality', 403);
+        abort_unless($user->userType =='Manager' || 'Speciality', 403);
             return view('forms.coffee.editSpecialty', compact('coffee','user'));
     }
     //View edit form for sample info already filled out
     public function editGrade(Coffee $coffee)
     {
-        // $coffee = Coffee::find($id);
 
         $user = auth()->user();
 
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Grader', 403);
+        abort_unless($user->userType =='Manager' || 'Grader', 403);
             return view('forms.coffee.editGrade', compact('coffee','user'));
     }
 
@@ -395,7 +422,14 @@ class CoffeesController extends Controller
         $coffee->dispatchFill = TRUE;
 
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+
+        //Editor info
+        $coffee->dispatchEditor = $user->name;
+        $coffee->dispatchEditorId = $user->id;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->dispatchEditTime = $current_date_time;
+
+        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
             $coffee->save();
 
             return redirect('/coffees');
@@ -413,7 +447,14 @@ class CoffeesController extends Controller
         $coffee->scaleFill = TRUE;
 
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Scale', 403);
+
+        //Editor info
+        $coffee->scaleEditor = $user->name;
+        $coffee->scaleEditorId = $user->id;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->scaleEditorId = $current_date_time;
+
+        abort_unless($user->userType =='Manager' || 'Scalor', 403);
             $coffee->save();
 
             return redirect('/viewScaleFilled');
@@ -430,7 +471,14 @@ class CoffeesController extends Controller
         $coffee->scaleFill = TRUE;
 
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Sampler', 403);
+
+        //Editor info
+        $coffee->sampleEditor = $user->name;
+        $coffee->samplEditorId = $user->id;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->samplEditorId = $current_date_time;
+
+        abort_unless($user->userType =='Manager' || 'Sampler', 403);
             $coffee->save();
 
             return redirect('/viewSampleFilled');
@@ -447,7 +495,14 @@ class CoffeesController extends Controller
         $coffee->scaleFill = TRUE;
 
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+
+        //Editor info
+        $coffee->specialtyEditor = $user->name;
+        $coffee->specialtyEditorId = $user->id;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->specialtyEditTime = $current_date_time;
+
+        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
             $coffee->save();
 
             return redirect('/viewSpecialtyFilled');
@@ -464,7 +519,14 @@ class CoffeesController extends Controller
         $coffee->scaleFill = TRUE;
 
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+
+        //Editor info
+        $coffee->graderEditor = $user->name;
+        $coffee->graderEditorId = $user->id;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->gradeEditTime = $current_date_time;
+
+        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
             $coffee->save();
 
             return redirect('/viewGradeFilled');
@@ -479,7 +541,7 @@ class CoffeesController extends Controller
     public function destroy(Coffee $coffee)
     {
         $user = auth()->user();
-        abort_unless($user->userType =='Manager' && 'Administrator' && 'Dispatcher', 403);
+        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
             $coffee->delete();
 
             return redirect('/coffees');

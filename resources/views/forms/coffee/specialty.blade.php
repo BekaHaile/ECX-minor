@@ -2,7 +2,6 @@
 
 @section('content')
     <style>
-
         @media (min-width: 768px) {
         }
         h5.view{
@@ -15,18 +14,12 @@
     </style>
     <div class="row">
         <div class="col-md-2 mb-3">
-            @if($user->userType == 'Manager')
-                @include('inc.managerSidenav')
-            @elseif($user->userType == 'Administrator')
-                @include('inc.sidenavAdmin')
-            @else
-                @include('inc.sampleSidenav')
-            @endif
+            @include('inc.specialtySidenav')
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <div class="py-5 text-center">
-                    <h2>Sample form</h2>
+                    <h2>Scale form</h2>
                 </div>
 
                 <div class="row">
@@ -71,47 +64,46 @@
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Sample Results </b> </h4>
-                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateSample">
+                        <h4 class="mb-3"> <b> Specialty Information </b> </h4>
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeSpecialty">
                             @csrf
 
-                            <hr class="mb-6">
                             <div class="row">
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="group1">Sample Group 1</label>
-                                    <textarea type="text" class="form-control" name="group1" id="group1" required>{{ $coffee -> group1 }}</textarea>
-                                    <div class="invalid-feedback">
-                                        Valid sample result is required.
+
+                                    <label for="wetnessPercent"> <h5>Coffee Wetness in Percentage</h5></label>
+
+                                    <div class="input-group mb-3">
+                                        {{--<div class="input-group-prepend">--}}
+                                            {{--<span class="input-group-text">$</span>--}}
+                                        {{--</div>--}}
+                                        {{--<input type="text" class="form-control" name="wetnessPercent" id="wetnessPercent" aria-label="Wetness (in percentage)">--}}
                                     </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="group2">Sample Group 2</label>
-                                    <textarea type="text" class="form-control" name="group2" id="group2" required>{{ $coffee -> group2 }}</textarea>
-                                    <div class="invalid-feedback">
-                                        Valid sample result is required.
+                                        <input type="range" name="wetnessPercent" id="wetnessPercent" value="5" min="1" max="100" oninput="range_weight_disp.value = range_weight.value">
+                                        <output  id="range_weight_disp">0</output>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">%</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
+
                                 <div class="col-md-6 mb-3">
-                                    <label for="group3">Sample Group 3</label>
-                                    <textarea type="text" class="form-control" name="group3" id="group3" required>{{ $coffee -> group3 }}</textarea>
-                                    <div class="invalid-feedback">
-                                        Valid sample result is required.
-                                    </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="group4">Sample Group 4</label>
-                                    <textarea type="text" class="form-control" name="group4" id="group4" required>{{ $coffee -> group4 }}</textarea>
-                                    <div class="invalid-feedback">
-                                        Valid sample result is required.
+
+                                    <label for="speciality"> <h5>Coffee Speciality in Percentage</h5></label>
+
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="speciality" id="speciality" aria-label="Speciality (in percentage)">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">%</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-
                             <hr class="mb-6">
-                            <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Update</button>
+                            <button class="btn btn-primary btn-lg " type="submit" style="margin-bottom: 10px;">Submit</button>
                             <button class="btn btn-danger btn-lg " type="reset" style="margin-bottom: 10px;">Clear</button>
                         </form>
                     </div>

@@ -12,12 +12,12 @@ margin-bottom: 5px;">
     <!-- Sidebar -->
     <nav id="sidebar">
         <div class="sidebar-header">
-            <h3>Dispatch Menu</h3>
+            <h4>Dispatch Menu</h4>
         </div>
 
         <ul class="list-unstyled components">
             <li>
-                <a href="/dispatch">Add Dispatch info</a>
+                <a href="/dispatch">Create Dispatch</a>
             </li>
             <li>
                 <a href="/coffees">View Existing</a>

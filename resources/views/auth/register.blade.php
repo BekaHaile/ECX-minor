@@ -156,26 +156,45 @@
                                     <h4 class="mb-3">User Type</h4>
 
                                     <div class="d-block my-3">
-                                        <div class="custom-control custom-radio">
-                                            <input id="Manager" name="userType" type="radio" value="Manager" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="Manager">Manager</label>
+                                        <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <div class="custom-control custom-radio">
+                                                <input id="Manager" name="userType" type="radio" value="Manager" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Manager">Manager</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Tester" name="userType" type="radio" value="Tester" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Tester">Tester</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Dispatcher" name="userType" type="radio" value="Dispatcher" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Dispatcher">Dispatcher</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Grader" name="userType" type="radio" value="Grader" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Grader">Grader</label>
+                                            </div>
                                         </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="Tester" name="userType" type="radio" value="Tester" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="Tester">Tester</label>
+
+                                        <div class="col-md-3 mb-3">
+                                            <div class="custom-control custom-radio">
+                                                <input id="Representative" name="userType" type="radio" value="Representative" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Representative">Representative</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Administrator" name="userType" type="radio" value="Administrator" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Administrator">Administrator</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Scalor" name="userType" type="radio" value="Scalor" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Scalor">Scalor</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input id="Sampler" name="userType" type="radio" value="Sampler" class="custom-control-input" required>
+                                                <label class="custom-control-label" for="Sampler">Sampler</label>
+                                            </div>
                                         </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="Grader" name="userType" type="radio" value="Grader" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="Grader">Grader</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="Representative" name="userType" type="radio" value="Representative" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="Representative">Representative</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="Administrator" name="Administrator" type="radio" value="Administrator" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="Administrator">Administrator</label>
-                                        </div>
+                                    </div>
                                     </div>
 
                                     <div class="form-group row mb-0">

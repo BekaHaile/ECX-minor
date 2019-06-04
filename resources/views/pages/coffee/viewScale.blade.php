@@ -51,7 +51,7 @@
                                         {{ $coffee -> washingStation}}
                                     </td>
                                     @foreach($coffees as $coffee)
-                                        @if($coffee->gradeFill == 1)
+                                        @if($coffee->scaleFill == 1)
                                             <td>
                                                 {{ $coffee -> scaleWeight}}
                                             </td>
