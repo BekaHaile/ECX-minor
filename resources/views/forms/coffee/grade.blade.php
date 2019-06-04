@@ -1,17 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        @media (min-width: 768px) {
-        }
-        h5.view{
-            margin-left: 15px;
-        }
-        p{
-            margin-left: 5px;
-        }
-
-    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @include('inc.gradeSidenav')
@@ -22,25 +11,8 @@
                     <h2>Grade form</h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Coffee Information </b> </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <h5 class="view">Owner Name - </h5> <p>{{ $coffee -> ownerName }} </p>
+                @include("inc.coffeeInfo")
 
-                    <h5 class="view">Phone Number - </h5> <p>{{ $coffee -> ownerPhone }}</p>
-
-                    <h5 class="view">ID - </h5><p> {{ $coffee -> id }} </p>
-
-                </div>
-                <div class="row">
-                    <h5 class="view">Region - </h5> <p>{{ $coffee -> region }} </p>
-
-                    <h5 class="view">Washing Station - </h5> <p> {{ $coffee -> washingStation }}</p>
-
-                </div>
                 <hr class="mb-4">
 
                 <div class="row">

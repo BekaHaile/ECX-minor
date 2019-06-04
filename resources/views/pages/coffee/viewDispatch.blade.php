@@ -5,15 +5,13 @@
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @elseif($user->userType == 'Administrator')
-                    @include('inc.sidenavAdmin')
             @else
                 @include('inc.sidenav')
             @endif
 
         </div>
         <div class="col-md-10 mb-3">
-            <div class="jumbotron" style="margin: 20px;">
+            <div class="jumbotron bg-light" style="margin: 20px;">
                 <h1 style="margin-left: 400px;">Dispatch</h1>
                 @if(count($coffees) > 0)
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">

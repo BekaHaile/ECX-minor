@@ -144,7 +144,7 @@ class CoffeesController extends Controller
     {
         $user = auth()->user();
 
-        abort_unless($user->userType == 'Speciality', 403);
+        abort_unless($user->userType == 'Tester', 403);
         return view('forms.coffee.specialty', compact('coffee'));
     }
     //Views coffees with dispatch, scale info filled
@@ -201,7 +201,6 @@ class CoffeesController extends Controller
             $current_date_time = Carbon::now()->toDateTimeString();
             $coffees->dispatchFillTime = $current_date_time;
 
-            $coffees->scaleFill = FALSE;
         $user = auth()->user();
 
             $coffees->dispatcher = $user->username;
@@ -223,7 +222,6 @@ class CoffeesController extends Controller
         else
             $coffee->scaleWet = FALSE;
         $coffee->scaleFill = TRUE;
-        $coffee->sampleFill = False;
 
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->scaleFillTime = $current_date_time;
@@ -266,12 +264,12 @@ class CoffeesController extends Controller
     {
 
         $coffee->wetnessPercent = request('wetnessPercent');
-        $coffee->speciality = request('speciality');
+        $coffee->specialty = request('specialty');
 
-        $coffee->specialityFill = TRUE;
+        $coffee->specialtyFill = TRUE;
 
         $current_date_time = Carbon::now()->toDateTimeString();
-        $coffee->specialityFillTime = $current_date_time;
+        $coffee->specialtyFillTime = $current_date_time;
         $user = auth()->user();
 
         $coffee->tester = $user->username;
@@ -424,7 +422,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         //Editor info
-        $coffee->dispatchEditor = $user->name;
+        $coffee->dispatchEditor = $user->username;
         $coffee->dispatchEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->dispatchEditTime = $current_date_time;
@@ -449,10 +447,10 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         //Editor info
-        $coffee->scaleEditor = $user->name;
+        $coffee->scaleEditor = $user->username;
         $coffee->scaleEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
-        $coffee->scaleEditorId = $current_date_time;
+        $coffee->scaleEditTime = $current_date_time;
 
         abort_unless($user->userType =='Manager' || 'Scalor', 403);
             $coffee->save();
@@ -473,7 +471,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         //Editor info
-        $coffee->sampleEditor = $user->name;
+        $coffee->sampleEditor = $user->username;
         $coffee->samplEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->samplEditorId = $current_date_time;
@@ -487,22 +485,18 @@ class CoffeesController extends Controller
     //To update already filled sample info
     public function updateSpecialty(Request $request, Coffee $coffee)
     {
-        $coffee->scaleWeight = request('scaleWeight');
-        if(request('scaleWet')== 'Wet')
-            $coffee->scaleWet = TRUE;
-        else
-            $coffee->scaleWet = FALSE;
-        $coffee->scaleFill = TRUE;
+        $coffee->wetnessPercent = request('wetnessPercent');
+        $coffee->specialty = request('specialty');
 
         $user = auth()->user();
 
         //Editor info
-        $coffee->specialtyEditor = $user->name;
+        $coffee->specialtyEditor = $user->username;
         $coffee->specialtyEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->specialtyEditTime = $current_date_time;
 
-        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
+        abort_unless($user->userType =='Manager' || 'Tester', 403);
             $coffee->save();
 
             return redirect('/viewSpecialtyFilled');
@@ -521,12 +515,12 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         //Editor info
-        $coffee->graderEditor = $user->name;
+        $coffee->graderEditor = $user->username;
         $coffee->graderEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->gradeEditTime = $current_date_time;
 
-        abort_unless($user->userType =='Manager' || 'Dispatcher', 403);
+        abort_unless($user->userType =='Manager' || 'Grader', 403);
             $coffee->save();
 
             return redirect('/viewGradeFilled');

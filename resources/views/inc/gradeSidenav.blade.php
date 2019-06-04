@@ -1,8 +1,3 @@
-<style>
-    li a{
-        color: white;
-    }
-</style>
 <div class="wrapper jumbotron bg-dark" style="margin-right: -10px; color: white;
 height: 100%;     width: 200px;
 /*position: fixed;*/

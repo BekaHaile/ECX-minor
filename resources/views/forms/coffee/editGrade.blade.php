@@ -1,25 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-
-        @media (min-width: 768px) {
-
-        }
-        h5.view{
-            margin-left: 15px;
-        }
-        p{
-            margin-left: 5px;
-        }
-
-    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @elseif($user->userType == 'Administrator')
-                @include('inc.sidenavAdmin')
             @else
                 @include('inc.gradeSidenav')
             @endif
@@ -30,33 +15,15 @@
                     <h2>Grade form</h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Coffee Information </b> </h4>
-                    </div>
-                </div>
-                <div class="row">
-                    <h5 class="view">Owner Name - </h5> <p>{{ $coffee -> ownerName }} </p>
+                @include("inc.coffeeInfo")
 
-                    <h5 class="view">Phone Number - </h5> <p>{{ $coffee -> ownerPhone }}</p>
-
-                    <h5 class="view">ID - </h5><p> {{ $coffee -> id }} </p>
-
-                </div>
-                <div class="row">
-                    <h5 class="view">Region - </h5> <p>{{ $coffee -> region }} </p>
-
-                    <h5 class="view">Washing Station - </h5> <p> {{ $coffee -> washingStation }}</p>
-
-                </div>
                 <hr class="mb-4">
 
                 <div class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Specialty Information </b> </h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateGrade">
-                            {{--{{ method_field('PATCH') }}--}}
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="scaleWeight"><h5>Weight in KG</h5></label>

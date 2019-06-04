@@ -1,17 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        @media (min-width: 768px) {
-
-        }
-    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @elseif($user->userType == 'Administrator')
-                @include('inc.sidenavAdmin')
             @else
                 @include('inc.sidenav')
             @endif
@@ -26,8 +19,7 @@
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Owner Information</h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}">
-                            {{ method_field('PATCH') }}
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerName">Full name</label>

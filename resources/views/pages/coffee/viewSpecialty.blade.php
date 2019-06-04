@@ -10,7 +10,7 @@
            @endif
         </div>
         <div class="col-md-10 mb-3">
-            <div class="jumbotron" style="margin: 20px;">
+            <div class="jumbotron bg-light" style="margin: 20px;">
                 <h1 style="margin-left: 400px;">Coffee Info</h1>
                 @if(count($coffees) > 0)
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
