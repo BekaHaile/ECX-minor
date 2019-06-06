@@ -58,7 +58,20 @@ Route::get('/coffees/{coffee}/editGrade','CoffeesController@editGrade')->name('c
 Route::post('/coffees/{coffee}/updateGrade','CoffeesController@updateGrade')->name('coffees.updateGrade')->middleware('auth');
 Route::get('/viewGradeFilled','CoffeesController@viewGradeFilled')->name('coffees.viewGradeFilled')->middleware('auth');
 
+//Jar approval
+Route::get('/jar','CoffeesController@jar')->name('jar')->middleware('auth');
+Route::get('/viewJarApproved','CoffeesController@viewJarApproved')->name('coffees.viewJarApproved')->middleware('auth');
+Route::get('/coffees/{coffee}/approveJar','CoffeesController@approveJar')->name('coffees.approveJar')->middleware('auth');
+Route::post('/coffees/{coffee}/storeJar','CoffeesController@storeJar')->name('coffees.storeJar')->middleware('auth');
+Route::get('/viewCompletedJar','CoffeesController@viewCompletedJar')->name('coffees.viewCompletedJar')->middleware('auth');
 
+//price info input by representative
+Route::get('/rep','CoffeesController@rep')->name('rep')->middleware('auth');
+Route::get('/priceDone','CoffeesController@priceDone')->name('priceDone')->middleware('auth');Route::get('/coffees/{coffee}/createGrade','CoffeesController@createGrade')->name('coffees.createGrade')->middleware('auth');
+Route::get('/coffees/{coffee}/createPrice','CoffeesController@createPrice')->name('coffees.createPrice')->middleware('auth');
+Route::post('/coffees/{coffee}/storePrice','CoffeesController@storePrice')->name('coffees.storePrice')->middleware('auth');
+Route::get('/coffees/{coffee}/editPrice','CoffeesController@editPrice')->name('coffees.editPrice')->middleware('auth');
+Route::post('/coffees/{coffee}/updatePrice','CoffeesController@updatePrice')->name('coffees.updatePrice')->middleware('auth');
 
 Route::resource('users','UsersController')->middleware('auth');
 Route::post('/user','UsersController@store')->middleware('auth');

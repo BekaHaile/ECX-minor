@@ -3,11 +3,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-2 mb-3">
-            @if($user->userType == 'Manager')
-                @include('inc.managerSidenav')
-            @else
-                @include('inc.specialtySidenav')
-           @endif
+            @if($user->userType == 'Representative')
+                @include('inc.repSidenav')
+            @endif
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
@@ -24,7 +22,6 @@
                                 <th scope="col">Washing Station</th>
                                 <th scope="col">Scale Weight</th>
                                 <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,19 +43,12 @@
                                         {{ $coffee -> scaleWeight}}
                                     </td>
                                     <td>
-                                        <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
-                                        @else "/coffees/{{ $coffee->id }}/editSpecialty"
+                                        <a href=@if ($coffee->priceDone == 0) "/coffees/{{ $coffee->id }}/createPrice"
+                                        @else "/coffees/{{ $coffee->id }}/editPrice"
                                         @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->specialtyFill == 0)Insert Specialty
-                                            @else Edit Specialty
+                                            @if ($coffee->priceDone == 0)Input Price
+                                            @else Edit Price
                                             @endif </button> </a>
-                                    </td>
-                                    <td>
-                                        <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                            {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
-                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                        </form>
                                     </td>
                                 </tr>
 

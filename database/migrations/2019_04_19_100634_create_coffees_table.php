@@ -29,6 +29,9 @@ class CreateCoffeesTable extends Migration
             //owner info
                 $table->string("ownerName");
                 $table->string("ownerPhone");
+            //Representative Info
+                $table->string("representativeName");
+                $table->string("representativeMail");
             //driver info
                 $table->string("driverName");
                 $table->string("driverPhone");
@@ -38,11 +41,11 @@ class CreateCoffeesTable extends Migration
                 $table->string("typeOfCar");
                 $table->string("plateNum");
                 $table->Integer('cardinalNum');
-                $table->boolean("dispatchFill")->default(false);
+                $table->boolean("dispatchFill");
 
             $table->string("dispatcher");
             $table->integer("dispatcherId");
-            $table->string("dispatchFillTime")->nullable();
+            $table->string("dispatchFillTime");
 
             $table->string("dispatchEditor")->nullable();
             $table->integer("dispatchEditorId")->nullable();
@@ -77,8 +80,8 @@ class CreateCoffeesTable extends Migration
             $table->string("sampleEditTime")->nullable();
 
         //speciality info
-            $table->decimal("specialty")->nullable();
-            $table->decimal("wetnessPercent")->nullable();
+            $table->integer("specialty")->nullable();
+            $table->integer("wetnessPercent")->nullable();
             $table->boolean("specialtyFill")->nullable()->default(false);
 
             $table->string("tester")->nullable();
@@ -90,7 +93,7 @@ class CreateCoffeesTable extends Migration
             $table->string("specialtyEditTime")->nullable();
 
         //Encoded info
-            $table->string("encode")->nullable();
+            $table->string("encode")->nullable()->unique();
 
         //Grade info
             $table->string("washedGrade")->nullable();
@@ -107,8 +110,20 @@ class CreateCoffeesTable extends Migration
 
         //Jar approval
             $table->boolean("jarApproved")->nullable()->default(false);
+            $table->string("manager")->nullable();
+            $table->integer("managerId")->nullable();
+            $table->string("jarApprovalTime")->nullable();
 
- //           $table->string("price")->nullable();
+        //Price Input
+            $table->boolean("priceDone")->nullable()->default(false);
+            $table->integer("price")->nullable();
+
+            $table->string("representative")->nullable();
+            $table->integer("representativeId")->nullable();
+            $table->string("priceInputTime")->nullable();
+
+            $table->string("priceEditTime")->nullable();
+
         });
     }
 

@@ -5,9 +5,7 @@
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')
                 @include('inc.managerSidenav')
-            @else
-                @include('inc.specialtySidenav')
-           @endif
+            @endif
         </div>
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
@@ -15,7 +13,6 @@
                 @if(count($coffees) > 0)
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-hover ">
-                            {{--table-striped mb-0--}}
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -24,7 +21,12 @@
                                 <th scope="col">Washing Station</th>
                                 <th scope="col">Scale Weight</th>
                                 <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
+                                @foreach($coffees as $coffee)
+                                    @if($coffee->jarApproved == 0)
+                                        <th scope="col">Remove</th>
+                                        @break
+                                    @endIf
+                                @endforeach
                             </tr>
                             </thead>
                             <tbody>
@@ -46,20 +48,19 @@
                                         {{ $coffee -> scaleWeight}}
                                     </td>
                                     <td>
-                                        <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
-                                        @else "/coffees/{{ $coffee->id }}/editSpecialty"
-                                        @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->specialtyFill == 0)Insert Specialty
-                                            @else Edit Specialty
-                                            @endif </button> </a>
+                                        <a href = "/coffees/{{ $coffee->id }}/approveJar"> <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                             View Jar
+                                            </button> </a>
                                     </td>
+                                    @if( $coffee -> jarApproved ==0)
                                     <td>
                                         <form method="POST" action="/coffees/{{ $coffee->id }}">
                                             {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
+                                            @csrf
                                             <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
                                         </form>
                                     </td>
+                                    @endif
                                 </tr>
 
                             @endforeach

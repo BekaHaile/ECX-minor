@@ -19,20 +19,40 @@
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Owner Information</h4>
                         <form class="needs-validation" method="POST" action="/coffee">
-                            {{ csrf_field() }}
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerName">Full name</label>
-                                    <input type="text" class="form-control"   name="ownerName" id="ownerName" placeholder="" value="" required>
+                                    <input type="text" class="form-control"   name="ownerName" id="ownerName" required>
                                     <div class="invalid-feedback">
                                         Valid full name is required.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerPhone">Phone number</label>
-                                    <input type="tel" class="form-control"   name="ownerPhone" id="ownerPhone" placeholder="" value="" required>
+                                    <input type="tel" class="form-control"   name="ownerPhone" id="ownerPhone" required>
                                     <div class="invalid-feedback">
                                         Valid phone number is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
+                            <h4 class="mb-3">Representative Information</h4>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="representativeName">Full name</label>
+                                    <input type="text" class="form-control"    name="representativeName" id="representativeName" required>
+                                    <div class="invalid-feedback">
+                                        Valid full name is required.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="representativeMail">Email</label>
+                                    <input type="email" class="form-control"   name="representativeMail" id="representativeMail" required>
+                                    <div class="invalid-feedback">
+                                        Valid email is required.
                                     </div>
                                 </div>
                             </div>

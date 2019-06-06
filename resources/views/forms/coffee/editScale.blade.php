@@ -1,18 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        @media (min-width: 768px) {
-
-        }
-        h5.view{
-            margin-left: 15px;
-        }
-        p{
-            margin-left: 5px;
-        }
-
-    </style>
     <div class="row">
         <div class="col-md-2 mb-3">
             @if($user->userType == 'Manager')

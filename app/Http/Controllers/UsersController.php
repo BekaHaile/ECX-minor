@@ -20,7 +20,7 @@ class UsersController extends Controller
         $users = User::orderBy('created_at','asc')->paginate(5);
 
         $userAuth = auth()->user();
-        abort_unless($userAuth->userType == 'Administrator', 403);
+        abort_unless($userAuth->userType == 'Administrator' || 'Manager', 403);
             return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
         }
 
@@ -29,7 +29,7 @@ class UsersController extends Controller
         $users = User::orderBy('created_at','asc')->paginate(5);
 
         $userAuth = auth()->user();
-        abort_unless($userAuth->userType == 'Manager' , 403);
+        abort_unless($userAuth->userType == 'Administrator' || 'Manager' , 403);
         return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
     }
 

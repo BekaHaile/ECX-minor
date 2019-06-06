@@ -80,6 +80,8 @@ class LoginController extends Controller
             return redirect('/specialty');
         if($user->userType == 'Grader')
             return redirect('/grade');
+        if($user->userType == 'Representative')
+            return redirect('/rep');
         else
             return redirect('/dispatch');
     }

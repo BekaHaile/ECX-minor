@@ -38,6 +38,26 @@
                             </div>
 
                             <hr class="mb-4">
+                            <h4 class="mb-3">Representative Information</h4>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="representativeName">Full name</label>
+                                    <input type="text" class="form-control"    name="representativeName" id="representativeName" value="{{ $coffee -> representativeName }}" required>
+                                    <div class="invalid-feedback">
+                                        Valid full name is required.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="representativeMail">Phone number</label>
+                                    <input type="tel" class="form-control"   name="representativeMail" id="representativeMail" value="{{ $coffee -> representativeMail }}" required>
+                                    <div class="invalid-feedback">
+                                        Valid phone number is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="mb-4">
                             <h4 class="mb-3">Driver Information</h4>
 
                             <div class="row">

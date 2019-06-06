@@ -34,7 +34,7 @@
                         <a href="/viewSampleFilled">Sample Info</a>
                     </li>
                     <li>
-                        <a href="/viewSpecialityFilled">Speciality Info</a>
+                        <a href="/viewSpecialtyFilled">Specialty Info</a>
                     </li>
                     <li>
                         <a href="/viewGradeFilled">Grade Info</a>
@@ -42,7 +42,15 @@
                 </ul>
             </li>
             <li>
-                <a href="/comments">Approve Jar</a>
+                <a href="#jarSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">JAR</a>
+                <ul class="collapse list-unstyled" id="jarSubmenu">
+                    <li>
+                        <a href="/jar">Approve Jars</a>
+                    </li>
+                    <li>
+                        <a href="/viewJarApproved">View Approved Jars</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="/comments">Comments</a>

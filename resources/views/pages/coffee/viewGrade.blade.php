@@ -18,33 +18,16 @@
                             {{--table-striped mb-0--}}
                             <thead>
                             <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Owners' Name</th>
-                                <th scope="col">Owners' Phone Number</th>
-                                <th scope="col">Washing Station</th>
-                                <th scope="col">Scale Weight</th>
+                                <th scope="col">Coffee Encoded ID</th>
                                 <th scope="col">Edit</th>
                                 <th scope="col">Remove</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($coffees as $coffee)
-                                {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
                                 <tr>
                                     <td>
-                                        {{ $coffee->id }}
-                                    </td>
-                                    <td>
-                                        {{ $coffee -> ownerName }}
-                                    </td>
-                                    <td>
-                                        {{ $coffee -> ownerPhone }}
-                                    </td>
-                                    <td>
-                                        {{ $coffee -> washingStation}}
-                                    </td>
-                                    <td>
-                                        {{ $coffee -> scaleWeight}}
+                                        {{ $coffee-> encode}}
                                     </td>
                                     <td>
                                         <a href=@if ($coffee->gradeFill == 0) "/coffees/{{ $coffee->id }}/createGrade"
@@ -57,7 +40,7 @@
                                     <td>
                                         <form method="POST" action="/coffees/{{ $coffee->id }}">
                                             {{ method_field('DELETE') }}
-                                            {{ csrf_field() }}
+                                            @csrf
                                             <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
                                         </form>
                                     </td>
