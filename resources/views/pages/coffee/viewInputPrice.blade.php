@@ -13,14 +13,14 @@
                 @if(count($coffees) > 0)
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-hover ">
-                            {{--table-striped mb-0--}}
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Owners' Name</th>
                                 <th scope="col">Owners' Phone Number</th>
                                 <th scope="col">Washing Station</th>
-                                <th scope="col">Scale Weight</th>
+                                <th scope="col">Region</th>
+                                <th scope="col">Grade</th>
                                 <th scope="col">Edit</th>
                             </tr>
                             </thead>
@@ -40,7 +40,10 @@
                                         {{ $coffee -> washingStation}}
                                     </td>
                                     <td>
-                                        {{ $coffee -> scaleWeight}}
+                                        {{ $coffee -> region}}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> grade}}
                                     </td>
                                     <td>
                                         <a href=@if ($coffee->priceDone == 0) "/coffees/{{ $coffee->id }}/createPrice"

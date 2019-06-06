@@ -12,6 +12,7 @@
             <th scope="col">Phone Number</th>
             <th scope="col">Washing Station</th>
             <th scope="col">Region</th>
+            <th scope="col">Grade</th>
         </tr>
         </thead>
         <tbody>
@@ -31,6 +32,9 @@
             </td>
             <td>
                 {{ $coffee -> region }}
+            </td>
+            <td>
+                {{ $coffee -> grade }}
             </td>
         </tr>
         </tbody>

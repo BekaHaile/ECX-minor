@@ -34,7 +34,7 @@ class PagesController extends Controller
     public function admin(){
         $user = auth()->user();
         abort_unless($user->userType == 'Administrator', 403);
-            return view('forms.createUser');
+            return view('auth.register');
     }
 
     public function report(){

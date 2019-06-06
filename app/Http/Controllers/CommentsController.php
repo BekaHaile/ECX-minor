@@ -50,7 +50,7 @@ class CommentsController extends Controller
 
         $comments->save();
 
-        return redirect('/comments');
+        return redirect('/');
     }
 
     /**

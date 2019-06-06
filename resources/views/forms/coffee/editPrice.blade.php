@@ -8,10 +8,10 @@
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <div class="py-5 text-center">
-                    <h2>Scale form</h2>
+                    <h2>Price form</h2>
                 </div>
 
-                @include("inc.coffeeInfo")
+                @include("inc.coffeeInfo2")
 
                 <hr class="mb-4">
 
@@ -24,9 +24,12 @@
                                 <div class="col-md-6 mb-3">
                                     <label for="price"><h5>Price for 100 KG</h5></label>
                                     <input type="number" class="form-control" name="price" id="price" value={{ $coffee->price }} required>
-                                    <div class="invalid-feedback">
-                                        Valid price is required.
-                                    </div>
+                                </div>
+                                <div class="col-md-3 mb-3" style="margin-top: 37px; margin-left: -20px;">
+                                    <label class="input-group-text bg-light" style="width: 45px;">birr</label>
+                                </div>
+                                <div class="invalid-feedback">
+                                    Valid price is required.
                                 </div>
                             </div>
 

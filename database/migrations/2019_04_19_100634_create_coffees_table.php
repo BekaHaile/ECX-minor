@@ -40,7 +40,6 @@ class CreateCoffeesTable extends Migration
             //car info
                 $table->string("typeOfCar");
                 $table->string("plateNum");
-                $table->Integer('cardinalNum');
                 $table->boolean("dispatchFill");
 
             $table->string("dispatcher");

@@ -201,7 +201,6 @@ class CoffeesController extends Controller
             //Car info
             $coffees->typeOfCar = request('typeOfCar');
             $coffees->plateNum = request('plateNum');
-            $coffees->cardinalNum = 1;
             $coffees->dispatchFill = TRUE;
             $current_date_time = Carbon::now()->toDateTimeString();
             $coffees->dispatchFillTime = $current_date_time;
@@ -590,7 +589,7 @@ class CoffeesController extends Controller
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
 
         abort_unless($user->userType == 'Representative', 403);
-        return view('forms.coffee.viewInputPrice', compact('coffees','user'));
+        return view('pages.coffee.viewInputPrice', compact('coffees','user'));
     }
     public function createPrice(Coffee $coffee)
     {
@@ -620,7 +619,7 @@ class CoffeesController extends Controller
     {
         $user = auth()->user();
 
-        abort_unless($user->userType =='Representative' , 403);
+        abort_unless($user->userType == 'Representative' , 403);
         return view('forms.coffee.editPrice', compact('coffee','user'));
     }
     public function updatePrice(Coffee $coffee)

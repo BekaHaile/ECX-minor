@@ -13,7 +13,7 @@
                     <h2>Jar Certificate</h2>
                 </div>
 
-                @include("inc.coffeeInfo")
+                @include("inc.coffeeInfo2")
 
                 @if($coffee -> jarApproved == 0)
                     <hr class="mb-4">
