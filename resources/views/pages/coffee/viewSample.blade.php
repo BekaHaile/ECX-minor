@@ -14,7 +14,7 @@
                 <h1 style="margin-left: 400px;">Coffee Info</h1>
                 @if(count($coffees) > 0)
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                        <table class="table table-hover ">
+                        <table class="table table-hover table-bordered table-striped mb-0">
                             {{--table-striped mb-0--}}
                             <thead>
                             <tr>

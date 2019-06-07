@@ -14,12 +14,12 @@
             @endif
         </div>
         <div class="col-md-10 mb-3">
-                <div class="jumbotron" style="margin: 20px;">
+                <div class="jumbotron bg-light" style="margin: 20px;">
                     <h1 style="margin-left: 400px;">Users</h1>
                     @if(count($users) > 0)
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <table class="table table-hover ">
-                                {{--table-striped mb-0--}}
+                            <table class="table table-hover table-bordered table-striped mb-0">
+
                                 <thead>
                                 <tr>
                                     <th scope="col">ID</th>

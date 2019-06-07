@@ -55,10 +55,13 @@ class PagesController extends Controller
 
         $coffees2 = Coffee::where('region',request('region'))->where('washedGrade',request('grade'))
             ->orderBy('created_at','desc')->paginate(5);
+        $region = request('region');
+        $grade = request('grade');
 
         $count = 1;
 
-        return view('pages.guestReport',compact('coffees'))->with('coffees2',$coffees2)->with('count',$count);
+        return view('pages.guestReport',compact('coffees'))->with('coffees2',$coffees2)
+            ->with('count',$count)->with('region',$region)->with('grade',$grade);
     }
 
 }

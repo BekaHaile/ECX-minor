@@ -14,9 +14,9 @@
                             <h4><label for="region">Region :</label></h4>
                         </div>
                         <div class="col-md-3 mb-3" style="margin-left: -30px;">
-                            <select class="form-control" id="region" name="region">
+                            <select class="form-control" id="region" name="region" >
                                 @foreach($coffees as $coffee)
-                                    <option>{{$coffee->region}}</option>
+                                    <option @if($count == 1 && $coffee->region == $region) selected @endif>{{$coffee->region}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -26,21 +26,23 @@
                         <div class="col-md-3 mb-3" style="margin-left: -30px;">
                             <select class="form-control" id="grade" name="grade">
                                 @foreach($coffees as $coffee)
-                                    <option>{{$coffee->washedGrade}}</option>
+                                    <option @if($count == 1 && $coffee->washedGrade == $grade) selected @endif>{{$coffee->washedGrade}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-md-2 mb-3" style="margin-left: -60px;">
-                            <button class="btn btn-primary btn-md " type="submit" style="margin-bottom: 10px;">Search</button>
+                            <button class="btn btn-primary btn-md " type="submit" style="margin-bottom: 10px;">
+                                <span class="glyphicon glyphicon-search">search</span> </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         @if($count == 1)
+            @if(count($coffees2) > 0)
             <div class="col-md-6 mb-3" style="margin-left: 300px;">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 20px;">
-                    <table class="table table-hover ">
+                    <table class="table table-hover table-bordered table-striped mb-0">
                         <thead>
                         <tr>
                             <th scope="col">Region</th>
@@ -67,6 +69,9 @@
                 </div>
             </div>
         {{ $coffees2->links()}}
+        @else
+                <p style="margin-top: 30px;"> <h4> No coffee to view.</h4></p>
+        @endif
         @endif
     </div>
 @endsection
