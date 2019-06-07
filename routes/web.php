@@ -86,3 +86,6 @@ Route::get('/comment','CommentsController@create')->name('comment');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
+
+//Price report for guest users
+Route::post('/searchReport','PagesController@searchReport')->name('searchReport');

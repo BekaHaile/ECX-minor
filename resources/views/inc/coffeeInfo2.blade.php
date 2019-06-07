@@ -34,7 +34,7 @@
                 {{ $coffee -> region }}
             </td>
             <td>
-                {{ $coffee -> grade }}
+                {{ $coffee -> washedGrade }}
             </td>
         </tr>
         </tbody>

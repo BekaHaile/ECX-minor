@@ -29,7 +29,6 @@
                                 </thead>
                                 <tbody>
                                     @foreach($coffees as $coffee)
-                                        {{--<div class="table-bordered bg-light" style="margin-bottom: 10px;">--}}
                                         <tr>
                                             <td>
                                                 {{ $coffee->id }}

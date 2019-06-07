@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Coffee;
 
 class PagesController extends Controller
 {
@@ -38,7 +39,26 @@ class PagesController extends Controller
     }
 
     public function report(){
-        return view('pages.report');
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
+            ->where('priceDone', TRUE)->orderBy('created_at','desc')->paginate(5);
+        $coffees2 = Coffee::where('dispatchFill',False);
+        $count = 0;
+
+        return view('pages.guestReport', compact('coffees'))->with('coffees2',$coffees2)->with('count',$count);
+    }
+    public function searchReport(Request $request)
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
+            ->where('priceDone', TRUE)->orderBy('created_at','desc')->paginate(5);
+
+        $coffees2 = Coffee::where('region',request('region'))->where('washedGrade',request('grade'))
+            ->orderBy('created_at','desc')->paginate(5);
+
+        $count = 1;
+
+        return view('pages.guestReport',compact('coffees'))->with('coffees2',$coffees2)->with('count',$count);
     }
 
 }
