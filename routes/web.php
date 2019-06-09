@@ -89,3 +89,13 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
 
 //Price report for guest users
 Route::post('/searchReport','PagesController@searchReport')->name('searchReport');
+
+//Search routes
+Route::get('/searchUser','SearchController@searchUser')->name('searchUser');
+Route::get('/searchDispatch','SearchController@searchDispatch')->name('searchDispatch');
+Route::get('/searchScale','SearchController@searchScale')->name('searchScale');
+Route::get('/searchSample','SearchController@searchSample')->name('searchSample');
+Route::get('/searchSpecialty','SearchController@searchSpecialty')->name('searchSpecialty');
+Route::get('/searchGrade','SearchController@searchGrade')->name('searchGrade');
+Route::get('/searchJar','SearchController@searchJar')->name('searchJar');
+Route::get('/searchInputPrice','SearchController@searchInputPrice')->name('searchInputPrice');

@@ -204,6 +204,7 @@ class CoffeesController extends Controller
             $coffees->dispatchFill = TRUE;
             $current_date_time = Carbon::now()->toDateTimeString();
             $coffees->dispatchFillTime = $current_date_time;
+          //  $coffees->dispatchCount = $coffees->dispatchCount + 1;
 
         $user = auth()->user();
 

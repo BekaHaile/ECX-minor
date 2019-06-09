@@ -16,6 +16,29 @@
         <div class="col-md-10 mb-3">
                 <div class="jumbotron bg-light" style="margin: 20px;">
                     <h1 style="margin-left: 400px;">Users</h1>
+
+                    <div class="col-md-4" style="margin-left: 780px; margin-bottom: 10px;">
+                        <form action="/searchUser" method="get">
+                            <div class="input-group">
+                                    {{--<div class="col-md-5 mb-3">--}}
+                                        {{--<label for="searchBy">Search by:</label>--}}
+                                        <select class="form-control" id="searchBy" name="searchBy" style="margin-right: 5px;">
+                                                <option>Search By</option>
+                                                <option>Name</option>
+                                                <option>User Type</option>
+                                                <option>User Name</option>
+                                                <option>ID</option>
+                                                <option>View All</option>
+                                        </select>
+                                    {{--</div>--}}
+                                                <input type="search" name="search" class="form-control">
+                                                <span class="input-group-prepend">
+                                                    <button type="submit" class="btn btn-primary">Search</button>
+                                                </span>
+                            </div>
+                        </form>
+                    </div>
+
                     @if(count($users) > 0)
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table class="table table-hover table-bordered table-striped mb-0">
@@ -25,6 +48,7 @@
                                     <th scope="col">ID</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">User Type</th>
+                                    <th scope="col">User Name</th>
                                 @if($userAuth->userType == 'Administrator')
                                     <th scope="col">Edit</th>
                                     <th scope="col">Remove</th>
@@ -43,6 +67,9 @@
                                         </td>
                                         <td>
                                             {{ $user -> userType}}
+                                        </td>
+                                        <td>
+                                            {{ $user -> username}}
                                         </td>
                                         @if($userAuth->userType == 'Administrator')
                                             <td>

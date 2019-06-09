@@ -12,6 +12,28 @@
         <div class="col-md-10 mb-3">
             <div class="jumbotron bg-light" style="margin: 20px;">
                 <h1 style="margin-left: 400px;">Coffee Info</h1>
+
+                <div class="col-md-4" style="margin-left: 780px; margin-bottom: 10px;">
+                    <form action="/searchScale" method="get">
+                        <div class="input-group">
+                            <select class="form-control" id="searchBy" name="searchBy" style="margin-right: 5px;">
+                                <option>Search By</option>
+                                <option>ID</option>
+                                <option>Owners Name</option>
+                                <option>Phone Number</option>
+                                <option>Region</option>
+                                <option>Washing Station</option>
+                                <option>View All</option>
+                            </select>
+                            <input type="number" name="view" @foreach($coffees as $coffee) @if($coffee->scaleFill == 1) value="1" @else value="0" @break @endIf @endforeach hidden>
+                            <input type="search" name="search" class="form-control">
+                            <span class="input-group-prepend">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+
                 @if(count($coffees) > 0)
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
                         <table class="table table-hover table-bordered table-striped mb-0">
@@ -21,6 +43,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Owners' Name</th>
                                 <th scope="col">Owners' Phone Number</th>
+                                <th scope="col">Region</th>
                                 <th scope="col">Washing Station</th>
                                 @foreach($coffees as $coffee)
                                     @if($coffee->scaleFill == 1)
@@ -44,6 +67,9 @@
                                     </td>
                                     <td>
                                         {{ $coffee -> ownerPhone }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> region}}
                                     </td>
                                     <td>
                                         {{ $coffee -> washingStation}}
