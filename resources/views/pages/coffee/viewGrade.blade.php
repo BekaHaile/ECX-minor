@@ -16,7 +16,7 @@
                 <div class="col-md-4" style="margin-left: 780px; margin-bottom: 10px;">
                     <form action="/searchGrade" method="get">
                         <div class="input-group">
-                            <input type="number" name="view" @foreach($coffees as $coffee) @if($coffee->gradeFill == 1) value="1" @else value="0" @break @endIf @endforeach hidden>
+                            <input type="number" name="view" @if($view == 1) value="1" @else value="0" @endIf hidden>
                             <input type="search" name="search" class="form-control" placeholder="Encoded Code">
                             <span class="input-group-prepend">
                                 <button type="submit" class="btn btn-primary">Search</button>

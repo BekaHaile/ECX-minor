@@ -25,7 +25,7 @@
                                 <option>Washing Station</option>
                                 <option>View All</option>
                             </select>
-                            <input type="number" name="view" @foreach($coffees as $coffee) @if($coffee->scaleFill == 1) value="1" @else value="0" @break @endIf @endforeach hidden>
+                            <input type="number" name="view" @if($view == 1) value="1" @else value="0" @endIf hidden>
                             <input type="search" name="search" class="form-control">
                             <span class="input-group-prepend">
                                 <button type="submit" class="btn btn-primary">Search</button>
@@ -45,12 +45,9 @@
                                 <th scope="col">Owners' Phone Number</th>
                                 <th scope="col">Region</th>
                                 <th scope="col">Washing Station</th>
-                                @foreach($coffees as $coffee)
-                                    @if($coffee->scaleFill == 1)
+                                    @if($view == 1)
                                     <th scope="col">Scale Weight</th>
-                                    @break
                                     @endIf
-                                @endforeach
                                 <th scope="col">Edit</th>
                                 <th scope="col">Remove</th>
                             </tr>
@@ -74,14 +71,11 @@
                                     <td>
                                         {{ $coffee -> washingStation}}
                                     </td>
-                                    @foreach($coffees as $coffee)
-                                        @if($coffee->scaleFill == 1)
+                                        @if($view == 1)
                                             <td>
                                                 {{ $coffee -> scaleWeight}}
                                             </td>
-                                            @break
                                         @endIf
-                                    @endforeach
                                     <td>
                                         <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createScale"
                                         @else "/coffees/{{ $coffee->id }}/editScale"
@@ -93,7 +87,7 @@
                                 <td>
                                     <form method="POST" action="/coffees/{{ $coffee->id }}">
                                         {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
+                                        @csrf
                                         <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
                                     </form>
                                 </td>

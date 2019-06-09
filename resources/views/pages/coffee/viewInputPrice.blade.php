@@ -24,7 +24,7 @@
                                 <option>Washing Station</option>
                                 <option>View All</option>
                             </select>
-                            <input type="number" name="view" @foreach($coffees as $coffee) @if($coffee->priceDone == 1) value="1" @else value="0" @break @endIf @endforeach hidden>
+                            <input type="number" name="view" @if($view == 1) value="1" @else value="0" @endIf hidden>
                             <input type="search" name="search" class="form-control">
                             <span class="input-group-prepend">
                                 <button type="submit" class="btn btn-primary">Search</button>

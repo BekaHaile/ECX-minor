@@ -18,10 +18,11 @@ class CoffeesController extends Controller
     public function index()
     {
         $coffees = Coffee::orderBy('created_at','asc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Dispatcher', 403);
-            return view('pages.coffee.viewDispatch', compact('coffees','user'));
+            return view('pages.coffee.viewDispatch', compact('coffees','user'))->with('view',$view);
     }
 
     //view coffees with dispatch info already filled out
@@ -29,20 +30,22 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->where('jarApproved',False)->
         orderBy('created_at','asc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Scalor', 403);
-            return view('pages.coffee.viewScale',compact('coffees','user'));
+            return view('pages.coffee.viewScale',compact('coffees','user'))->with('view',$view);
     }
     //show coffees with scale info filled out
     public function viewScaleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('jarApproved',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Scalor', 403);
-        return view('pages.coffee.viewScale', compact('coffees','user'));
+        return view('pages.coffee.viewScale', compact('coffees','user'))->with('view',$view);
     }
 
 
@@ -51,21 +54,22 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)->where('jarApproved',False)
             ->orderBy('created_at','asc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Sampler', 403);
-            return view('pages.coffee.viewSample',compact('coffees','user'));
+            return view('pages.coffee.viewSample',compact('coffees','user'))->with('view',$view);
     }
-
     //show coffees with sample info filled out
     public function viewSampleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Sampler', 403);
-            return view('pages.coffee.viewSample', compact('coffees','user'));
+            return view('pages.coffee.viewSample', compact('coffees','user'))->with('view',$view);
     }
 
     //view coffees with dispatch ans scale info already filled out
@@ -73,21 +77,22 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',False)->orderBy('created_at','asc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Tester', 403);
-            return view('pages.coffee.viewSpecialty',compact('coffees','user'));
+            return view('pages.coffee.viewSpecialty',compact('coffees','user'))->with('view',$view);
     }
-
     //show coffees with sample info filled out
     public function viewSpecialtyFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Tester', 403);
-            return view('pages.coffee.viewSpecialty', compact('coffees','user'));
+            return view('pages.coffee.viewSpecialty', compact('coffees','user'))->with('view',$view);
     }
 
     //view coffees with dispatch and scale info already filled out
@@ -95,21 +100,22 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',FALSE)->orderBy('created_at','asc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Grader', 403);
-        return view('pages.coffee.viewGrade',compact('coffees','user'));
+        return view('pages.coffee.viewGrade',compact('coffees','user'))->with('view',$view);
     }
-
     //show coffees with sample info filled out
     public function viewGradeFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Grader', 403);
-        return view('pages.coffee.viewGrade', compact('coffees','user'));
+        return view('pages.coffee.viewGrade', compact('coffees','user'))->with('view',$view);
     }
 
     /**
@@ -529,19 +535,21 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('pages.coffee.viewJar', compact('coffees','user'));
+        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view);
     }
     public function viewJarApproved()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',True)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('pages.coffee.viewJar', compact('coffees','user'));
+        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view);
     }
     public function approveJar(Coffee $coffee)
     {
@@ -575,12 +583,11 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
-//            ->where('priceDone', False)
-            ->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', False)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+        $view = 0;
 
         abort_unless($user->userType == 'Representative', 403);
-        return view('pages.coffee.viewInputPrice', compact('coffees','user'));
+        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view);
     }
     public function priceDone()
     {
@@ -588,9 +595,10 @@ class CoffeesController extends Controller
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+        $view = 1;
 
         abort_unless($user->userType == 'Representative', 403);
-        return view('pages.coffee.viewInputPrice', compact('coffees','user'));
+        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view);
     }
     public function createPrice(Coffee $coffee)
     {
