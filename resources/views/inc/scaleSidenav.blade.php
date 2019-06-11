@@ -18,6 +18,8 @@ margin-bottom: 5px;">
         <ul class="list-unstyled components">
             <li>
                 <a href="/scale">Add Scale info</a>
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                <span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>
             </li>
             <li>
                 <a href="/viewScaleFilled">View Existing</a>

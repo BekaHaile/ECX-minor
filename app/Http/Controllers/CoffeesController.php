@@ -30,22 +30,24 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->where('jarApproved',False)->
         orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Scalor', 403);
-            return view('pages.coffee.viewScale',compact('coffees','user'))->with('view',$view);
+            return view('pages.coffee.viewScale',compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
     //show coffees with scale info filled out
     public function viewScaleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('jarApproved',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Scalor', 403);
-        return view('pages.coffee.viewScale', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewScale', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
 
 
@@ -54,22 +56,25 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)->where('jarApproved',False)
             ->orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Sampler', 403);
-            return view('pages.coffee.viewSample',compact('coffees','user'))->with('view',$view);
+            return view('pages.coffee.viewSample',compact('coffees','user'))->with('view',$view)
+                ->with('count',$count);
     }
     //show coffees with sample info filled out
     public function viewSampleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Sampler', 403);
-            return view('pages.coffee.viewSample', compact('coffees','user'))->with('view',$view);
+            return view('pages.coffee.viewSample', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
 
     //view coffees with dispatch ans scale info already filled out
@@ -77,22 +82,28 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',False)->orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',False)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Tester', 403);
-            return view('pages.coffee.viewSpecialty',compact('coffees','user'))->with('view',$view);
+            return view('pages.coffee.viewSpecialty',compact('coffees','user'))->with('view',$view)
+                ->with('count',$count);;
     }
     //show coffees with sample info filled out
     public function viewSpecialtyFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',False)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Tester', 403);
-            return view('pages.coffee.viewSpecialty', compact('coffees','user'))->with('view',$view);
+            return view('pages.coffee.viewSpecialty', compact('coffees','user'))->with('view',$view)
+                ->with('count',$count);;
     }
 
     //view coffees with dispatch and scale info already filled out
@@ -100,22 +111,28 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',FALSE)->orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Grader', 403);
-        return view('pages.coffee.viewGrade',compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewGrade',compact('coffees','user'))->with('view',$view)
+            ->with('count',$count);;
     }
     //show coffees with sample info filled out
     public function viewGradeFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Grader', 403);
-        return view('pages.coffee.viewGrade', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewGrade', compact('coffees','user'))->with('view',$view)
+            ->with('count',$count);;
     }
 
     /**
@@ -134,33 +151,42 @@ class CoffeesController extends Controller
     public function createScale(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
 
         abort_unless($user->userType == 'Scalor', 403);
-            return view('forms.coffee.scale', compact('coffee'));
+            return view('forms.coffee.scale', compact('coffee'))->with('count',$count);
     }
     //Views coffees with dispatch, scale info filled
     public function createSample(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
 
         abort_unless($user->userType == 'Sampler', 403);
-            return view('forms.coffee.sample', compact('coffee'));
+            return view('forms.coffee.sample', compact('coffee'))
+                ->with('count',$count);;
     }
     //Views coffees with dispatch, scale, sample info filled
     public function createSpecialty(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',False)->count();
 
         abort_unless($user->userType == 'Tester', 403);
-        return view('forms.coffee.specialty', compact('coffee'));
+        return view('forms.coffee.specialty', compact('coffee'))
+            ->with('count',$count);;
     }
     //Views coffees with dispatch, scale, sample, specialty info filled
     public function createGrade(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
 
         abort_unless($user->userType == 'Grader', 403);
-        return view('forms.coffee.grade', compact('coffee'));
+        return view('forms.coffee.grade', compact('coffee'))
+            ->with('count',$count);;
     }
 
     /**
@@ -350,41 +376,44 @@ class CoffeesController extends Controller
     //View edit form for scale info already filled out
     public function editScale(Coffee $coffee)
     {
-        // $coffee = Coffee::find($id);
-
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
 
         abort_unless($user->userType =='Manager' || 'Scalor', 403);
-            return view('forms.coffee.editScale', compact('coffee','user'));
+            return view('forms.coffee.editScale', compact('coffee','user'))->with('count',$count);
     }
     //View edit form for sample info already filled out
     public function editSample(Coffee $coffee)
     {
-        // $coffee = Coffee::find($id);
-
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
 
         abort_unless($user->userType =='Manager' || 'Sampler', 403);
-            return view('forms.coffee.editSample', compact('coffee','user'));
+            return view('forms.coffee.editSample', compact('coffee','user'))
+                ->with('count',$count);;
     }
     //View edit form for specialty info already filled out
     public function editSpecialty(Coffee $coffee)
     {
-        // $coffee = Coffee::find($id);
-
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',False)->count();
 
         abort_unless($user->userType =='Manager' || 'Speciality', 403);
-            return view('forms.coffee.editSpecialty', compact('coffee','user'));
+            return view('forms.coffee.editSpecialty', compact('coffee','user'))
+                ->with('count',$count);;
     }
     //View edit form for grade info already filled out
     public function editGrade(Coffee $coffee)
     {
 
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
 
         abort_unless($user->userType =='Manager' || 'Grader', 403);
-            return view('forms.coffee.editGrade', compact('coffee','user'));
+            return view('forms.coffee.editGrade', compact('coffee','user'))
+                ->with('count',$count);
     }
 
     /**
@@ -428,7 +457,6 @@ class CoffeesController extends Controller
         //Car info
         $coffee->typeOfCar = request('typeOfCar');
         $coffee->plateNum = request('plateNum');
-        $coffee->cardinalNum = 1;
         $coffee->dispatchFill = TRUE;
 
         $user = auth()->user();
@@ -535,28 +563,34 @@ class CoffeesController extends Controller
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
     public function viewJarApproved()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',True)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewJar', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
     public function approveJar(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
 
         abort_unless($user->userType =='Manager' , 403);
-            return view('forms.coffee.approveJar', compact('coffee','user'));
+            return view('forms.coffee.approveJar', compact('coffee','user'))->with('count',$count);
     }
     public function storeJar (Coffee $coffee)
     {
@@ -584,10 +618,12 @@ class CoffeesController extends Controller
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', False)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
         $view = 0;
 
         abort_unless($user->userType == 'Representative', 403);
-        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
     public function priceDone()
     {
@@ -595,17 +631,21 @@ class CoffeesController extends Controller
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
             ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
         $view = 1;
 
         abort_unless($user->userType == 'Representative', 403);
-        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view);
+        return view('pages.coffee.viewInputPrice', compact('coffees','user'))->with('view',$view)->with('count',$count);
     }
     public function createPrice(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
 
         abort_unless($user->userType =='Representative' , 403);
-        return view('forms.coffee.inputPrice', compact('coffee','user'));
+        return view('forms.coffee.inputPrice', compact('coffee','user'))->with('count',$count);
     }
     public function storePrice(Coffee $coffee)
     {
@@ -627,9 +667,11 @@ class CoffeesController extends Controller
     public function editPrice(Coffee $coffee)
     {
         $user = auth()->user();
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
 
         abort_unless($user->userType == 'Representative' , 403);
-        return view('forms.coffee.editPrice', compact('coffee','user'));
+        return view('forms.coffee.editPrice', compact('coffee','user'))->with('count',$count);
     }
     public function updatePrice(Coffee $coffee)
     {

@@ -19,6 +19,7 @@
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Owner Information</h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}">
+                            {{ method_field('PATCH') }}
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">

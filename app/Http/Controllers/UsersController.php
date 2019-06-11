@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Webpatser\Uuid\Uuid;
-
+use App\Coffee;
 class UsersController extends Controller
 {
     /**
@@ -18,19 +18,23 @@ class UsersController extends Controller
     public function index()
     {
         $users = User::orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
 
         $userAuth = auth()->user();
         abort_unless($userAuth->userType == 'Administrator' || 'Manager', 403);
-            return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
+            return view('pages.viewUsers', compact('userAuth'))->with('users',$users)->with('count',$count);
         }
 
     public function manage()
     {
         $users = User::orderBy('created_at','asc')->paginate(5);
+        $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
 
         $userAuth = auth()->user();
         abort_unless($userAuth->userType == 'Administrator' || 'Manager' , 403);
-        return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
+        return view('pages.viewUsers', compact('userAuth'))->with('users',$users)->with('count',$count);
     }
 
     /**

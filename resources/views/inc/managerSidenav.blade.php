@@ -46,6 +46,8 @@
                 <ul class="collapse list-unstyled" id="jarSubmenu">
                     <li>
                         <a href="/jar">Approve Jars</a>
+                        <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                        <span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>
                     </li>
                     <li>
                         <a href="/viewJarApproved">View Approved Jars</a>
