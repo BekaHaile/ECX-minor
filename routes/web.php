@@ -17,7 +17,10 @@ Route::get('/login2','PagesController@login')->name('login');
 
 Route::get('/about','PagesController@about')->name('about');
 
-Route::get('/report','PagesController@report')->name('report');
+//Report routes
+Route::get('/guestReport','PagesController@guestReport')->name('guestReport');
+Route::get('/priceReport','ReportController@priceReport')->name('priceReport')->middleware('auth');
+Route::get('/userReport','ReportController@userReport')->name('userReport')->middleware('auth');
 
 Route::get('/help','PagesController@help')->name('help');
 
@@ -87,8 +90,8 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('guest');
 
-//Price report for guest users
-Route::post('/searchReport','PagesController@searchReport')->name('searchReport');
+//Search price report for guest users
+Route::post('/searchGuestReport','PagesController@searchGuestReport')->name('searchGuestReport');
 
 //Search routes
 Route::get('/searchUser','SearchController@searchUser')->name('searchUser');
@@ -99,3 +102,7 @@ Route::get('/searchSpecialty','SearchController@searchSpecialty')->name('searchS
 Route::get('/searchGrade','SearchController@searchGrade')->name('searchGrade');
 Route::get('/searchJar','SearchController@searchJar')->name('searchJar');
 Route::get('/searchInputPrice','SearchController@searchInputPrice')->name('searchInputPrice');
+
+//Search reports
+Route::post('/searchPriceReport','SearchController@searchPriceReport')->name('searchPriceReport');
+Route::get('/searchUserReport','SearchController@searchUserReport')->name('searchUserReport');

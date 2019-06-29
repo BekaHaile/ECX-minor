@@ -38,16 +38,16 @@ class PagesController extends Controller
             return view('auth.register');
     }
 
-    public function report(){
+    public function guestReport(){
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
             ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
             ->where('priceDone', TRUE)->orderBy('created_at','desc')->paginate(5);
         $coffees2 = Coffee::where('dispatchFill',False);
         $count = 0;
 
-        return view('pages.guestReport', compact('coffees'))->with('coffees2',$coffees2)->with('count',$count);
+        return view('pages.report.guestReport', compact('coffees'))->with('coffees2',$coffees2)->with('count',$count);
     }
-    public function searchReport(Request $request)
+    public function searchGuestReport(Request $request)
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
             ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
@@ -60,7 +60,7 @@ class PagesController extends Controller
 
         $count = 1;
 
-        return view('pages.guestReport',compact('coffees'))->with('coffees2',$coffees2)
+        return view('pages.report.guestReport',compact('coffees'))->with('coffees2',$coffees2)
             ->with('count',$count)->with('region',$region)->with('grade',$grade);
     }
 

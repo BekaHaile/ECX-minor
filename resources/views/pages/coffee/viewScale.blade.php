@@ -48,8 +48,10 @@
                                     @if($view == 1)
                                     <th scope="col">Scale Weight</th>
                                     @endIf
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
+                                @if ($view == 0)
+                                <th scope="col">Insert</th>
+                                @endif
+                                {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -76,21 +78,23 @@
                                                 {{ $coffee -> scaleWeight}}
                                             </td>
                                         @endIf
-                                    <td>
-                                        <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createScale"
-                                        @else "/coffees/{{ $coffee->id }}/editScale"
-                                        @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                        @if ($coffee->scaleFill == 0)Insert Scale
-                                        @else Edit Scale
-                                        @endif </button> </a>
-                                </td>
-                                <td>
-                                    <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                        {{ method_field('DELETE') }}
-                                        @csrf
-                                        <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                    </form>
-                                </td>
+                                    @if ($view == 0)
+                                        <td>
+                                            <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createScale"
+                                            @else "/coffees/{{ $coffee->id }}/editScale"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                            @if ($coffee->scaleFill == 0)Insert Scale
+                                            @else Edit Scale
+                                            @endif </button> </a>
+                                        </td>
+                                    @endif
+                                    {{--<td>--}}
+                                        {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}
+                                            {{--{{ method_field('DELETE') }}--}}
+                                            {{--@csrf--}}
+                                            {{--<button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>--}}
+                                        {{--</form>--}}
+                                    {{--</td>--}}
                             </tr>
 
                         @endforeach

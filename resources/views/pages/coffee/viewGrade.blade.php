@@ -32,8 +32,10 @@
                             <thead>
                             <tr>
                                 <th scope="col">Coffee Encoded ID</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
+                                @if($view == 0)
+                                <th scope="col">Insert</th>
+                                @endif
+                                {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -42,6 +44,7 @@
                                     <td>
                                         {{ $coffee-> encode}}
                                     </td>
+                                    @if ($coffee->gradeFill == 0)
                                     <td>
                                         <a href=@if ($coffee->gradeFill == 0) "/coffees/{{ $coffee->id }}/createGrade"
                                         @else "/coffees/{{ $coffee->id }}/editGrade"
@@ -50,13 +53,14 @@
                                             @else Edit Grade
                                             @endif </button> </a>
                                     </td>
-                                    <td>
-                                        <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                            {{ method_field('DELETE') }}
-                                            @csrf
-                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                        </form>
-                                    </td>
+                                    @endif
+                                    {{--<td>--}}
+                                        {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}
+                                            {{--{{ method_field('DELETE') }}--}}
+                                            {{--@csrf--}}
+                                            {{--<button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>--}}
+                                        {{--</form>--}}
+                                    {{--</td>--}}
                                 </tr>
 
                             @endforeach

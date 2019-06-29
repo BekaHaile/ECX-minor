@@ -25,9 +25,10 @@
                         </div>
                         <div class="col-md-3 mb-3" style="margin-left: -30px;">
                             <select class="form-control" id="grade" name="grade">
-                                @foreach($coffees as $coffee)
-                                    <option @if($count == 1 && $coffee->washedGrade == $grade) selected @endif>{{$coffee->washedGrade}}</option>
-                                @endforeach
+                                <option @if($count == 1 && $grade == 'A') selected @endif>A</option>
+                                <option @if($count == 1 && $grade == 'B') selected @endif>B</option>
+                                <option @if($count == 1 && $grade == 'C') selected @endif>C</option>
+                                <option @if($count == 1 && $grade == 'D') selected @endif>D</option>
                             </select>
                         </div>
                         <div class="col-md-2 mb-3" style="margin-left: -60px;">
@@ -38,7 +39,39 @@
                 </div>
             </form>
         </div>
-        @if($count == 1)
+        @if($count == 0)
+            @if(count($coffees) > 0)
+                <div class="col-md-6 mb-3" style="margin-left: 300px;">
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 20px;">
+                        <table class="table table-hover table-bordered table-striped mb-0">
+                            <thead>
+                            <tr>
+                                <th scope="col">Region</th>
+                                <th scope="col">Grade</th>
+                                <th scope="col">Price</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($coffees as $coffee)
+                                <tr>
+                                    <td>
+                                        {{ $coffee -> region }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> washedGrade }}
+                                    </td>
+                                    <td>
+                                        {{ $coffee -> price }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                {{ $coffees->links()}}
+            @endif
+        @elseif($count == 1)
             @if(count($coffees2) > 0)
             <div class="col-md-6 mb-3" style="margin-left: 300px;">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 20px;">
@@ -60,7 +93,7 @@
                                     {{ $coffee -> washedGrade }}
                                 </td>
                                 <td>
-                                    {{ $coffee -> price }}
+                                    {{ $coffee -> price }}  birr
                                 </td>
                             </tr>
                         @endforeach
@@ -69,9 +102,9 @@
                 </div>
             </div>
         {{ $coffees2->links()}}
+                @endif
         @else
                 <p style="margin-top: 30px;"> <h4> No coffee to view.</h4></p>
-        @endif
         @endif
     </div>
 @endsection

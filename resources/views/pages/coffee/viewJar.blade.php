@@ -44,10 +44,10 @@
                                 <th scope="col">Washing Station</th>
                                 <th scope="col">Region</th>
                                 <th scope="col">Grade</th>
-                                <th scope="col">Edit</th>
-                                    @if($view == 0)
-                                        <th scope="col">Remove</th>
-                                    @endIf
+                                @if($view == 0)
+                                    <th scope="col">Approve</th>
+                                    {{--<th scope="col">Remove</th>--}}
+                                @endIf
                             </tr>
                             </thead>
                             <tbody>
@@ -71,19 +71,19 @@
                                     <td>
                                         {{ $coffee -> washedGrade}}
                                     </td>
+                                    @if( $coffee -> jarApproved ==0)
                                     <td>
                                         <a href = "/coffees/{{ $coffee->id }}/approveJar"> <button class="btn btn-primary"  style="margin-bottom: 10px;">
                                              View Jar
                                             </button> </a>
                                     </td>
-                                    @if( $coffee -> jarApproved ==0)
-                                    <td>
-                                        <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                            {{ method_field('DELETE') }}
-                                            @csrf
-                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                        </form>
-                                    </td>
+                                    {{--<td>--}}
+                                        {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}
+                                            {{--{{ method_field('DELETE') }}--}}
+                                            {{--@csrf--}}
+                                            {{--<button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>--}}
+                                        {{--</form>--}}
+                                    {{--</td>--}}
                                     @endif
                                 </tr>
 

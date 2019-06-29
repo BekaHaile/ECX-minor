@@ -333,6 +333,9 @@ class CoffeesController extends Controller
         $coffee->grader = $user->username;
         $coffee->graderId = $user->id;
 
+        //Jar Approved by default.
+        $coffee->jarApproved = TRUE;
+
         abort_unless($user->userType == 'Grader', 403);
             $coffee->save();
 
@@ -589,7 +592,7 @@ class CoffeesController extends Controller
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
 
-        abort_unless($user->userType =='Manager' , 403);
+        abort_unless($user->userType =='' , 403);
             return view('forms.coffee.approveJar', compact('coffee','user'))->with('count',$count);
     }
     public function storeJar (Coffee $coffee)
@@ -630,7 +633,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','asc')->paginate(5);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
         $view = 1;
@@ -682,7 +685,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
 
-        abort_unless($user->userType == 'Representative', 403);
+        abort_unless($user->userType == '', 403);
         $coffee->save();
 
         return redirect('/priceDone');

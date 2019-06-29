@@ -18,7 +18,7 @@
                 <!-- Authentication Links -->
                 @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('report') }}">{{ __('Report') }}</a>
+                        <a class="nav-link" href="{{ route('guestReport') }}">{{ __('Report') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('comment') }}">{{ __('Comment') }}</a>

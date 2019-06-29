@@ -260,5 +260,25 @@ class SearchController extends Controller
         return view('pages.coffee.viewInputPrice',compact('coffees','user'));
     }
 
+    public function searchPriceReport(Request $request)
+    {
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
+            ->where('priceDone', TRUE)->orderBy('created_at','desc')->paginate(5);
+
+        $coffees2 = Coffee::where('region',request('region'))->where('washedGrade',request('grade'))
+            ->orderBy('created_at','desc')->paginate(5);
+        $region = request('region');
+        $grade = request('grade');
+
+        $count = 1;
+
+        $user = auth()->user();
+
+        abort_unless($user->userType == 'Manager', 403);
+        return view('pages.report.priceReport',compact('coffees','user'))->with('coffees2',$coffees2)
+            ->with('count',$count)->with('region',$region)->with('grade',$grade);
+    }
+
 
 }

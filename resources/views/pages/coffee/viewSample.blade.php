@@ -46,8 +46,10 @@
                                 <th scope="col">Region</th>
                                 <th scope="col">Washing Station</th>
                                 <th scope="col">Scale Weight</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Remove</th>
+                                @if($view == 0)
+                                <th scope="col">Insert</th>
+                                @endif
+                                {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
                             <tbody>
@@ -72,21 +74,23 @@
                                     <td>
                                         {{ $coffee -> scaleWeight}}
                                     </td>
-                                    <td>
-                                        <a href=@if ($coffee->sampleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
-                                        @else "/coffees/{{ $coffee->id }}/editSample"
-                                        @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->sampleFill == 0)Insert Sample
-                                            @else Edit Sample
-                                            @endif </button> </a>
-                                    </td>
-                                    <td>
-                                        <form method="POST" action="/coffees/{{ $coffee->id }}">
-                                            {{ method_field('DELETE') }}
-                                            @csrf
-                                            <button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>
-                                        </form>
-                                    </td>
+                                    @if($view == 0)
+                                        <td>
+                                            <a href=@if ($coffee->sampleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
+                                            @else "/coffees/{{ $coffee->id }}/editSample"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->sampleFill == 0)Insert Sample
+                                                @else Edit Sample
+                                                @endif </button> </a>
+                                        </td>
+                                    @endif
+                                    {{--<td>--}}
+                                        {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}
+                                            {{--{{ method_field('DELETE') }}--}}
+                                            {{--@csrf--}}
+                                            {{--<button class="btn btn-primary btn-danger " type="submit" style="margin-bottom: 10px;">Remove</button>--}}
+                                        {{--</form>--}}
+                                    {{--</td>--}}
                                 </tr>
 
                             @endforeach

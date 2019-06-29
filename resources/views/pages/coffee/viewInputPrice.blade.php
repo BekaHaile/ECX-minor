@@ -44,7 +44,12 @@
                                 <th scope="col">Washing Station</th>
                                 <th scope="col">Region</th>
                                 <th scope="col">Grade</th>
-                                <th scope="col">Edit</th>
+                                @if($view==0)
+                                    <th scope="col">Insert</th>
+                                @endif
+                                @if($view==1)
+                                    <th scope="col">Price</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
@@ -68,14 +73,21 @@
                                     <td>
                                         {{ $coffee -> washedGrade}}
                                     </td>
-                                    <td>
-                                        <a href=@if ($coffee->priceDone == 0) "/coffees/{{ $coffee->id }}/createPrice"
-                                        @else "/coffees/{{ $coffee->id }}/editPrice"
-                                        @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
-                                            @if ($coffee->priceDone == 0)Input Price
-                                            @else Edit Price
-                                            @endif </button> </a>
-                                    </td>
+                                    @if($view==0)
+                                        <td>
+                                            <a href=@if ($coffee->priceDone == 0) "/coffees/{{ $coffee->id }}/createPrice"
+                                            @else "/coffees/{{ $coffee->id }}/editPrice"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->priceDone == 0)Input Price
+                                                @else Edit Price
+                                                @endif </button> </a>
+                                        </td>
+                                    @endif
+                                    @if($view==1)
+                                        <td>
+                                            {{ $coffee -> price}} birr
+                                        </td>
+                                    @endif
                                 </tr>
 
                             @endforeach

@@ -11,7 +11,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/jquery-3.4.1.js') }}" defer></script>
+    <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
+
+    {{--<link rel="stylesheet" href="{{ asset('bootstrap-4/css/bootstrap.css') }}">--}}
+    {{--<script src="{{ asset('bootstrap-4/js/bootstrap.js') }}"></script>--}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -28,9 +31,9 @@
         }
 
         body {
-            opacity: 0.9;
+            opacity: 0.98;
             {{--background-image: url("{{ asset('images/ECX2.jpg') }}");--}}
-            /*  background-repeat: no-repeat;*/
+            background-repeat: no-repeat;
         }
         .jumbotron {
             /*margin: 20px;*/

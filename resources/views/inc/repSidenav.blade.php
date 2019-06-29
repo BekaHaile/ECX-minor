@@ -16,7 +16,7 @@ margin-bottom: 5px;">
                 <span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>
             </li>
             <li>
-                <a href="/priceDone">Edit Price</a>
+                <a href="/priceDone">View Price Filled</a>
             </li>
         </ul>
     </nav>
