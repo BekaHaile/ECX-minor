@@ -266,13 +266,13 @@ class SearchController extends Controller
         $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
             ->where('priceDone', TRUE)
             ->groupBy('region','washedGrade')
-            ->get();
+            ->paginate(5);
 
         $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
             ->where('region',request('region'))->where('washedGrade',request('grade'))
             ->where('priceDone', TRUE)
             ->groupBy('region','washedGrade')
-            ->get();
+            ->paginate(5);
 
         if(request('region') == 'All')
             $coffees2 = $coffees;
@@ -295,13 +295,38 @@ class SearchController extends Controller
         $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
             ->where('priceDone', TRUE)
             ->groupBy('region','washedGrade')
-            ->get();
+            ->paginate(5);
 
-        $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
-            ->where('region',request('region'))->where('washedGrade',request('grade'))
-            ->where('priceDone', TRUE)
-            ->groupBy('region','washedGrade')
-            ->get();
+        $from = request('from');
+        $to = request('to');
+
+        if(request('region') == 'All' && request('grade') != 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('washedGrade',request('grade'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        elseif(request('region') != 'All' && request('grade') == 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('region',request('region'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        elseif(request('region') == 'All' && request('grade') == 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        else
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('region',request('region'))->where('washedGrade',request('grade'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
 
         if(request('region') == 'All')
             $coffees2 = $coffees;
@@ -319,7 +344,7 @@ class SearchController extends Controller
         abort_unless($user->userType == 'Manager', 403);
         return view('pages.report.priceReport',compact('coffees'))->with('coffees2',$coffees2)
             ->with('count',$count)->with('region',$region)->with('grade',$grade)
-            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user);
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user)->with('from',$from)->with('to',$to);
         }
 
     public function searchCoffeeReport(Request $request)
@@ -340,27 +365,27 @@ class SearchController extends Controller
             ->whereBetween('jarApprovalTime', [$from, $to])
             ->where('jarApproved', TRUE)
             ->groupBy('region','washedGrade')
-            ->get();
+            ->paginate(5);
         elseif(request('grade') == 'All' && request('region') != 'All')
         $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
             ->where('region',request('region'))
             ->whereBetween('jarApprovalTime', [$from, $to])
             ->where('jarApproved', TRUE)
             ->groupBy('region','washedGrade')
-            ->get();
+            ->paginate(5);
         elseif(request('grade') == 'All' && request('region') == 'All')
             $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
                 ->where('jarApprovalTime', '>=', $from)->where('jarApprovalTime', '<=', $to)
                 ->where('jarApproved', TRUE)
                 ->groupBy('region','washedGrade')
-                ->get();
+                ->paginate(5);
         else
             $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
                 ->where('region',request('region'))->where('washedGrade',request('grade'))
                 ->where('jarApprovalTime', '>=', $from)->where('jarApprovalTime', '<=', $to)
                 ->where('jarApproved', TRUE)
                 ->groupBy('region','washedGrade')
-                ->get();
+                ->paginate(5);
 
 
         $region = Coffee::select('region')->groupBy('region')->where('jarApproved', TRUE)->get();

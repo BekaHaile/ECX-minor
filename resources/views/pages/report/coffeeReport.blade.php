@@ -43,13 +43,13 @@
                                      <label for="from" style="margin-top: 5px;">From :</label>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-left: -30px;">
-                                    <input type="date" class="form-control" id="from" name="from" @if($count == 1) value="{{$from}}" @endif/>
+                                    <input type="date" class="form-control" id="from" name="from" @if($count == 1) value="{{$from}}" @else value="<?php echo date('Y-m-d', strtotime("-1 days")); ?>" @endif/>
                                 </div>
                                 <div class="col-md-1 mb-3">
                                      <label for="to" style="margin-top: 5px;">To :</label>
                                 </div>
                                 <div class="col-md-2 mb-3" style="margin-left: -30px;">
-                                    <input type="date" class="form-control" id="to" name="to" @if($count == 1) value="{{$to}}" @endif/>
+                                    <input type="date" class="form-control" id="to" name="to" @if($count == 1) value="{{$to}}" @else value="<?php echo date('Y-m-d'); ?>" @endif/>
                                 </div>
                                 <div class="col-md-1 mb-3" style="margin-left: -25px;">
                                     <button class="btn btn-primary btn-md " type="submit" style="margin-bottom: 10px;">
@@ -91,7 +91,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-3" style="margin-left: 10px;">
-                                <canvas id="myChart" style="max-width: 500px;"></canvas>
+                                <canvas id="barChart" style="max-width: 500px;"></canvas>
                             </div>
                         </div>
                         {{ $coffees->links()}}
@@ -132,7 +132,7 @@
                             {{--{{$from}} - {{$to}}--}}
                             </div>
                         </div>
-                        {{--{{ $coffees2->links()}}--}}
+                        {{ $coffees2->links()}}
                     @endif
                 @else
                     <p style="margin-top: 30px;"> <h4> No coffee to view.</h4></p>
@@ -144,18 +144,21 @@
         var ctxB = document.getElementById("barChart").getContext('2d');
         var regions = [];
         var weight = [];
-        @foreach ($region as $region1)
-            regions.push('{{ $region1->region }}');
-        @endforeach
-        {{--@if($count == 1)--}}
+        @if($count == 1)
+            @foreach ($coffees2 as $coffee)
+                regions.push('{{ $coffee->region }}');
+            @endforeach
             @foreach ($coffees2 as $coffee)
                 weight.push('{{ $coffee->Weight }}');
             @endforeach
-        {{--@else--}}
-            {{--@foreach ($coffees as $coffee)--}}
-                {{--weight.push('{{ $coffee->Weight }}');--}}
-            {{--@endforeach--}}
-        {{--@endif--}}
+        @else
+            @foreach ($coffees as $coffee)
+              regions.push('{{ $coffee->region }}');
+            @endforeach
+            @foreach ($coffees as $coffee)
+              weight.push('{{ $coffee->Weight }}');
+            @endforeach
+        @endif
         var myBarChart = new Chart(ctxB, {
             type: 'bar',
             data: {

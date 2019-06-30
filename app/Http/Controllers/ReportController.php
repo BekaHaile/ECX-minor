@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use App\Coffee;
 use App\User;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -35,7 +36,7 @@ class ReportController extends Controller
             ->groupBy('region','washedGrade')
             ->paginate(5);
 
-        $coffees2 = Coffee::where('dispatchFill',False);
+        $coffees2 = Coffee::where('jarApproved', TRUE);
 
         $region = Coffee::select('region')->groupBy('region')->where('priceDone', TRUE)->get();
         $grade = Coffee::select('washedGrade')->groupBy('washedGrade')->where('priceDone', TRUE)->get();
@@ -57,8 +58,13 @@ class ReportController extends Controller
             ->groupBy('region','washedGrade')
             ->paginate(5);
 
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $from = $current_date_time;
+        $to = $current_date_time;
+
         $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
-             ->where('jarApproved', TRUE)
+            ->where('jarApprovalTime', '<=', $from)->where('jarApprovalTime', '>=', $to)
+            ->where('jarApproved', TRUE)
             ->groupBy('region','washedGrade')
             ->get();
 
@@ -72,7 +78,8 @@ class ReportController extends Controller
         abort_unless($user->userType == 'Manager', 403);
 
         return view('pages.report.coffeeReport', compact('coffees'))->with('coffees2',$coffees2)
-            ->with('count',$count)->with('region',$region)->with('grade',$grade)->with('user',$user);
+            ->with('count',$count)->with('region',$region)->with('grade',$grade)->with('user',$user)
+            ->with('from',$from)->with('to',$to);
 
     }
     public function userReport()
