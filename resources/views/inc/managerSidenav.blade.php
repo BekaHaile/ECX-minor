@@ -64,7 +64,7 @@
                         <a href="/priceReport">Price Report</a>
                     </li>
                     <li>
-                        <a href="/userReport">Coffee Report</a>
+                        <a href="/coffeeReport">Coffee Report</a>
                     </li>
                 </ul>
             </li>

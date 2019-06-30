@@ -13,6 +13,8 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/jquery-3.4.1.js') }}"></script>
 
+    <script src="{{ asset('MDB-Free_4.8.3/js/mdb.js') }}"></script>
+
     {{--<link rel="stylesheet" href="{{ asset('bootstrap-4/css/bootstrap.css') }}">--}}
     {{--<script src="{{ asset('bootstrap-4/js/bootstrap.js') }}"></script>--}}
 
@@ -45,7 +47,7 @@
     </style>
 </head>
 <body>
-    <div id="app">
+    <div>
         @include('inc.navbar')
         <main class="py-4">
             @yield('content')

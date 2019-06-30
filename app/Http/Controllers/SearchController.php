@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
 use App\User;
 use App\Coffee;
 
@@ -260,24 +261,122 @@ class SearchController extends Controller
         return view('pages.coffee.viewInputPrice',compact('coffees','user'));
     }
 
+    public function searchGuestReport(Request $request)
+    {
+        $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+            ->where('priceDone', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+
+        $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+            ->where('region',request('region'))->where('washedGrade',request('grade'))
+            ->where('priceDone', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+
+        if(request('region') == 'All')
+            $coffees2 = $coffees;
+
+        $region = Coffee::select('region')->groupBy('region')->where('priceDone', TRUE)->get();
+        $grade = Coffee::select('washedGrade')->groupBy('washedGrade')->where('priceDone', TRUE)->get();
+
+        $regionSelect = request('region');
+        $gradeSelect = request('grade');
+
+        $count = 1;
+
+        return view('pages.report.guestReport',compact('coffees'))->with('coffees2',$coffees2)
+            ->with('count',$count)->with('region',$region)->with('grade',$grade)
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect);
+    }
+
     public function searchPriceReport(Request $request)
     {
-        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
-            ->where('jarApproved', TRUE)->where('specialtyFill',TRUE)->where('gradeFill',TRUE)
-            ->where('priceDone', TRUE)->orderBy('created_at','desc')->paginate(5);
+        $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+            ->where('priceDone', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
 
-        $coffees2 = Coffee::where('region',request('region'))->where('washedGrade',request('grade'))
-            ->orderBy('created_at','desc')->paginate(5);
-        $region = request('region');
-        $grade = request('grade');
+        $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+            ->where('region',request('region'))->where('washedGrade',request('grade'))
+            ->where('priceDone', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+
+        if(request('region') == 'All')
+            $coffees2 = $coffees;
+
+        $region = Coffee::select('region')->groupBy('region')->where('priceDone', TRUE)->get();
+        $grade = Coffee::select('washedGrade')->groupBy('washedGrade')->where('priceDone', TRUE)->get();
+
+        $regionSelect = request('region');
+        $gradeSelect = request('grade');
 
         $count = 1;
 
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('pages.report.priceReport',compact('coffees','user'))->with('coffees2',$coffees2)
-            ->with('count',$count)->with('region',$region)->with('grade',$grade);
+        return view('pages.report.priceReport',compact('coffees'))->with('coffees2',$coffees2)
+            ->with('count',$count)->with('region',$region)->with('grade',$grade)
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user);
+        }
+
+    public function searchCoffeeReport(Request $request)
+    {
+        $coffees = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
+            ->where('jarApproved', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+
+        $from = request('from');
+        $to = request('to');
+
+       // Reservation::whereBetween('reservation_from', [$from, $to])->get();
+
+        if(request('region') == 'All' && request('grade') != 'All')
+        $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
+            ->where('washedGrade',request('grade'))
+            ->whereBetween('jarApprovalTime', [$from, $to])
+            ->where('jarApproved', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+        elseif(request('grade') == 'All' && request('region') != 'All')
+        $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
+            ->where('region',request('region'))
+            ->whereBetween('jarApprovalTime', [$from, $to])
+            ->where('jarApproved', TRUE)
+            ->groupBy('region','washedGrade')
+            ->get();
+        elseif(request('grade') == 'All' && request('region') == 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
+                ->where('jarApprovalTime', '>=', $from)->where('jarApprovalTime', '<=', $to)
+                ->where('jarApproved', TRUE)
+                ->groupBy('region','washedGrade')
+                ->get();
+        else
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))
+                ->where('region',request('region'))->where('washedGrade',request('grade'))
+                ->where('jarApprovalTime', '>=', $from)->where('jarApprovalTime', '<=', $to)
+                ->where('jarApproved', TRUE)
+                ->groupBy('region','washedGrade')
+                ->get();
+
+
+        $region = Coffee::select('region')->groupBy('region')->where('jarApproved', TRUE)->get();
+        $grade = Coffee::select('washedGrade')->groupBy('washedGrade')->where('jarApproved', TRUE)->get();
+
+        $regionSelect = request('region');
+        $gradeSelect = request('grade');
+
+        $count = 1;
+
+        $user = auth()->user();
+
+        abort_unless($user->userType == 'Manager', 403);
+        return view('pages.report.coffeeReport',compact('coffees'))->with('coffees2',$coffees2)
+            ->with('count',$count)->with('region',$region)->with('grade',$grade)
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user)->with('from',$from)->with('to',$to);
     }
 
 

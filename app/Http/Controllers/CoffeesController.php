@@ -335,6 +335,8 @@ class CoffeesController extends Controller
 
         //Jar Approved by default.
         $coffee->jarApproved = TRUE;
+        $current_date_time = Carbon::now()->toDateTimeString();
+        $coffee->jarApprovalTime = $current_date_time;
 
         abort_unless($user->userType == 'Grader', 403);
             $coffee->save();
