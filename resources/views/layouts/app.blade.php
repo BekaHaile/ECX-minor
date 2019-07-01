@@ -28,6 +28,11 @@
         @media (min-width: 768px) {
         }
 
+        @media print{
+            table { margin: 200px;}
+            #print-content{display: block;}
+        }
+
         .footer {
             height: 50px;
         }

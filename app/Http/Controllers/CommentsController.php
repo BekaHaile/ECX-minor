@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comment;
+use GuzzleHttp\Client;
 
 class CommentsController extends Controller
 {
@@ -16,12 +17,16 @@ class CommentsController extends Controller
     {
         //$comments = Comment::orderBy('id','desc')->paginate(10);
 
-        $comments = Comment::where('category','good')->latest()->get();
-        $comments2 = Comment::where('category','bad')->latest()->paginate(3);
+        $commentsP = Comment::where('category','positive')->orderBy('polarity','desc')->paginate(5);
+        $commentsN = Comment::where('category','negative')->orderBy('polarity','desc')->paginate(5);
+        $commentsNt = Comment::where('category','neutral')->orderBy('polarity','desc')->paginate(5);
+
+        $view = 0;
 
         $user = auth()->user();
-        abort_unless($user->userType == 'Manager' && 'Administrator', 403);
-            return view('pages.viewComment', compact('user'))->with('comments',$comments)->with('comments2',$comments2);
+        abort_unless($user->userType == 'Manager' , 403);
+            return view('pages.viewComment', compact('user'))->with('commentsP',$commentsP)
+                ->with('commentsN',$commentsN)->with('commentsNt',$commentsNt)->with('view',$view);
     }
 
     /**
@@ -29,9 +34,18 @@ class CommentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Comment $comment)
     {
-            return view('forms.comment');
+        $commentsP = Comment::where('category','positive')->orderBy('polarity','desc')->paginate(5);
+        $commentsN = Comment::where('category','negative')->orderBy('polarity','desc')->paginate(5);
+        $commentsNt = Comment::where('category','neutral')->orderBy('polarity','desc')->paginate(5);
+
+        $view = 0;
+
+        $user = auth()->user();
+        abort_unless($user->userType == 'Manager' , 403);
+        return view('pages.viewComment', compact('user'))->with('commentsP',$commentsP)
+            ->with('commentsN',$commentsN)->with('commentsNt',$commentsNt)->with('view',$view);
     }
 
     /**
@@ -46,11 +60,33 @@ class CommentsController extends Controller
 
         $comments->email = request('email');
         $comments->comment = request('comment');
-        $comments->category = '';
+
+        $cat = $this->categorizeComment('https://api.aylien.com/api/v1/sentiment', request('comment'));
+        $comments->category = $cat->polarity;
+        $comments->polarity = $cat->polarity_confidence;
 
         $comments->save();
 
         return redirect('/');
+    }
+
+    public function categorizeComment($url , $comment)
+    {
+        $client = new Client([
+            'verify' => false
+        ]);
+
+        $response = $client->post($url, [
+            'form_params' => [
+                'text' => $comment
+            ],
+            'headers' => [
+                'X-AYLIEN-TextAPI-Application-Key' => '38a35380b106011980b75f0b9a5e46c0',
+                'X-AYLIEN-TextAPI-Application-ID' => '1c1eb977'
+            ]
+        ]);
+
+        return json_decode($response->getBody()->getContents());
     }
 
     /**
@@ -76,7 +112,15 @@ class CommentsController extends Controller
      */
     public function edit(Comment $comment)
     {
-        //
+        $user = auth()->user();
+        $view = 1;
+
+        abort_unless($user->userType == 'Manager', 403);
+        return view('forms.comment', compact('comment'))->with('view',$view);
+    }
+    public function commentReply(Comment $comment)
+    {
+
     }
 
     /**

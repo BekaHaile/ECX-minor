@@ -83,6 +83,8 @@ Route::post('/user','UsersController@store')->middleware('auth');
 Route::resource('comments','CommentsController');
 Route::post('/comment','CommentsController@store');
 Route::get('/comment','CommentsController@create')->name('comment');
+Route::post('/commentReply','CommentsController@commentReply');
+
 
 /*Route::get('/users/{name}/{id}',function ($name, $id){
     return 'The user is '.$name.$id;

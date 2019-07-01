@@ -32,6 +32,8 @@ class SearchController extends Controller
        return view('pages.viewUsers', compact('userAuth'))->with('users',$users);
    }
 
+
+   //Search coffees
     public function searchDispatch()
     {
         $searchBy = request('searchBy');
@@ -261,6 +263,8 @@ class SearchController extends Controller
         return view('pages.coffee.viewInputPrice',compact('coffees','user'));
     }
 
+
+    //Search reports section
     public function searchGuestReport(Request $request)
     {
         $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
@@ -268,11 +272,36 @@ class SearchController extends Controller
             ->groupBy('region','washedGrade')
             ->paginate(5);
 
-        $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
-            ->where('region',request('region'))->where('washedGrade',request('grade'))
-            ->where('priceDone', TRUE)
-            ->groupBy('region','washedGrade')
-            ->paginate(5);
+        $from = request('from');
+        $to = request('to');
+
+        if(request('region') == 'All' && request('grade') != 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('washedGrade',request('grade'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        elseif(request('region') != 'All' && request('grade') == 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('region',request('region'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        elseif(request('region') == 'All' && request('grade') == 'All')
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
+        else
+            $coffees2 = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
+                ->where('region',request('region'))->where('washedGrade',request('grade'))
+                ->whereBetween('priceInputTime', [$from, $to])
+                ->where('priceDone', TRUE)
+                ->groupBy('region','washedGrade')
+                ->paginate(5);
 
         if(request('region') == 'All')
             $coffees2 = $coffees;
@@ -285,11 +314,12 @@ class SearchController extends Controller
 
         $count = 1;
 
+
         return view('pages.report.guestReport',compact('coffees'))->with('coffees2',$coffees2)
             ->with('count',$count)->with('region',$region)->with('grade',$grade)
-            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect);
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)
+            ->with('from',$from)->with('to',$to);
     }
-
     public function searchPriceReport(Request $request)
     {
         $coffees = Coffee::select('region','washedGrade',DB::raw('AVG(price) Price'))
@@ -344,9 +374,9 @@ class SearchController extends Controller
         abort_unless($user->userType == 'Manager', 403);
         return view('pages.report.priceReport',compact('coffees'))->with('coffees2',$coffees2)
             ->with('count',$count)->with('region',$region)->with('grade',$grade)
-            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user)->with('from',$from)->with('to',$to);
+            ->with('regionSelect',$regionSelect)->with('gradeSelect',$gradeSelect)->with('user',$user)
+            ->with('from',$from)->with('to',$to);
         }
-
     public function searchCoffeeReport(Request $request)
     {
         $coffees = Coffee::select('region','washedGrade',DB::raw('SUM(weight) Weight'))

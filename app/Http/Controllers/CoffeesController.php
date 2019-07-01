@@ -311,7 +311,7 @@ class CoffeesController extends Controller
 
         //Assign a unique code to the coffee
         //$code = $coffee->washingStation; -- convert it to string and add on the encoding to make the code unique
-        $coffee->encode = base64_encode("$coffee->washingStation + $coffee->ownerName");
+        $coffee->encode = base64_encode("$coffee->id");
 
         abort_unless($user->userType == 'Tester', 403);
             $coffee->save();

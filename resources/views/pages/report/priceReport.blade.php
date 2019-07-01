@@ -11,8 +11,12 @@
             <div class="jumbotron text-center bg-light">
                 <div class="py-5 text-center">
                     <h2>Price Report of ECX</h2>
+
+                    <a @if($count == 0) onclick="printDiv('print-content')" @else onclick="printDiv('print-content2')" @endif style="float: right;">
+                        <img src="{{ asset('images/print.jpg') }}" alt="print this page" height="50px;"></a>
+
                 </div>
-                <div class="container" style="height: 50px;">
+                <div class="container" style="height: 50px; margin-top: 20px;">
                     <form class="needs-validation" method="POST" action="/searchPriceReport">
                         @csrf
                         <div class="form-group">
@@ -61,7 +65,7 @@
                 </div>
                 @if($count == 0)
                     @if(count($coffees) > 0)
-                        <div class="row">
+                        <div class="row" id="print-content">
                             <div class="col-md-8 mb-3" style="margin-left: 10px;">
                                 <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 20px;">
                                     <table class="table table-hover table-bordered table-striped mb-0">
@@ -98,7 +102,7 @@
                     @endif
                 @elseif($count == 1)
                     @if(count($coffees2) > 0)
-                        <div class="row">
+                        <div class="row" id="print-content2">
                             <div class="col-md-8 mb-3" style="margin-left: 160px;">
                                 <div class="table-wrapper-scroll-y my-custom-scrollbar" style="margin-top: 20px;">
                                     <table class="table table-hover table-bordered table-striped mb-0">
@@ -135,7 +139,7 @@
                         {{ $coffees2->links()}}
                     @endif
                 @else
-                    <p style="margin-top: 30px;"> <h4> No coffee to view.</h4></p>
+                    <p style="margin-top: 30px;"> <h4> No coffee to view.</h4>
                 @endif
             </div>
         </div>
@@ -195,5 +199,14 @@
                     }
                 }
             });
+
+
+        function printDiv(divName) {
+            var printContents = document.getElementById(divName).innerHTML;
+            w=window.open();
+            w.document.write(printContents);
+            w.print();
+            w.close();
+        }
     </script>
 @endsection
