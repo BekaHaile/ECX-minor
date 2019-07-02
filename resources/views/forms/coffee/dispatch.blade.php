@@ -15,11 +15,23 @@
                     <h2>Dispatch form</h2>
                 </div>
 
+                <form class="needs-validation" method="POST" action="/coffee">
+                    @csrf
+                    <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Cardinal Number</h4>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="cardinal">Cardinal Number</label>
+                        <input type="number" class="form-control"   name="cardinal" id="cardinal" value="{{$card}}" readonly required>
+                        <div class="invalid-feedback">
+                            Valid cardinal number is required.
+                        </div>
+                    </div>
+                </div>
+                    <hr class="mb-4">
                 <div class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3">Owner Information</h4>
-                        <form class="needs-validation" method="POST" action="/coffee">
-                            @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label for="ownerName">Full name</label>

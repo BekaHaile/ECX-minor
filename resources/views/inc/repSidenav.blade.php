@@ -18,6 +18,9 @@ margin-bottom: 5px;">
             <li>
                 <a href="/priceDone">View Price Filled</a>
             </li>
+            <li>
+                <a href="/cardinalView">Cardinal Number</a>
+            </li>
         </ul>
     </nav>
 

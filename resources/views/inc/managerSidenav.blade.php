@@ -50,12 +50,22 @@
                         {{--<span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>--}}
                     {{--</li>--}}
                     <li>
-                        <a href="/viewJarApproved">View Approved Jars</a>
+                        <a href="/viewJarApproved">View Jars</a>
                     </li>
                 </ul>
             </li>
             <li>
-                <a href="/comments">Comments</a>
+                <a href="#commentSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Comments</a>
+                <ul class="collapse list-unstyled" id="commentSubmenu">
+                    {{--<li>--}}
+                    {{--<a href="/jar">Approve Jars</a>--}}
+                    {{--<i class="fa fa-envelope fa-2x" aria-hidden="true"></i>--}}
+                    {{--<span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>--}}
+                    {{--</li>--}}
+                    <li>
+                        <a href="/comments">View Comments</a>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="#reportSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Report</a>
@@ -65,6 +75,9 @@
                     </li>
                     <li>
                         <a href="/coffeeReport">Coffee Report</a>
+                    </li>
+                    <li>
+                        <a href="/userReport">Work Report</a>
                     </li>
                 </ul>
             </li>

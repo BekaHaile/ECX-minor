@@ -14,37 +14,40 @@ class CreateCoffeesTable extends Migration
     public function up()
     {
         Schema::create('coffees', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->integer("cardinal")->unique();
+            $table->boolean("cardinalProcessed")->default(false);
+
+            $table->bigIncrements('id')->unique();
             $table->timestamps();
         //dispatch info
-                $table->boolean("wet");
-                $table->integer("weight");
-                $table->integer("sacks");
-                $table->integer("stitchNo");
-                $table->date("packDate");
-                $table->string("region");
-                $table->string("woreda");
-                $table->string("kebele");
-                $table->string("washingStation");
+                $table->boolean("wet")->nullable();
+                $table->integer("weight")->nullable();
+                $table->integer("sacks")->nullable();
+                $table->integer("stitchNo")->nullable();
+                $table->date("packDate")->nullable();
+                $table->string("region")->nullable();
+                $table->string("woreda")->nullable();
+                $table->string("kebele")->nullable();
+                $table->string("washingStation")->nullable();
             //owner info
-                $table->string("ownerName");
-                $table->string("ownerPhone");
+                $table->string("ownerName")->nullable();
+                $table->string("ownerPhone")->nullable();
             //Representative Info
-                $table->string("representativeName");
-                $table->string("representativeMail");
+                $table->string("representativeName")->nullable();
+                $table->string("representativeMail")->nullable();
             //driver info
-                $table->string("driverName");
-                $table->string("driverPhone");
-                $table->string("driverId");
-                $table->string("licenceNum");
+                $table->string("driverName")->nullable();
+                $table->string("driverPhone")->nullable();
+                $table->string("driverId")->nullable();
+                $table->string("licenceNum")->nullable();
             //car info
-                $table->string("typeOfCar");
-                $table->string("plateNum");
-                $table->boolean("dispatchFill");
+                $table->string("typeOfCar")->nullable();
+                $table->string("plateNum")->nullable();
+                $table->boolean("dispatchFill")->nullable();
 
-            $table->string("dispatcher");
-            $table->integer("dispatcherId");
-            $table->string("dispatchFillTime");
+            $table->string("dispatcher")->nullable();
+            $table->integer("dispatcherId")->nullable();
+            $table->string("dispatchFillTime")->nullable();
 
             $table->string("dispatchEditor")->nullable();
             $table->integer("dispatchEditorId")->nullable();

@@ -21,7 +21,7 @@ Route::get('/about','PagesController@about')->name('about');
 Route::get('/guestReport','ReportController@guestReport')->name('guestReport');
 Route::get('/priceReport','ReportController@priceReport')->name('priceReport')->middleware('auth');
 Route::get('/coffeeReport','ReportController@coffeeReport')->name('coffeeReport')->middleware('auth');
-//Route::get('/userReport','ReportController@userReport')->name('userReport')->middleware('auth');
+Route::get('/userReport','ReportController@userReport')->name('userReport')->middleware('auth');
 
 Route::get('/help','PagesController@help')->name('help');
 
@@ -30,6 +30,10 @@ Route::get('/admin','UsersController@index')->name('admin')->middleware('auth');
 Route::get('/manager','UsersController@manage')->name('manager')->middleware('auth');
 
 Route::resource('coffees','CoffeesController')->middleware('auth');
+
+//cardinal number
+Route::get('/cardinalView','CoffeesController@cardinalView')->name('cardinalView')->middleware('auth');
+Route::post('/cardinal','CoffeesController@cardinal')->name('cardinal')->middleware('auth');
 //dispatch
 Route::post('/coffee','CoffeesController@storeDispatch')->middleware('auth');
 Route::get('/dispatch','CoffeesController@create')->name('dispatch')->middleware('auth');

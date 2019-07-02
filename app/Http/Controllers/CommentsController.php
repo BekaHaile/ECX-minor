@@ -36,16 +36,8 @@ class CommentsController extends Controller
      */
     public function create(Comment $comment)
     {
-        $commentsP = Comment::where('category','positive')->orderBy('polarity','desc')->paginate(5);
-        $commentsN = Comment::where('category','negative')->orderBy('polarity','desc')->paginate(5);
-        $commentsNt = Comment::where('category','neutral')->orderBy('polarity','desc')->paginate(5);
-
         $view = 0;
-
-        $user = auth()->user();
-        abort_unless($user->userType == 'Manager' , 403);
-        return view('pages.viewComment', compact('user'))->with('commentsP',$commentsP)
-            ->with('commentsN',$commentsN)->with('commentsNt',$commentsNt)->with('view',$view);
+        return view('forms.comment')->with('view',$view);
     }
 
     /**

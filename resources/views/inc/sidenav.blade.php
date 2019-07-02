@@ -3,6 +3,7 @@
         color: white;
     }
 </style>
+
 <div class="wrapper jumbotron bg-dark" style=" margin-right: -10px; color: white;
 height: 100%;     width: 200px;
 /*position: fixed;*/
@@ -18,6 +19,8 @@ margin-bottom: 5px;">
         <ul class="list-unstyled components">
             <li>
                 <a href="/dispatch">Create Dispatch</a>
+                <i class="fa fa-envelope fa-2x" aria-hidden="true"></i>
+                <span class="badge" style="background:red; position: relative; top: -15px; left: -10px;">{{$count}}</span>
             </li>
             <li>
                 <a href="/coffees">View Existing</a>

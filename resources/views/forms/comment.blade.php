@@ -22,7 +22,7 @@
 
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="comment" style="margin-top: 20px;"><h4>Email @if($view == 0 ) (Optional) @endif</h4></label>
+                    <label for="comment" style="margin-top: 20px; @if($view == 1) margin-left:-45px; @endif"><h4>Email @if($view == 0 ) (Optional) @endif</h4></label>
                     <input type="email" class="form-control" name="email" id="email" style="margin-left: 180px;"
                            placeholder="you@example.com" @if($view == 1 ) value=" {{$comment->email}}" readonly @endif>
                     <div class="invalid-feedback">

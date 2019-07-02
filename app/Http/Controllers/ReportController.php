@@ -84,14 +84,50 @@ class ReportController extends Controller
     }
     public function userReport()
     {
-        $users = User::orderBy('created_at','asc')->paginate(5);
-        $coffees = Coffee::where('dispatchFill',True);
-        $count = 0;
-        $countForm = 0;
-        $user = auth()->user();
+        $to = Carbon::now()->format('Y-m-d');
+        $toT = Carbon::now();
+        $from = Carbon::now()->subWeek()->format('Y-m-d');
+        $fromT = Carbon::now()->subWeek()->format('Y-m-d');
+        $index = 0;
 
-        abort_unless($user->userType == 'Manager', 403);
-        return view('pages.report.userReport', compact('coffees','user'))
-            ->with('users',$users)->with('countForm',$countForm)->with('count',$count);
-    }
+        $day = Carbon::createFromFormat('Y-m-d H:i:s', $from)->day;
+
+        $approval = Coffee::select('jarApprovalTime')->get();
+//        dd($approve);
+//
+//        $work[$index] = Coffee::where('jarApprovalTime', $from)->count();
+
+        $work = [];
+        while($from != $to) {
+            foreach ($approval as $approv) {
+                $approve = $approv->jarApprovalTime->format('Y-m-d');
+                if ($from == $approve)
+                    $work[$index] = $work[$index] + 1;
+            }
+            $index = $index + 1;
+            $fromT = $fromT->addDay();
+            $from = $fromT->format('Y-m-d');
+
+        }
+        dd('Done');
+
+
+
+//            $work[$index] = Coffee::where('jarApprovalTime', $from)->count();
+//            $from = $from->addDay();
+//            echo $work[$index];
+//            $index = $index + 1;
+        }
+        //dd($work[$index]);
+
+//        $users = User::orderBy('created_at','asc')->paginate(5);
+//        $coffees = Coffee::where('dispatchFill',True);
+//        $count = 0;
+//        $countForm = 0;
+//        $user = auth()->user();
+//
+//        abort_unless($user->userType == 'Manager', 403);
+//        return view('pages.report.userReport', compact('coffees','user'))
+//            ->with('users',$users)->with('countForm',$countForm)->with('count',$count);
+
 }

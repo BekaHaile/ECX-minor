@@ -35,7 +35,7 @@
 
                 <hr class="mb-4">
 
-                <div class="row">
+                <form class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Grade Information </b> </h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeGrade">
@@ -44,51 +44,28 @@
 
                             <div class="d-block my-3">
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <h4 class="mb-3">Washed Coffee</h4>
-                                        <div class="custom-control custom-radio">
-                                            <input id="A" name="washedGrade" type="radio" value="A" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="A">A</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="B" name="washedGrade" type="radio" value="B" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="B">B</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="C" name="washedGrade" type="radio" value="C" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="C">C</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="D" name="washedGrade" type="radio" value="D" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="D">D</label>
+                                    <div class="col-md-4 mb-3">
+                                        <label for="washedGrade">Grade value for washed coffee</label>
+                                        <input type="number" class="form-control"   name="washedGrade" id="washedGrade" required>
+                                        <div class="invalid-feedback">
+                                            Valid Grade value is required.
                                         </div>
                                     </div>
-
                                     <div class="col-md-4 mb-3">
-                                        <h4 class="mb-3">Unwashed Coffee</h4>
-                                        <div class="custom-control custom-radio">
-                                            <input id="A2" name="unwashedGrade" type="radio" value="A" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="A2">A</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="B2" name="unwashedGrade" type="radio" value="B" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="B2">B</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="C2" name="unwashedGrade" type="radio" value="C" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="C2">C</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="D2" name="unwashedGrade" type="radio" value="D" class="custom-control-input" required>
-                                            <label class="custom-control-label" for="D2">D</label>
+                                        <label for="unwashedGrade">Grade value for unwashed coffee</label>
+                                        <input type="number" class="form-control"   name="unwashedGrade" id="unwashedGrade" required>
+                                        <div class="invalid-feedback">
+                                            Valid Grade value is required.
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
+
                             <hr class="mb-6">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                             <button class="btn btn-danger" type="reset" style=" margin-left: 10px;">Clear</button>
+                </form>
 
 
 
