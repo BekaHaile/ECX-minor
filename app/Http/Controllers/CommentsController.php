@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Comment;
 use GuzzleHttp\Client;
+use Mail;
 
 class CommentsController extends Controller
 {
@@ -108,11 +109,13 @@ class CommentsController extends Controller
         $view = 1;
 
         abort_unless($user->userType == 'Manager', 403);
-        return view('forms.comment', compact('comment'))->with('view',$view);
+        return view('forms.comment', compact('comment'))->with('view',$view)->with('user',$user);
     }
     public function commentReply(Comment $comment)
     {
-
+        Mail::send(['text'=>'mail'],['name'=>'ECX'],function ($message){
+           $message->to(request('email'))->subject('Reply to your comment to ECX');
+        });
     }
 
     /**

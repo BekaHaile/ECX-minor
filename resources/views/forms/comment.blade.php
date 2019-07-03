@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row">
+        <div class="col-md-2 mb-3">
+            {{--@if($user->userType == 'Manager')--}}
+                {{--@include('inc.managerSidenav')--}}
+            {{--@endif--}}
+        </div>
+        <div class="col-md-10 mb-3">
     <div class="jumbotron text-center">
         @if($view == 0)
             <h3>Provide any comments you have about ECX here.</h3>
