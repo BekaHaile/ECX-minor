@@ -49,6 +49,9 @@
                                 @if($view == 0)
                                 <th scope="col">Insert</th>
                                 @endif
+                                @if($user->userType == 'Manager')
+                                    <th scope="col">edit</th>
+                                @endif
                                 {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
@@ -75,6 +78,16 @@
                                         {{ $coffee -> scaleWeight}}
                                     </td>
                                     @if($view == 0)
+                                        <td>
+                                            <a href=@if ($coffee->sampleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
+                                            @else "/coffees/{{ $coffee->id }}/editSample"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->sampleFill == 0)Insert Sample
+                                                @else Edit Sample
+                                                @endif </button> </a>
+                                        </td>
+                                    @endif
+                                    @if($user->userType == 'Manager')
                                         <td>
                                             <a href=@if ($coffee->sampleFill == 0) "/coffees/{{ $coffee->id }}/createSample"
                                             @else "/coffees/{{ $coffee->id }}/editSample"

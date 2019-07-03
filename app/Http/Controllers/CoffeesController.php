@@ -18,7 +18,7 @@ class CoffeesController extends Controller
      */
     public function index()
     {
-        $coffees = Coffee::where('cardinalProcessed', TRUE)->orderBy('created_at','asc')->paginate(5);
+        $coffees = Coffee::where('cardinalProcessed', TRUE)->orderBy('created_at','asc')->paginate(20);
         $view = 0;
         $card =  Coffee::oldest()->value('cardinal');
 
@@ -36,13 +36,16 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         $view = 0;
-        $coffees = Coffee::where('cardinalProcessed',FALSE)->orderBy('created_at','asc')->paginate(8);
+        $coffees = Coffee::where('cardinalProcessed',FALSE)->orderBy('created_at','asc')->get();
         $coffeesCount = Coffee::where('cardinalProcessed',FALSE)->count();
+        $newVal = Coffee::latest()->value('cardinal');
+
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
-            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
+            ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)
+            ->where('priceDone', False)->where('representativeMail', $user->email)->count();
 
         return view('forms.coffee.cardinal', compact('coffees'))
-            ->with('view',$view)->with('coffeesCount',$coffeesCount)->with('count',$count);
+            ->with('view',$view)->with('coffeesCount',$coffeesCount)->with('count',$count)->with('newVal',$newVal);
     }
     public function cardinal(Request $request)
     {
@@ -63,15 +66,16 @@ class CoffeesController extends Controller
 
         abort_unless($user->userType == 'Representative', 403);
         $coffees->save();
+        $newVal = Coffee::latest()->value('cardinal');
 
         $view = 1;
-        $coffees = Coffee::where('cardinalProcessed',FALSE)->orderBy('created_at','asc')->paginate(8);
+        $coffees = Coffee::where('cardinalProcessed',FALSE)->orderBy('created_at','asc')->get();
         $coffeesCount = Coffee::where('cardinalProcessed',FALSE)->count();
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
 
         return view('forms.coffee.cardinal', compact('coffees'))
-            ->with('view',$view)->with('coffeesCount',$coffeesCount)->with('count',$count);
+            ->with('view',$view)->with('coffeesCount',$coffeesCount)->with('count',$count)->with('newVal',$newVal);
 
     }
 
@@ -79,25 +83,27 @@ class CoffeesController extends Controller
     public function viewScale()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->where('jarApproved',False)->
-        orderBy('created_at','asc')->paginate(5);
+        orderBy('created_at','asc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
         $view = 0;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Scalor', 403);
-            return view('pages.coffee.viewScale',compact('coffees','user'))->with('view',$view)->with('count',$count);
+            return view('pages.coffee.viewScale',compact('coffees','user'))
+                ->with('view',$view)->with('count',$count);
     }
     //show coffees with scale info filled out
     public function viewScaleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('jarApproved',False)
-            ->orderBy('created_at','desc')->paginate(5);
+            ->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',False)->count();
         $view = 1;
         $user = auth()->user();
 
         abort_unless($user->userType == 'Manager' || 'Scalor', 403);
-        return view('pages.coffee.viewScale', compact('coffees','user'))->with('view',$view)->with('count',$count);
+        return view('pages.coffee.viewScale', compact('coffees','user'))
+            ->with('view',$view)->with('count',$count);
     }
 
 
@@ -105,7 +111,7 @@ class CoffeesController extends Controller
     public function viewSample()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',False)->where('jarApproved',False)
-            ->orderBy('created_at','asc')->paginate(5);
+            ->orderBy('created_at','asc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
         $view = 0;
         $user = auth()->user();
@@ -118,7 +124,7 @@ class CoffeesController extends Controller
     public function viewSampleFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->orderBy('created_at','desc')->paginate(5);
+            ->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',False)->count();
         $view = 1;
         $user = auth()->user();
@@ -131,7 +137,7 @@ class CoffeesController extends Controller
     public function viewSpecialty()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->where('specialtyFill',False)->orderBy('created_at','asc')->paginate(5);
+            ->where('specialtyFill',False)->orderBy('created_at','asc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',False)->count();
         $view = 0;
@@ -145,7 +151,7 @@ class CoffeesController extends Controller
     public function viewSpecialtyFilled()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->where('specialtyFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',False)->count();
         $view = 1;
@@ -160,7 +166,7 @@ class CoffeesController extends Controller
     public function viewGrade()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->where('specialtyFill',TRUE)->where('gradeFill',FALSE)->orderBy('created_at','asc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',FALSE)->orderBy('created_at','asc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
         $view = 0;
@@ -173,8 +179,9 @@ class CoffeesController extends Controller
     //show coffees with sample info filled out
     public function viewGradeFilled()
     {
-        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+        $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)
+            ->where('jarApproved',TRUE)
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',FALSE)->count();
         $view = 1;
@@ -379,31 +386,33 @@ class CoffeesController extends Controller
             $coffee->washedGrade = 'A';
         elseif(request('washedGrade') < 85 && request('washedGrade') >= 75)
             $coffee->washedGrade = 'B';
-        elseif(request('washedGrade') < 75 && request('washedGrade') >= 65)
+        elseif(request('washedGrade') < 75 && request('washedGrade') >= 63)
             $coffee->washedGrade = 'C';
-        elseif(request('washedGrade') < 65 && request('washedGrade') >= 75)
+        elseif(request('washedGrade') < 62 && request('washedGrade') >= 47)
             $coffee->washedGrade = 'D';
+        elseif(request('washedGrade') < 46 && request('washedGrade') >= 31)
+            $coffee->washedGrade = 'E';
         else
-            $coffee->washedGrade = 'F';
+            $coffee->washedGrade = 'Under Grade';
 
-        if(request('washedGrade') >= 85)
-            $coffee->washedGrade = 'A';
-        elseif(request('washedGrade') < 85 && request('washedGrade') >= 75)
-            $coffee->washedGrade = 'B';
-        elseif(request('washedGrade') < 75 && request('washedGrade') >= 65)
-            $coffee->washedGrade = 'C';
-        elseif(request('washedGrade') < 65 && request('washedGrade') >= 75)
-            $coffee->washedGrade = 'D';
-        elseif(request('washedGrade') < 85 && request('washedGrade') >= 75)
-            $coffee->washedGrade = 'B';
-        elseif(request('washedGrade') < 75 && request('washedGrade') >= 65)
-            $coffee->washedGrade = 'C';
-        elseif(request('washedGrade') < 65 && request('washedGrade') >= 75)
-            $coffee->washedGrade = 'D';
-        elseif(request('washedGrade') < 65 && request('washedGrade') >= 75)
-            $coffee->washedGrade = 'D';
+        if(request('unWashedGrade') >= 90)
+            $coffee->unWashedGrade = 'A';
+        elseif(request('unWashedGrade') < 90 && request('unWashedGrade') >= 81)
+            $coffee->unWashedGrade = 'B';
+        elseif(request('unWashedGrade') < 81 && request('unWashedGrade') >= 71)
+            $coffee->unWashedGrade = 'C';
+        elseif(request('unWashedGrade') < 71 && request('unWashedGrade') >= 61)
+            $coffee->unWashedGrade = 'D';
+        elseif(request('unWashedGrade') < 60 && request('unWashedGrade') >= 51)
+            $coffee->unWashedGrade = 'E';
+        elseif(request('unWashedGrade') < 50 && request('unWashedGrade') >= 41)
+            $coffee->unWashedGrade = 'F';
+        elseif(request('unWashedGrade') < 40 && request('unWashedGrade') >= 31)
+            $coffee->unWashedGrade = 'G';
+        elseif(request('unWashedGrade') < 30 && request('unWashedGrade') >= 21)
+            $coffee->unWashedGrade = 'H';
         else
-            $coffee->washedGrade = 'F';
+            $coffee->unWashedGrade = 'Under Grade';
 
         $coffee->gradeFill = TRUE;
 
@@ -586,20 +595,18 @@ class CoffeesController extends Controller
     //To update already filled sample info
     public function updateSample(Request $request, Coffee $coffee)
     {
-        $coffee->scaleWeight = request('scaleWeight');
-        if(request('scaleWet')== 'Wet')
-            $coffee->scaleWet = TRUE;
-        else
-            $coffee->scaleWet = FALSE;
-        $coffee->scaleFill = TRUE;
+        $coffee->group1 = request('group1');
+        $coffee->group2 = request('group2');
+        $coffee->group3 = request('group3');
+        $coffee->group4 = request('group4');
 
         $user = auth()->user();
 
         //Editor info
         $coffee->sampleEditor = $user->username;
-        $coffee->samplEditorId = $user->id;
+        $coffee->sampleEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
-        $coffee->samplEditorId = $current_date_time;
+        $coffee->sampleEditTime = $current_date_time;
 
         abort_unless($user->userType =='Manager' || 'Sampler', 403);
             $coffee->save();
@@ -629,13 +636,13 @@ class CoffeesController extends Controller
     public function updateGrade(Request $request, Coffee $coffee)
     {
         $coffee->washedGrade = request('washedGrade');
-        $coffee->unwashedGrade = request('unwashedGrade');
+        //$coffee->unwashedGrade = request('unwashedGrade');
 
         $user = auth()->user();
 
         //Editor info
-        $coffee->graderEditor = $user->username;
-        $coffee->graderEditorId = $user->id;
+        $coffee->gradeEditor = $user->username;
+        $coffee->gradeEditorId = $user->id;
         $current_date_time = Carbon::now()->toDateTimeString();
         $coffee->gradeEditTime = $current_date_time;
 
@@ -649,7 +656,7 @@ class CoffeesController extends Controller
     public function jar()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',False)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
         $view = 0;
@@ -661,7 +668,7 @@ class CoffeesController extends Controller
     public function viewJarApproved()
     {
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved',True)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',False)->count();
         $view = 1;
@@ -704,7 +711,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', False)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', False)->where('representativeMail', $user->email)->orderBy('created_at','desc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
         $view = 0;
@@ -717,7 +724,7 @@ class CoffeesController extends Controller
         $user = auth()->user();
 
         $coffees = Coffee::where('dispatchFill',TRUE)->where('scaleFill',TRUE)->where('sampleFill',TRUE)->where('jarApproved', TRUE)
-            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','asc')->paginate(5);
+            ->where('specialtyFill',TRUE)->where('gradeFill',TRUE)->where('priceDone', TRUE)->where('representativeMail', $user->email)->orderBy('created_at','asc')->paginate(20);
         $count = Coffee::where('dispatchFill',TRUE)->where('scaleFill',True)->where('sampleFill',True)
             ->where('specialtyFill',True)->where('gradeFill',True)->where('jarApproved',True)->where('priceDone', False)->where('representativeMail', $user->email)->count();
         $view = 1;

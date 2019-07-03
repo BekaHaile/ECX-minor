@@ -49,7 +49,10 @@
                                     <th scope="col">Scale Weight</th>
                                     @endIf
                                 @if ($view == 0)
-                                <th scope="col">Insert</th>
+                                    <th scope="col">Insert</th>
+                                @endif
+                                @if($user->userType == 'Manager')
+                                    <th scope="col">Edit</th>
                                 @endif
                                 {{--<th scope="col">Remove</th>--}}
                             </tr>
@@ -86,6 +89,16 @@
                                             @if ($coffee->scaleFill == 0)Insert Scale
                                             @else Edit Scale
                                             @endif </button> </a>
+                                        </td>
+                                    @endif
+                                    @if($user->userType == 'Manager')
+                                        <td>
+                                            <a href=@if ($coffee->scaleFill == 0) "/coffees/{{ $coffee->id }}/createScale"
+                                            @else "/coffees/{{ $coffee->id }}/editScale"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->scaleFill == 0)Insert Scale
+                                                @else Edit Scale
+                                                @endif </button> </a>
                                         </td>
                                     @endif
                                     {{--<td>--}}

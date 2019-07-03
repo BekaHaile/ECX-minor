@@ -42,7 +42,7 @@
                 <div class="row">
                     <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Grade Information </b> </h4>
-                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeGrade">
+                        <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/updateGrade">
                             @csrf
                             <hr class="mb-4">
 
@@ -72,29 +72,29 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4 mb-3">
-                                        <h4 class="mb-3">Unwashed Coffee</h4>
-                                        <div class="custom-control custom-radio">
-                                            <input id="A2" name="unwashedGrade" type="radio" value="A" class="custom-control-input" @if($coffee->unwashedGrade == "A") checked
-                                                   @endif required>
-                                            <label class="custom-control-label" for="A2">A</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="B2" name="unwashedGrade" type="radio" value="B" class="custom-control-input" @if($coffee->unwashedGrade == "B") checked
-                                                   @endif required>
-                                            <label class="custom-control-label" for="B2">B</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="C2" name="unwashedGrade" type="radio" value="C" class="custom-control-input" @if($coffee->unwashedGrade == "C") checked
-                                                   @endif required>
-                                            <label class="custom-control-label" for="C2">C</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input id="D2" name="unwashedGrade" type="radio" value="D" class="custom-control-input" @if($coffee->unwashedGrade == "D") checked
-                                                   @endif required>
-                                            <label class="custom-control-label" for="D2">D</label>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-md-4 mb-3">--}}
+                                        {{--<h4 class="mb-3">Unwashed Coffee</h4>--}}
+                                        {{--<div class="custom-control custom-radio">--}}
+                                            {{--<input id="A2" name="unwashedGrade" type="radio" value="A" class="custom-control-input" @if($coffee->unwashedGrade == "A") checked--}}
+                                                   {{--@endif required>--}}
+                                            {{--<label class="custom-control-label" for="A2">A</label>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="custom-control custom-radio">--}}
+                                            {{--<input id="B2" name="unwashedGrade" type="radio" value="B" class="custom-control-input" @if($coffee->unwashedGrade == "B") checked--}}
+                                                   {{--@endif required>--}}
+                                            {{--<label class="custom-control-label" for="B2">B</label>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="custom-control custom-radio">--}}
+                                            {{--<input id="C2" name="unwashedGrade" type="radio" value="C" class="custom-control-input" @if($coffee->unwashedGrade == "C") checked--}}
+                                                   {{--@endif required>--}}
+                                            {{--<label class="custom-control-label" for="C2">C</label>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="custom-control custom-radio">--}}
+                                            {{--<input id="D2" name="unwashedGrade" type="radio" value="D" class="custom-control-input" @if($coffee->unwashedGrade == "D") checked--}}
+                                                   {{--@endif required>--}}
+                                            {{--<label class="custom-control-label" for="D2">D</label>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
 

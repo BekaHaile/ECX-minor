@@ -3,7 +3,7 @@
 @section('content')
     <style>
         a.nav-link{
-            color: black !important;
+            color: black ;
         }
     </style>
     <div class="row">
@@ -40,8 +40,11 @@
                                 <div class="col-md-12">
                                     @foreach($commentsP as $comment)
                                         <div class="table-bordered bg-light" style="margin: 10px;">
-                                                <p>{{ $comment -> comment }}</p> <a href="/comments/{{ $comment->id }}/edit">
+                                                <p>{{ $comment -> comment }}</p>
+                                            @if($comment->email != '')
+                                                <a href="/comments/{{ $comment->id }}/edit">
                                                     <button class="btn-sm btn-success"  style="float: right;"> Reply</button></a>
+                                            @endif
                                                 <small>Commented on {{ $comment -> created_at}}</small>
                                         </div>
                                     @endforeach
@@ -61,8 +64,10 @@
                                     @foreach($commentsN as $comment)
                                         <div class="table-bordered bg-light" style="margin: 10px;">
                                             <p>{{ $comment -> comment }}</p>
-                                            <a href="/comments/{{ $comment->id }}/edit">
-                                                <button class="btn-sm btn-success"  style="float: right;"> Reply</button></a>
+                                            @if($comment->email != '')
+                                                <a href="/comments/{{ $comment->id }}/edit">
+                                                    <button class="btn-sm btn-success"  style="float: right;"> Reply</button></a>
+                                            @endif
                                             <small>Commented on {{ $comment -> created_at}}</small>
                                         </div>
                                     @endforeach
@@ -82,8 +87,11 @@
                                 <div class="col-md-12">
                                     @foreach($commentsNt as $comment)
                                         <div class="table-bordered bg-light" style="margin: 10px;">
-                                            <p>{{ $comment -> comment }}</p> <a href="/comments/{{ $comment->id }}/edit">
+                                            <p>{{ $comment -> comment }}</p>
+                                            @if($comment->email != '')
+                                                <a href="/comments/{{ $comment->id }}/edit">
                                                 <button class="btn-sm btn-success"  style="float: right;"> Reply</button></a>
+                                            @endif
                                             <small>Commented on {{ $comment -> created_at}}</small>
                                         </div>
                                     @endforeach

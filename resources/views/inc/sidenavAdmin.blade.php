@@ -13,17 +13,17 @@
         </div>
 
         <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>
-                <ul class="collapse list-unstyled" id="userSubmenu">
+            {{--<li class="active">--}}
+                {{--<a href="#userSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Users</a>--}}
+                {{--<ul class="collapse list-unstyled" id="userSubmenu">--}}
                     <li>
                         <a href="/users/create">Create new user</a>
                     </li>
                     <li>
                         <a href="/users">View users</a>
                     </li>
-                </ul>
-            </li>
+                {{--</ul>--}}
+            {{--</li>--}}
             {{--<li>--}}
                 {{--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>--}}
                 {{--<ul class="collapse list-unstyled" id="pageSubmenu">--}}

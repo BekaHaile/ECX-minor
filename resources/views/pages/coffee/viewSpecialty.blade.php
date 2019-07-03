@@ -49,6 +49,9 @@
                                 @if($view == 0)
                                 <th scope="col">Insert</th>
                                 @endif
+                                @if($user->userType == 'Manager')
+                                    <th scope="col">Edit</th>
+                                @endif
                                 {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
@@ -82,6 +85,16 @@
                                             @else Edit Specialty
                                             @endif </button> </a>
                                     </td>
+                                    @endif
+                                    @if($user->userType == 'Manager')
+                                        <td>
+                                            <a href=@if ($coffee->specialtyFill == 0) "/coffees/{{ $coffee->id }}/createSpecialty"
+                                            @else "/coffees/{{ $coffee->id }}/editSpecialty"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->specialtyFill == 0)Insert Specialty
+                                                @else Edit Specialty
+                                                @endif </button> </a>
+                                        </td>
                                     @endif
                                     {{--<td>--}}
                                         {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}

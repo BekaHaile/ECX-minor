@@ -35,8 +35,7 @@
 
                 <hr class="mb-4">
 
-                <form class="row">
-                    <div class="col-md-8 order-md-1">
+                <div class="col-md-8 order-md-1">
                         <h4 class="mb-3"> <b> Grade Information </b> </h4>
                         <form class="needs-validation" method="POST" action="/coffees/{{ $coffee->id }}/storeGrade">
                             @csrf
@@ -46,17 +45,17 @@
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
                                         <label for="washedGrade">Grade value for washed coffee</label>
-                                        <input type="number" class="form-control"   name="washedGrade" id="washedGrade" required>
+                                        <input type="number" class="form-control" min="0" max="100"  name="washedGrade" id="washedGrade" required>
                                         <div class="invalid-feedback">
                                             Valid Grade value is required.
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label for="unwashedGrade">Grade value for unwashed coffee</label>
-                                        <input type="number" class="form-control"   name="unwashedGrade" id="unwashedGrade" required>
-                                        <div class="invalid-feedback">
-                                            Valid Grade value is required.
-                                        </div>
+                                        <label for="unwashedGrade" hidden>Grade value for unwashed coffee</label>
+                                        <input type="number" class="form-control" value="90" min="0" max="100" name="unwashedGrade" id="unwashedGrade"  hidden>
+                                        {{--<div class="invalid-feedback">--}}
+                                            {{--Valid Grade value is required.--}}
+                                        {{--</div>--}}
                                     </div>
                                 </div>
                             </div>
@@ -65,9 +64,6 @@
                             <hr class="mb-6">
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
                             <button class="btn btn-danger" type="reset" style=" margin-left: 10px;">Clear</button>
-                </form>
-
-
 
                             <!-- Modal -->
                             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"

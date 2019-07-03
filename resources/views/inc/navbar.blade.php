@@ -1,5 +1,6 @@
  <nav class="navbar navbar-expand-md navbar-dark bg-dark" style="margin-bottom: 0px;">
     <div class="container">
+        <img src="{{asset('images/EC.png')}}" style="height: 40px; width: 40px;">
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ __('Home') }}
         </a>

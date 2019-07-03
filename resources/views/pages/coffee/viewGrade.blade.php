@@ -35,6 +35,12 @@
                                 @if($view == 0)
                                 <th scope="col">Insert</th>
                                 @endif
+                                @if($user->userType == 'Manager')
+                                <th scope="col">Edit</th>
+                                @endif
+                                @if($view == 1)
+                                        <th scope="col">Grade</th>
+                                @endif
                                 {{--<th scope="col">Remove</th>--}}
                             </tr>
                             </thead>
@@ -44,6 +50,11 @@
                                     <td>
                                         {{ $coffee-> encode}}
                                     </td>
+                                    @if($view == 1)
+                                        <td>
+                                            {{ $coffee -> washedGrade }}
+                                        </td>
+                                    @endif
                                     @if ($coffee->gradeFill == 0)
                                     <td>
                                         <a href=@if ($coffee->gradeFill == 0) "/coffees/{{ $coffee->id }}/createGrade"
@@ -53,6 +64,16 @@
                                             @else Edit Grade
                                             @endif </button> </a>
                                     </td>
+                                    @endif
+                                    @if($user->userType == 'Manager')
+                                        <td>
+                                            <a href=@if ($coffee->gradeFill == 0) "/coffees/{{ $coffee->id }}/createGrade"
+                                            @else "/coffees/{{ $coffee->id }}/editGrade"
+                                            @endif > <button class="btn btn-primary"  style="margin-bottom: 10px;">
+                                                @if ($coffee->gradeFill == 0)Insert Grade
+                                                @else Edit Grade
+                                                @endif </button> </a>
+                                        </td>
                                     @endif
                                     {{--<td>--}}
                                         {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}

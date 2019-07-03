@@ -19,7 +19,7 @@
                 @if($view == 1)
                 <div class="row">
                     <div class="col-md-8 order-md-1">
-                        <h4 class="mb-3"> <b> Your cardinal number is = {{$coffeesCount}} </b> </h4>
+                        <h4 class="mb-3"> <b> Your cardinal number is = {{$newVal}} </b> </h4>
                     </div>
                 </div>
                 @endif
@@ -40,7 +40,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                    {{$coffees->links()}}
+                    {{--{{$coffees->links()}}--}}
                 </div>
 
                     <div class="col-md-8 order-md-1">

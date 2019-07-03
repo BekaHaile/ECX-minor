@@ -21,26 +21,26 @@
                     </li>
                 </ul>
             </li>
-            {{--<li>--}}
-                {{--<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Coffee</a>--}}
-                {{--<ul class="collapse list-unstyled" id="pageSubmenu">--}}
-                    {{--<li>--}}
-                        {{--<a href="/coffees">Dispatch Info</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="/viewScaleFilled">Scale Info</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="/viewSampleFilled">Sample Info</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="/viewSpecialtyFilled">Specialty Info</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="/viewGradeFilled">Grade Info</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Coffee</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="/coffees">Dispatch Info</a>
+                    </li>
+                    <li>
+                        <a href="/viewScaleFilled">Scale Info</a>
+                    </li>
+                    <li>
+                        <a href="/viewSampleFilled">Sample Info</a>
+                    </li>
+                    <li>
+                        <a href="/viewSpecialtyFilled">Specialty Info</a>
+                    </li>
+                    <li>
+                        <a href="/viewGradeFilled">Grade Info</a>
+                    </li>
+                </ul>
+            </li>
             <li>
                 <a href="#jarSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">JAR</a>
                 <ul class="collapse list-unstyled" id="jarSubmenu">
@@ -76,9 +76,9 @@
                     <li>
                         <a href="/coffeeReport">Coffee Report</a>
                     </li>
-                    <li>
-                        <a href="/userReport">Work Report</a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="/userReport">Work Report</a>--}}
+                    {{--</li>--}}
                 </ul>
             </li>
         </ul>

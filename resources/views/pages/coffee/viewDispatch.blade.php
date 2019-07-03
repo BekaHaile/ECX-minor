@@ -45,7 +45,9 @@
                                     <th scope="col">Owners' Phone Number</th>
                                     <th scope="col">Region</th>
                                     <th scope="col">Washing Station</th>
-                                    {{--<th scope="col">Insert</th>--}}
+                                    @if($user->userType == 'Manager')
+                                         <th scope="col">Edit</th>
+                                    @endif
                                     {{--<th scope="col">Remove</th>--}}
                                 </tr>
                                 </thead>
@@ -67,9 +69,11 @@
                                             <td>
                                                 {{ $coffee -> washingStation}}
                                             </td>
-                                            {{--<td>--}}
-                                                {{--<a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>--}}
-                                            {{--</td>--}}
+                                            @if($user->userType == 'Manager')
+                                                <td>
+                                                    <a href="/coffees/{{ $coffee->id }}/edit"> <button class="btn btn-primary"  style="margin-bottom: 10px;">Edit</button> </a>
+                                                </td>
+                                            @endif
                                             {{--<td>--}}
                                                 {{--<form method="POST" action="/coffees/{{ $coffee->id }}">--}}
                                                     {{--{{ method_field('DELETE') }}--}}
